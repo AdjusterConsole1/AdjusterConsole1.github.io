@@ -22,7 +22,13 @@ async function downloadLatestFile() {
     const listResult = await listAll(listRef);
 
     if (listResult.items.length > 0) {
-      // Assume the first item is the latest (you may need to sort or select the latest based on your requirements)
+      // Sort items by name to find the latest one (assuming filenames include a timestamp or version)
+      listResult.items.sort((a, b) => {
+        if (a.name > b.name) return -1;
+        if (a.name < b.name) return 1;
+        return 0;
+      });
+
       const latestFileRef = listResult.items[0];
       const downloadURL = await getDownloadURL(latestFileRef);
       const response = await fetch(downloadURL);
