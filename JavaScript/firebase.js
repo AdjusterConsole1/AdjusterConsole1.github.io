@@ -16,35 +16,20 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const auth = getAuth(app);
 
-async function downloadLatestFile() {
+async function downloadFile(fileName) {
   try {
-    const listRef = ref(storage, '');
-    const listResult = await listAll(listRef);
+    const fileRef = ref(storage, fileName);
+    const downloadURL = await getDownloadURL(fileRef);
+    const response = await fetch(downloadURL);
 
-    if (listResult.items.length > 0) {
-      // Sort items by name to find the latest one (assuming filenames include a timestamp or version)
-      listResult.items.sort((a, b) => {
-        if (a.name > b.name) return -1;
-        if (a.name < b.name) return 1;
-        return 0;
-      });
-
-      const latestFileRef = listResult.items[0];
-      const downloadURL = await getDownloadURL(latestFileRef);
-      const response = await fetch(downloadURL);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const jsonContent = await response.json();
-      return jsonContent;
-    } else {
-      console.log("No files found.");
-      return null;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const jsonContent = await response.json();
+    return jsonContent;
   } catch (error) {
-    console.error("Error listing files:", error);
+    console.error("Error downloading file:", error);
     return null;
   }
 }

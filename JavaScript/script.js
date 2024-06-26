@@ -3,7 +3,7 @@
 import { downloadLatestFile } from './firebase.js';
 
 document.getElementById('downloadMostRecent').addEventListener('click', async () => {
-  const jsonContent = await downloadLatestFile();
+  const jsonContent = await downloadFile('data.json');
   if (jsonContent) {
     const fakeEvent = { target: { files: [new File([JSON.stringify(jsonContent)], "latest.json", { type: "application/json" })] } };
     processUploadedFile(fakeEvent);
