@@ -1,9 +1,7 @@
-// JavaScript/script.js
-
-import { downloadLatestFile } from './firebase.js';
+import { downloadFile } from './firebase.js';
 
 document.getElementById('downloadMostRecent').addEventListener('click', async () => {
-  const jsonContent = await downloadFile('data.json');
+  const jsonContent = await downloadFile('data.json');  // The file name is 'data.json'
   if (jsonContent) {
     const fakeEvent = { target: { files: [new File([JSON.stringify(jsonContent)], "latest.json", { type: "application/json" })] } };
     processUploadedFile(fakeEvent);
@@ -87,7 +85,7 @@ function formatJson(jsonContent, indent = 0) {
       }
     }
   }
-  return result;
+  return JSON.stringify(jsonContent, null, 2);
 }
 
 function formatPart(part, indent) {
@@ -214,3 +212,17 @@ function partpriceCopyAndDelete() {
     }
   }
 }
+
+function setElementValue(elementIds, value) {
+  elementIds.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.value = value;
+    }
+  });
+}
+
+document.getElementById('autocopy').addEventListener('click', autoCopyAndDelete);
+document.getElementById('pncopy').addEventListener('click', partnumberCopyAndDelete);
+document.getElementById('pricecopy').addEventListener('click', partpriceCopyAndDelete);
+document.getElementById('resetbutton').addEventListener('click', resetAutoCopyComponents);
