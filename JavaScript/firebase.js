@@ -46,4 +46,3 @@ async function initializeFirebaseAuth() {
 initializeFirebaseAuth();
 
 export { downloadFile };
-``
