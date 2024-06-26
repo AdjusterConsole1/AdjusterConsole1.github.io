@@ -225,4 +225,4 @@ function setElementValue(elementIds, value) {
 document.getElementById('autocopy').addEventListener('click', autoCopyAndDelete);
 document.getElementById('pncopy').addEventListener('click', partnumberCopyAndDelete);
 document.getElementById('pricecopy').addEventListener('click', partpriceCopyAndDelete);
-document.getElementById('resetbutton').addEventListener('click', resetAutoCopyComponents);
+document.getElementById('resetFile').addEventListener('click', resetAutoCopyComponents);
