@@ -1,6 +1,6 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js';
-import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBbIDO_A-2sqnNP8qQC9OCJ2hOvfwwY050",
@@ -14,35 +14,30 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
+
 const auth = getAuth(app);
+signInAnonymously(auth)
+  .then(() => {
+    console.log('Signed in anonymously');
+  })
+  .catch((error) => {
+    console.error('Anonymous sign-in error:', error);
+  });
 
-async function downloadFile(fileName) {
+async function downloadFile(referenceKey) {
+  const storageRef = ref(storage, `uploads/${referenceKey}.json`);
   try {
-    const fileRef = ref(storage, fileName);
-    const downloadURL = await getDownloadURL(fileRef);
-    const response = await fetch(downloadURL);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const url = await getDownloadURL(storageRef);
+    const response = await fetch(url);
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Failed to download file');
     }
-
-    const jsonContent = await response.json();
-    return jsonContent;
   } catch (error) {
-    console.error("Error downloading file:", error);
+    console.error('Error downloading file:', error);
     return null;
   }
 }
 
-async function initializeFirebaseAuth() {
-  try {
-    await signInAnonymously(auth);
-    console.log("Signed in anonymously");
-  } catch (error) {
-    console.error("Anonymous sign-in error:", error);
-  }
-}
-
-initializeFirebaseAuth();
-
-export { downloadFile };
+export { storage, ref, uploadBytes, getDownloadURL, downloadFile };

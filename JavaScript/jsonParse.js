@@ -140,7 +140,6 @@ function autoCopyAndDelete() {
         const updatedText = lines.slice(1).join('\n');
         document.getElementById('textarea5').value = updatedText;
         document.getElementById('next1').innerHTML = "Next<br>" + NextLine;
-
         document.getElementById('left1').innerHTML = "Remaining<br>" + countAll;
         localStorage.setItem("countAll", countAll);
       }).catch(err => {

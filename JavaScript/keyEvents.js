@@ -32,7 +32,6 @@ function autoEnable() {
   document.getElementById("ITSBRITTNEY").classList.toggle('hide');
   document.getElementById("fileUploaderDiv").classList.toggle('hideFile');
   document.getElementById("snipbox").classList.toggle('hide');
-
 }
 
 function modePT() {

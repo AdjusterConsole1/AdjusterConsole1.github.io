@@ -1,9 +1,15 @@
 import { downloadFile } from './firebase.js';
 
 document.getElementById('downloadMostRecent').addEventListener('click', async () => {
-  const jsonContent = await downloadFile('data.json');  // The file name is 'data.json'
+  const referenceKey = prompt('Please enter the reference key:');
+  if (!referenceKey) {
+    alert('No reference key provided.');
+    return;
+  }
+
+  const jsonContent = await downloadFile(referenceKey);
   if (jsonContent) {
-    const fakeEvent = { target: { files: [new File([JSON.stringify(jsonContent)], "latest.json", { type: "application/json" })] } };
+    const fakeEvent = { target: { files: [new File([JSON.stringify(jsonContent)], `${referenceKey}.json`, { type: "application/json" })] } };
     processUploadedFile(fakeEvent);
   } else {
     alert("No file found or an error occurred.");
