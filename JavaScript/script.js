@@ -46,9 +46,26 @@ function processUploadedFile(event) {
 
 function formatJson(jsonContent, indent = 0) {
   let result = '';
-  for (let key in jsonContent) {
-    if (jsonContent.hasOwnProperty(key)) {
-      const value = jsonContent[key];
+  if (jsonContent.claim_info && jsonContent.claim_info.length > 0) {
+    const claimInfo = jsonContent.claim_info[0];
+    result += formatClaimInfo(claimInfo, indent);
+  } else {
+    for (let key in jsonContent) {
+      if (jsonContent.hasOwnProperty(key)) {
+        const value = jsonContent[key];
+        let indentation = ' '.repeat(indent);
+        result += `${indentation}${key}: ${value}\n`;
+      }
+    }
+  }
+  return result;
+}
+
+function formatClaimInfo(claimInfo, indent) {
+  let result = '';
+  for (let key in claimInfo) {
+    if (claimInfo.hasOwnProperty(key)) {
+      const value = claimInfo[key];
       let indentation = ' '.repeat(indent);
       switch (key) {
         case 'partsData':
@@ -62,16 +79,6 @@ function formatJson(jsonContent, indent = 0) {
           value.forEach(labor => {
             result += `${' '.repeat(indent + 2)}Description: ${labor.laborDescription}\n`;
             result += `${' '.repeat(indent + 2)}Hours: ${labor.hours}\n\n`;
-          });
-          break;
-        case 'moneyData':
-          result += `${indentation}Money Data:\n`;
-          value.forEach(money => {
-            result += `${' '.repeat(indent + 2)}Total Parts: ${money.totalParts}\n`;
-            result += `${' '.repeat(indent + 2)}Total Labor: ${money.totalLabor}\n`;
-            result += `${' '.repeat(indent + 2)}Subtotal: ${money.subTotal}\n`;
-            result += `${' '.repeat(indent + 2)}Tax Total: ${money.taxTotal}\n`;
-            result += `${' '.repeat(indent + 2)}Grand Total: ${money.grandTotal}\n\n`;
           });
           break;
         case 'totals':
@@ -91,7 +98,7 @@ function formatJson(jsonContent, indent = 0) {
       }
     }
   }
-  return JSON.stringify(jsonContent, null, 2);
+  return result;
 }
 
 function formatPart(part, indent) {
