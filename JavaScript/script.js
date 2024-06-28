@@ -26,17 +26,22 @@ function processUploadedFile(event) {
   reader.onload = function(e) {
     try {
       const jsonContent = JSON.parse(e.target.result);
-      const output = formatJson(jsonContent);
-      document.getElementById('textarea2').value = output;
-      const countLeft = localStorage.getItem("countLeft");
-      document.getElementById('left2').innerHTML = 'Remaining<br>' + countLeft;
-      document.getElementById('left3').innerHTML = 'Remaining<br>' + countLeft; 
-      const countInt = parseInt(countLeft) * 4;
-      localStorage.setItem("countAll", countInt);
-      localStorage.setItem("countPN", countLeft);
-      localStorage.setItem("countPrice", countLeft);
-      const countStr = countInt.toString();
-      document.getElementById('left1').innerHTML = 'Remaining<br>' + countStr;
+      if (jsonContent.claim_info && jsonContent.claim_info.length > 0) {
+        const claimInfo = jsonContent.claim_info[0]; // Isolate claim_info
+        const output = formatJson(claimInfo); // Pass only claim_info to formatJson
+        document.getElementById('textarea2').value = output;
+        const countLeft = localStorage.getItem("countLeft");
+        document.getElementById('left2').innerHTML = 'Remaining<br>' + countLeft;
+        document.getElementById('left3').innerHTML = 'Remaining<br>' + countLeft; 
+        const countInt = parseInt(countLeft) * 4;
+        localStorage.setItem("countAll", countInt);
+        localStorage.setItem("countPN", countLeft);
+        localStorage.setItem("countPrice", countLeft);
+        const countStr = countInt.toString();
+        document.getElementById('left1').innerHTML = 'Remaining<br>' + countStr;
+      } else {
+        alert("Invalid JSON structure.");
+      }
     } catch (error) {
       alert("Error parsing JSON file: " + error.message);
     }
@@ -46,26 +51,9 @@ function processUploadedFile(event) {
 
 function formatJson(jsonContent, indent = 0) {
   let result = '';
-  if (jsonContent.claim_info && jsonContent.claim_info.length > 0) {
-    const claimInfo = jsonContent.claim_info[0];
-    result += formatClaimInfo(claimInfo, indent);
-  } else {
-    for (let key in jsonContent) {
-      if (jsonContent.hasOwnProperty(key)) {
-        const value = jsonContent[key];
-        let indentation = ' '.repeat(indent);
-        result += `${indentation}${key}: ${value}\n`;
-      }
-    }
-  }
-  return result;
-}
-
-function formatClaimInfo(claimInfo, indent) {
-  let result = '';
-  for (let key in claimInfo) {
-    if (claimInfo.hasOwnProperty(key)) {
-      const value = claimInfo[key];
+  for (let key in jsonContent) {
+    if (jsonContent.hasOwnProperty(key)) {
+      const value = jsonContent[key];
       let indentation = ' '.repeat(indent);
       switch (key) {
         case 'partsData':
