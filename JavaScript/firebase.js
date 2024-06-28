@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -25,19 +25,31 @@ signInAnonymously(auth)
   });
 
 async function downloadFile(referenceKey) {
-  const storageRef = ref(storage, `uploads/${referenceKey}.json`);
+  const filePath = `uploads/${referenceKey}.json`; // Correct path construction
+  const storageRef = ref(storage, filePath);
   try {
     const url = await getDownloadURL(storageRef);
-    const response = await fetch(url);
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('Failed to download file');
-    }
+    
+    // Using XMLHttpRequest to download the file
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = 'json'; // Expecting a JSON response
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          resolve(xhr.response);
+        } else {
+          reject(new Error('Failed to download file'));
+        }
+      };
+      xhr.onerror = () => reject(new Error('Network error'));
+      xhr.open('GET', url);
+      xhr.send();
+    });
+    
   } catch (error) {
     console.error('Error downloading file:', error);
     return null;
   }
 }
 
-export { storage, ref, uploadBytes, getDownloadURL, downloadFile };
+export { downloadFile };
