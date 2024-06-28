@@ -27,8 +27,8 @@ function processUploadedFile(event) {
     try {
       const jsonContent = JSON.parse(e.target.result);
       if (jsonContent.claim_info && jsonContent.claim_info.length > 0) {
-        const claimInfo = jsonContent.claim_info[0]; // Isolate claim_info
-        const output = formatJson(claimInfo); // Pass only claim_info to formatJson
+        const claimInfo = jsonContent.claim_info[0]; 
+        const output = formatJson(claimInfo); 
         document.getElementById('textarea2').value = output;
         const countLeft = localStorage.getItem("countLeft");
         document.getElementById('left2').innerHTML = 'Remaining<br>' + countLeft;
@@ -134,21 +134,23 @@ function autoCopyAndDelete() {
 
     if (firstLine !== '') {
       navigator.clipboard.writeText(firstLine).then(() => {
-        let countAll = parseInt(localStorage.getItem("countAll")) - 1;
-        if (countAll === 0) {
-          document.getElementById('next1').innerHTML = "Next<br>--";
-          document.getElementById('left1').innerHTML = "Remaining<br>--";
-          document.getElementById('textarea5').value = '';
-          document.getElementById('autocopy').disabled = true;
-          return;
+        let countAll = parseInt(localStorage.getItem("countAll"));
+        if (countAll > 0) {
+          countAll -= 1;
+          if (countAll === 0) {
+            document.getElementById('next1').innerHTML = "Next<br>--";
+            document.getElementById('left1').innerHTML = "Remaining<br>--";
+            document.getElementById('textarea5').value = '';
+            document.getElementById('autocopy').disabled = true;
+          } else {
+            const NextLine = lines[1].trim() || '';
+            const updatedText = lines.slice(1).join('\n');
+            document.getElementById('textarea5').value = updatedText;
+            document.getElementById('next1').innerHTML = "Next<br>" + NextLine;
+            document.getElementById('left1').innerHTML = "Remaining<br>" + countAll;
+          }
+          localStorage.setItem("countAll", countAll);
         }
-        const NextLine = lines[1].trim() || '';
-        const updatedText = lines.slice(1).join('\n');
-        document.getElementById('textarea5').value = updatedText;
-        document.getElementById('next1').innerHTML = "Next<br>" + NextLine;
-
-        document.getElementById('left1').innerHTML = "Remaining<br>" + countAll;
-        localStorage.setItem("countAll", countAll);
       }).catch(err => {
         console.error('Failed to copy text: ', err);
       });
@@ -164,20 +166,23 @@ function partnumberCopyAndDelete() {
 
     if (firstLine !== '') {
       navigator.clipboard.writeText(firstLine).then(() => {
-        let countPN = parseInt(localStorage.getItem("countPN")) - 1;
-        if (countPN === 0) {
-          document.getElementById('next2').innerHTML = "Next<br>--";
-          document.getElementById('left2').innerHTML = "Remaining<br>--";
-          document.getElementById('textarea3').value = '';
-          document.getElementById('pncopy').disabled = true;
-          return;
+        let countPN = parseInt(localStorage.getItem("countPN"));
+        if (countPN > 0) {
+          countPN -= 1;
+          if (countPN === 0) {
+            document.getElementById('next2').innerHTML = "Next<br>--";
+            document.getElementById('left2').innerHTML = "Remaining<br>--";
+            document.getElementById('textarea3').value = '';
+            document.getElementById('pncopy').disabled = true;
+          } else {
+            const NextLine = lines[1].trim() || '';
+            const updatedText = lines.slice(1).join('\n');
+            document.getElementById('textarea3').value = updatedText;
+            document.getElementById('next2').innerHTML = "Next<br>" + NextLine;
+            document.getElementById('left2').innerHTML = "Remaining<br>" + countPN;
+          }
+          localStorage.setItem("countPN", countPN);
         }
-        const NextLine = lines[1].trim() || '';
-        const updatedText = lines.slice(1).join('\n');
-        document.getElementById('textarea3').value = updatedText;
-        document.getElementById('next2').innerHTML = "Next<br>" + NextLine;
-        document.getElementById('left2').innerHTML = "Remaining<br>" + countPN;
-        localStorage.setItem("countPN", countPN);
       }).catch(err => {
         console.error('Failed to copy text: ', err);
       });
@@ -193,20 +198,23 @@ function partpriceCopyAndDelete() {
 
     if (firstLine !== '') {
       navigator.clipboard.writeText(firstLine).then(() => {
-        let countPrice = parseInt(localStorage.getItem("countPrice")) - 1;
-        if (countPrice === 0) {
-          document.getElementById('next3').innerHTML = "Next<br>--";
-          document.getElementById('left3').innerHTML = "Remaining<br>--";
-          document.getElementById('textarea4').value = '';
-          document.getElementById('pricecopy').disabled = true;
-          return;
+        let countPrice = parseInt(localStorage.getItem("countPrice"));
+        if (countPrice > 0) {
+          countPrice -= 1;
+          if (countPrice === 0) {
+            document.getElementById('next3').innerHTML = "Next<br>--";
+            document.getElementById('left3').innerHTML = "Remaining<br>--";
+            document.getElementById('textarea4').value = '';
+            document.getElementById('pricecopy').disabled = true;
+          } else {
+            const NextLine = lines[1].trim() || '';
+            const updatedText = lines.slice(1).join('\n');
+            document.getElementById('textarea4').value = updatedText;
+            document.getElementById('next3').innerHTML = "Next<br>" + NextLine;
+            document.getElementById('left3').innerHTML = "Remaining<br>" + countPrice;
+          }
+          localStorage.setItem("countPrice", countPrice);
         }
-        const NextLine = lines[1].trim() || '';
-        const updatedText = lines.slice(1).join('\n');
-        document.getElementById('textarea4').value = updatedText;
-        document.getElementById('next3').innerHTML = "Next<br>" + NextLine;
-        document.getElementById('left3').innerHTML = "Remaining<br>" + countPrice;
-        localStorage.setItem("countPrice", countPrice);
       }).catch(err => {
         console.error('Failed to copy text: ', err);
       });
