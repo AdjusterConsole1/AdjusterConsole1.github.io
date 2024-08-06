@@ -47,9 +47,9 @@ input[type="color"] {
 
 #glowDiv {
   font-family: 'Brush Script MT', cursive;
-  font-weight: 700;
+  font-weight: 500;
   top: 880px;
-  left: 680px;
+  left: 670px;
   width: 200px;
   text-align: center;
   position: absolute;

@@ -268,7 +268,7 @@ div#original.default button.orig {
   text-align: center;
 }
 
-#fdPick {
+#mlPick {
   position: absolute;
   display: inline-block;
   margin: 0px;
@@ -278,7 +278,7 @@ div#original.default button.orig {
   text-align: center;
 }
 
-#mlPick {
+#mdPick {
   position: absolute;
   display: inline-block;
   margin: 0px;
@@ -288,7 +288,7 @@ div#original.default button.orig {
   text-align: center;
 }
 
-#mdPick {
+#fdPick {
   position: absolute;
   display: inline-block;
   margin: 0px;
