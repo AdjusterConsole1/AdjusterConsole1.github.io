@@ -6,13 +6,16 @@
 <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="referrer" content="no-referrer">
-<link rel="stylesheet" href="CSS/Common.css?v=20240628041642">
-<link rel="stylesheet" href="CSS/Stable.css?v=20240628041642">
-<link rel="stylesheet" href="CSS/auth_module.css?v=20240628041642">
-<link rel="stylesheet" href="CSS/Buttons.css?v=20240628041642">
-<link rel="stylesheet" href="CSS/AppearOpts.css?v=20240628041642">
-<link rel="stylesheet" href="CSS/Resource.css?v=20240628041642">
 
+
+<link rel="stylesheet" href="CSS/Common.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/Stable.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/auth_module.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/Buttons.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/AppearOpts.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/Resource.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/contextMenu.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/laborRateScript.css?v=20240707202844">
 	<title>Adjuster Console</title>
 
 <style>
@@ -95,7 +98,6 @@ body {
   z-index: -20;
 }
 
-
 #ITSBRITTNEY {
   top: 440px;
   left: 10px;
@@ -159,19 +161,49 @@ body {
   --fancy-meddark: #a4aaae;
   --fancy-dark: #6d7174;
   --fancy-background: #B6BDC1;
+
+  --box-shadow1: 2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1);
+  --btn-background: linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2));
+
+  --box-shadow2: -5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light);
+  --btn-background2: linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight));
+
+  --altboxshad: 
+    0px 10px 25px -5px rgba(0,0,0,0.6),
+    0px 20px 45px -5px rgba(0,0,0,0.55),
+    0px 30px 65px -5px rgba(0,0,0,0.5);
+  --altboxshad2: 
+    inset 0px 0px 5px  rgba(0,0,0,0.8),
+    inset 0px 0px 15px rgba(0,0,0,0.5),
+    inset 0px 0px 35px rgba(0,0,0,0.2),
+    0px 10px 25px -5px rgba(0,0,0,0.6),
+    0px 20px 45px -5px rgba(0,0,0,0.55),
+    0px 30px 65px -5px rgba(0,0,0,0.5);
   --div-width: 10px;
+}
+
+#disclaimer {
+  text-align: center;
+  position: absolute;
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  bottom: 10px;
+  left: 70px;
+  background: none;
+  box-shadow: none;
+  border: 1px solid var(--fancy-background);
+  color: var(--fancy-background);
 }
 
 </style>
 </head>
 <body>
+<div id="disclaimer">Confidential and Prorietary<br>For Internal AAS Use Only</div>
 <div id="copy-notification">Copied!</div>
 <button id="swapper" class="swapVer" onclick="setVer()">Original</button>
 
-
                                                 <!-- Auto Copy -->
-
-
 
 <div id="fileUploaderDiv" class="noShow hideFile">
   <div class="noShow">
@@ -211,15 +243,6 @@ body {
   <div class="lonelyInput noShow" style="display:none;">
   </div>
 </div>
-
-
-<!--  
-
-
-
-
--->
-
 
                                                 <!-- Menu -->
 
@@ -334,23 +357,23 @@ body {
 
 <div id="appearDiv" style="display:none;" class="backing">
   <div id="BGpick" class="noShow">
-    <label for="background-picker">Page Background color:</label><br>
+    <label for="background-picker">Background:</label><br>
     <input id="background-picker" type="color">
   </div>
   <div id="ACpick" class="noShow">
-    <label for="accent-picker">Page Accent Color:</label><br>
+    <label for="accent-picker">Accent:</label><br>
     <input id="accent-picker" type="color">
   </div>
   <div id="shad2Pick" class="noShow">
-    <label for="shad2-picker">Gradient Start:</label><br>
+    <label for="shad2-picker">Gradient1:</label><br>
     <input id="shad2-picker" type="color">
   </div>
   <div id="shad3Pick" class="noShow">
-    <label for="shad3-picker">Gradient End:</label><br>
+    <label for="shad3-picker">Gradient2:</label><br>
     <input id="shad3-picker" type="color">
   </div>
   <div id="shad1Pick" class="noShow">
-    <label for="shad1-picker">Highlight: </label><br>
+    <label for="shad1-picker">Highlight:</label><br>
     <input id="shad1-picker" type="color">
   </div>
   <div id="shad4Pick" class="noShow">
@@ -359,23 +382,23 @@ body {
   </div>
   <div id="secondaries" class="noShow">
   <div id="bg2Pick" class="noShow">
-    <label for="bg2-picker">Secondary Background Color:</label><br>
+    <label for="bg2-picker">Background 2:</label><br>
     <input id="bg2-picker" type="color">
   </div>
   <div id="flPick" class="noShow">
-    <label for="fl-picker">Secondary Highlight:</label><br>
+    <label for="fl-picker">Highlight 2:</label><br>
     <input id="fl-picker" type="color">
   </div>
   <div id="fdPick" class="noShow">
-    <label for="fd-picker">Secondary Shadow:</label><br>
+    <label for="fd-picker">Shadow 2:</label><br>
     <input id="fd-picker" type="color">
   </div>
   <div id="mlPick" class="noShow">
-    <label for="ml-picker">Seccondary Gradient Start:</label><br>
+    <label for="ml-picker">Gradient1 2:</label><br>
     <input id="ml-picker" type="color">
   </div>
   <div id="mdPick" class="noShow">
-    <label for="md-picker">Seccondary Gradient End:</label><br>
+    <label for="md-picker">Gradient2 2:</label><br>
     <input id="md-picker" type="color" value="#a4aaae">
   </div>
   </div>
@@ -395,6 +418,91 @@ body {
     <label for="nameGlow">Glow Color:</label><br>
     <input id="nameGlow" type="color">
   </div>
+
+  <div class="prop-wrapper">
+    <div class="css-property">
+      <label for="x-offset">X-Offset</label>
+      <div class="input-with-buttons">
+        <button id="xOffsetDecrement">-</button>
+        <input type="number" id="x-offset" value="2">
+        <button id="xOffsetIncrement">+</button>
+      </div>
+    </div>
+    <div class="css-property">
+      <label for="yOffset">Y-Offset</label>
+      <div class="input-with-buttons">
+        <button id="yOffsetDecrement">-</button>
+        <input type="number" id="y-offset" value="2">
+        <button id="yOffsetIncrement">+</button>
+      </div>
+    </div>
+    <div class="css-property">
+      <label for="blur">Blur:</label>
+      <div class="input-with-buttons">
+        <button id="blurDecrement">-</button>
+        <input type="number" id="blur" value="6">
+        <button id="blurIncrement">+</button>
+      </div>
+    </div>
+    <div class="css-property">
+      <label for="spread">Spread:</label>
+      <div class="input-with-buttons">
+        <button id="spreadDecrement">-</button>
+        <input type="number" id="spread" value="0">
+        <button id="spreadIncrement">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="prop-wrapper2">
+    <div class="css-property">
+      <label for="x-offset2">X-Offset 2</label>
+      <div class="input-with-buttons">
+        <button id="xOffsetDecrement2">-</button>
+        <input type="number" id="x-offset2" value="5">
+        <button id="xOffsetIncrement2">+</button>
+      </div>
+    </div>
+    <div class="css-property">
+      <label for="yOffset2">Y-Offset 2</label>
+      <div class="input-with-buttons">
+        <button id="yOffsetDecrement2">-</button>
+        <input type="number" id="y-offset2" value="5">
+        <button id="yOffsetIncrement2">+</button>
+      </div>
+    </div>
+    <div class="css-property">
+      <label for="blur2">Blur 2:</label>
+      <div class="input-with-buttons">
+        <button id="blurDecrement2">-</button>
+        <input type="number" id="blur2" value="16">
+        <button id="blurIncrement2">+</button>
+      </div>
+    </div>
+    <div class="css-property">
+      <label for="spread2">Spread 2:</label>
+      <div class="input-with-buttons">
+        <button id="spreadDecrement2">-</button>
+        <input type="number" id="spread2" value="0">
+        <button id="spreadIncrement2">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toggleBox">
+      <label for="shadDouble">Dual<Br>Shadows</label>
+    <input type="checkbox" id="shadDouble" onclick="getPicker()" checked>
+  </div>
+
+  <div class="displayPreview" id="displayPreviewDiv">
+    <button class="previewBtn" id="previewBtn"></button>
+  </div>
+
+  <div class="previewDiv" id="previewDiv">
+    <button class="previewBtn2" id="previewBtn2"></button>
+  </div>
+
+
   <button id="setColors" class="picker" onclick="saveColors()">Save and Exit</button>
   <button id="exitColor" class="picker" onclick="exitColor()">Exit</button>
   <button id="defaultColors" class="picker" onclick="setColor('default')">Default Preset</button>
@@ -402,7 +510,7 @@ body {
   <button id="presetRed" class="picker" onclick="setColor('red')">Red Preset</button>
   <button id="presetGreen" class="picker" onclick="setColor('green')">Green Preset</button>
   <button id="presetPink" class="picker" onclick="setColor('pink')">Pink Preset</button>
-  <button id="shadMaker" class="picker" onclick="shadMaker()">Shadow Maker</button>
+  <button id="ConsoleDefault" class="picker" onclick="setColor('ACDF')">Console Clrs</button>
 </div>
 
                                               <!-- Main Buttons -->
@@ -411,37 +519,37 @@ body {
 <div id="swap1" class="otherone" onclick="openNav()">&#9776;</div>
 
 <div id="navtag" class="nav_tag neu_style" onclick="openSOPnav();">Browse Full SOPs</div>
-<button id="newAuthstarter" class="D R P s7dispStat"><b><f>Authorize</f></b> Claim</button>
-<button id="statusNote" class="D R P s8dispStat" onclick="statNOTE()"><b>Status</b> Note</button>
-<button id="openScript" class="D R P s4dispStat" onclick="openScript()">Labor Rate<br>Script</button>
+<button id="newAuthstarter" class="D R P s7dispStat" oncontextmenu="customMenu(this.id, event)"><b><f>Authorize</f></b> Claim</button>
+<button id="statusNote" class="D R P s8dispStat" onclick="statNOTE()" oncontextmenu="customMenu(this.id, event)"><b>Status</b> Note</button>
+<button id="openScript" class="D R P s4dispStat" onclick="openScript()" oncontextmenu="customMenu(this.id, event)">Labor Rate<br>Script</button>
 
 <div id="Request" class="REQUESTDIV noShow">
-  <button id="picR" class="D R P C s1dispStat" onclick="PICREQ(this.id)"><b>PICTURE</b> REQUEST</button>
-  <button id="recR" class="D R P C s2dispStat" onclick="RECREQ(this.id)"><b>RECORDS</b> REQUEST</button>
-  <button id="noansR" class="D R P C s3dispStat" onclick="NOANSREC(this.id)">RECDS REQST <b>NO ANSWER</b></button>
-  <button id="T0" class="D R P s6dispStat" onclick="ShowTemps()"><b>TEMPLATES</b></button>
+  <button id="picR" class="D R P C s1dispStat" onclick="PICREQ(this.id)" oncontextmenu="customMenu(this.id, event)"><b>PICTURE</b> REQUEST</button>
+  <button id="recR" class="D R P C s2dispStat" onclick="RECREQ(this.id)" oncontextmenu="customMenu(this.id, event)"><b>RECORDS</b> REQUEST</button>
+  <button id="noansR" class="D R P C s3dispStat" onclick="NOANSREC(this.id)" oncontextmenu="customMenu(this.id, event)">RECDS REQST <b>NO ANSWER</b></button>
+  <button id="T0" class="D R P s6dispStat" onclick="ShowTemps()" oncontextmenu="customMenu(this.id, event)"><b>TEMPLATES</b></button>
 </div>
 
-<button id="SOPs" class="R P D g0dispStat" onclick="resrcCenter('4','p')"><f>Policy</f></button>
-<button id="tools" class="R P D g1dispStat" onclick="resrcCenter('5','t')"><f>Tools</f></button>
+<button id="SOPs" class="R P D g0dispStat" onclick="resrcCenter('4','p')" oncontextmenu="customMenu(this.id, event)"><f>Policy</f></button>
+<button id="tools" class="R P D g1dispStat" onclick="resrcCenter('5','t')" oncontextmenu="customMenu(this.id, event)"><f>Tools</f></button>
 
 <div id="TPDiv" class="noShow" style="display: none">
-  <button id="T1" class="D R P" name="name" onclick="PTXFER()"><b>PT TRANSFER</b> TEMPLATE</button>
-  <button id="T2" class="D R P C" onclick="STMTTEMP(this.id)">CH <b>STATEMENT</b> QUESTIONS</button>
-  <button id="T3" class="D R P C" onclick="REVIEW(this.id)">INPS/PIC <b>REVIEW</b> NOTE</button>
-  <button id="T4" class="D R P C" onclick="INSPTEMP(this.id)"><b>INSPECTION</b> TEMPLATE</button>
+  <button id="T1" class="D R P" name="name" onclick="PTXFER()" oncontextmenu="customMenu(this.id, event)"><b>PT TRANSFER</b> TEMPLATE</button>
+  <button id="T2" class="D R P C" onclick="STMTTEMP(this.id)" oncontextmenu="customMenu(this.id, event)">CH <b>STATEMENT</b> QUESTIONS</button>
+  <button id="T3" class="D R P C" onclick="REVIEW(this.id)" oncontextmenu="customMenu(this.id, event)">INPS/PIC <b>REVIEW</b> NOTE</button>
+  <button id="T4" class="D R P C" onclick="INSPTEMP(this.id)" oncontextmenu="customMenu(this.id, event)"><b>INSPECTION</b> TEMPLATE</button>
 </div>
 
                                                 <!-- PT Mode -->
 
 <div id="PTModeDiv" class="noShow" style="display: none">
-  <button id="transAuthBtn" onclick="transAuth()">Trans Auth</button>
-  <button id="ringfailDeny" onclick="ringDeny()">Denial-Carbon<br>Piston Rings</button>
-  <button id="T21" onclick="STMTTEMP(this.id)"><b>STATEMENT</b> QUESTIONS</button>
-  <button id="T31" onclick="INSPTEMP(this.id)"><b>INSPECTION</b> TEMPLATE</button>
-  <button id="T41" onclick="inspREVIEW(this.id)">INPSECT <b>REVIEW</b></button>
-  <button id="T51" onclick="REVIEW(this.id)">PICTURE <b>REVIEW</b></button>
-  <button id="T61" onclick="carfaxREVIEW(this.id)">CARFAX <b>REVIEW</b></button>
+  <button class="D R P" id="transAuthBtn" onclick="transAuth()" oncontextmenu="customMenu(this.id, event)">Trans Auth</button>
+  <button class="D R P" id="ringfailDeny" onclick="ringDeny()" oncontextmenu="customMenu(this.id, event)">Denial-Carbon<br>Piston Rings</button>
+  <button class="D R P" id="T21" onclick="STMTTEMP(this.id)" oncontextmenu="customMenu(this.id, event)"><b>STATEMENT</b> QUESTIONS</button>
+  <button class="D R P" id="T31" onclick="INSPTEMP(this.id)" oncontextmenu="customMenu(this.id, event)"><b>INSPECTION</b> TEMPLATE</button>
+  <button class="D R P" id="T41" onclick="inspREVIEW(this.id)" oncontextmenu="customMenu(this.id, event)">INPSECT <b>REVIEW</b></button>
+  <button class="D R P" id="T51" onclick="REVIEW(this.id)" oncontextmenu="customMenu(this.id, event)">PICTURE <b>REVIEW</b></button>
+  <button class="D R P" id="T61" onclick="carfaxREVIEW(this.id)" oncontextmenu="customMenu(this.id, event)">CARFAX <b>REVIEW</b></button>
 </div>
 
                                                 <!-- Parts Intake -->
@@ -457,35 +565,33 @@ body {
   <textarea autocomplete="off" title="Part Number" id="partnum" class="intakeboxes" name="name" placeholder="Part Number"></textarea>
   <textarea autocomplete="off" title="RF Price" id="rfprice" class="intakeboxes" name="name" placeholder="RF Price"></textarea>
   <textarea autocomplete="off" title="MSRP" id="msrp" class="intakeboxes" name="name" placeholder="OEM MSRP"></textarea>
-  <button id="SENDPART" class="senditnow D R P" onclick="FormToTA();">Part</button>
-  <button id="SENDLABOR" class="senditnow D R P" onclick="SENDLABOR1()">Labor</button>
-  <button id="SENDDIAG" class="senditnow D R P" onclick="SENDDIAG1()">Diag</button>
-  <button id="clearIntake" class="senditnow D R P" onclick="ClearIntake()">Clear</button>
-  <button id="DJKahlid" class="senditnow D R P" onclick="AnotherOne()">Add Box</button>
-  <button id="MTVsNEXT" class="senditnow D R P" onclick="NextPart()">Next</button>
+  <button id="SENDPART" class="senditnow D R P" onclick="FormToTA();" oncontextmenu="customMenu(this.id, event)">Part</button>
+  <button id="SENDLABOR" class="senditnow D R P" onclick="SENDLABOR1()" oncontextmenu="customMenu(this.id, event)">Labor</button>
+  <button id="SENDDIAG" class="senditnow D R P" onclick="SENDDIAG1()" oncontextmenu="customMenu(this.id, event)">Diag</button>
+  <button id="clearIntake" class="senditnow D R P" onclick="ClearIntake()" oncontextmenu="customMenu(this.id, event)">Clear</button>
+  <button id="DJKahlid" class="senditnow D R P" onclick="AnotherOne()" oncontextmenu="customMenu(this.id, event)">Add Box</button>
+  <button id="MTVsNEXT" class="senditnow D R P" onclick="NextPart()" oncontextmenu="customMenu(this.id, event)">Next</button>
 </div>
 
                                             <!-- Other Parts and Labor -->
 
 <div id="hlc" class="HardLaborCamp noShow">
-  <button id="R2" class="PartsAndLabor D R P a1dispStat" onclick="COPYNOTE()">Copy P&L</button>
-  <button id="R15" class="Reset D R P a4dispStat" style="display: inline-block" onclick="RESET()"><f>RESET</f></button>
+  <button id="R2" class="PartsAndLabor D R P a1dispStat" onclick="COPYNOTE()" oncontextmenu="customMenu(this.id, event)">Copy P&L</button>
+  <button id="R15" class="Reset D R P a4dispStat" style="display: inline-block" onclick="RESET()" oncontextmenu="customMenu(this.id, event)"><f>RESET</f></button>
   <div id="subPL2" class="noShow a2dispStat">
-    <button id="R8" class="D R P" style="display: inline-block" onclick="NEWOEM()"><f>OEM</f></button>
-    <button id="R9" class="D R P" style="display: inline-block" onclick="NEWAM()"><f>AM</f></button>
-    <button id="R10" class="D R P" style="display: inline-block" onclick="OEMOVER()">Over 250</button>
-    <button id="R11" class="D R P" style="display: inline-block" name="edit" onclick="BULK(this.id)">BULK</button>
-    <button id="fluid" class="P astext" style="display: inline-block" onclick="FLUIDLEAK()">$</button>
+    <button id="R8" class="D R P" style="display: inline-block" onclick="NEWOEM()" oncontextmenu="customMenu(this.id, event)"><f>OEM</f></button>
+    <button id="R9" class="D R P" style="display: inline-block" onclick="NEWAM()" oncontextmenu="customMenu(this.id, event)"><f>AM</f></button>
+    <button id="R10" class="D R P" style="display: inline-block" onclick="OEMOVER()" oncontextmenu="customMenu(this.id, event)">Over 250</button>
+    <button id="R11" class="D R P" style="display: inline-block" name="edit" onclick="BULK(this.id)" oncontextmenu="customMenu(this.id, event)">BULK</button>
+    <button id="fluid" class="P astext" style="display: inline-block" onclick="FLUIDLEAK()" oncontextmenu="customMenu(this.id, event)">$</button>
   </div>
   <div id="subPL1" class="noShow a3dispStat">
-    <button id="R12" class="D R P C" style="display: inline-block" name="edit" onclick="EVACRECH(this.id)">EVAC</button>
-    <button id="R13" class="D R P C" style="display: inline-block" name="edit" onclick="ALIGNMENT(this.id)">ALIGN</button>
-    <button id="R16" class="D R P" style="display: inline-block" onclick="LABOR()">LABOR</button>
-    <button id="R17" class="D R P" style="display: inline-block" onclick="DIAG()">DIAG</button>
+    <button id="R12" class="D R P C" style="display: inline-block" name="edit" onclick="EVACRECH(this.id)" oncontextmenu="customMenu(this.id, event)">EVAC</button>
+    <button id="R13" class="D R P C" style="display: inline-block" name="edit" onclick="ALIGNMENT(this.id)" oncontextmenu="customMenu(this.id, event)">ALIGN</button>
+    <button id="R16" class="D R P" style="display: inline-block" onclick="LABOR()" oncontextmenu="customMenu(this.id, event)">LABOR</button>
+    <button id="R17" class="D R P" style="display: inline-block" onclick="DIAG()" oncontextmenu="customMenu(this.id, event)">DIAG</button>
   </div>
 </div>
-
-
 
                                                 <!-- Note Builder -->
 
@@ -495,49 +601,49 @@ body {
        <textarea autocomplete="off" id="Snippings" class="SnipArea" name="name" style="display: none" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
     </div>
     <div id="RFone noShow">
-      <button id="RFIBBTN" class="IBOBC2 R D P" onclick="RFIB()"><f>RF</f><br><b>INBOUND</b></button>
-      <button id="TGAFBTN" class="IBOBC2 R D P" onclick="TGAF()"><f>CALLED CH</f> <b>TO GET AUTH FOR</b></button>
-      <button id="RESET" class="IBOBC2 R D P" onclick="RESETNOTE()">RESET</button>
-      <button id="COPY" class="IBOBC2 R D P" onclick="COPYIt()">COPY</button>
+      <button id="RFIBBTN" class="IBOBC2 R D P" onclick="RFIB()" oncontextmenu="customMenu(this.id, event)"><f>RF</f><br><b>INBOUND</b></button>
+      <button id="TGAFBTN" class="IBOBC2 R D P" onclick="TGAF()" oncontextmenu="customMenu(this.id, event)"><f>CALLED CH</f> <b>TO GET AUTH FOR</b></button>
+      <button id="RESET" class="IBOBC2 R D P" onclick="RESETNOTE()" oncontextmenu="customMenu(this.id, event)">RESET</button>
+      <button id="COPY" class="IBOBC2 R D P" onclick="COPYIt()" oncontextmenu="customMenu(this.id, event)">COPY</button>
     </div>
   </div>
   <div id="chobcall" class="CHoutboundDIV noShow">
     <div id="RFtwo" class="noShow">
-     <button id="RFIBDH" class="IBOBC2 D R P" onclick="RFIBDH()" style="display:none;">DIDN'T HAVE</button>
-     <button id="PNLCBTN" class="IBOBC2 D R P C" onclick="PNLC(this.id)" style="display:none">CHECK COVERAGE <br>ADV PNLC</button>
-     <button id="TOTALBTN" class="IBOBC2 D R P C" onclick="TOTAL(this.id)" style="display:none">TO GET <br>TOTALS</button>
-     <button id="RFAUTHBTN" class="IBOBC2 D R P C" onclick="GAR(this.id)" style="display:none">TO GET <br>AUTH</button>
+     <button id="RFIBDH" class="IBOBC2 D R P" onclick="RFIBDH()" style="display:none;" oncontextmenu="customMenu(this.id, event)">DIDN'T HAVE</button>
+     <button id="PNLCBTN" class="IBOBC2 D R P C" onclick="PNLC(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">CHECK COVERAGE <br>ADV PNLC</button>
+     <button id="TOTALBTN" class="IBOBC2 D R P C" onclick="TOTAL(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">TO GET <br>TOTALS</button>
+     <button id="RFAUTHBTN" class="IBOBC2 D R P C" onclick="GAR(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">TO GET <br>AUTH</button>
     </div>
     <div id="RFthree" class="noShow">
-      <button id="RFIBND" class="IBOBC2 D R P C" onclick="RFIBND(this.id)" style="display:none">DIAGNOSTIC</button>
-      <button id="RFIBNE" class="IBOBC2 D R P C" onclick="RFIBNE(this.id)" style="display:none">ESTIMATE</button>
-      <button id="RFIBNF" class="IBOBC2 D R P C" onclick="RFIBNF(this.id)" style="display:none">FAILURE</button>
-      <button id="RFIBNV" class="IBOBC2 D R P C" onclick="RFIBNV(this.id)" style="display:none">THE VEHICLE</button>
+      <button id="RFIBND" class="IBOBC2 D R P C" onclick="RFIBND(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">DIAGNOSTIC</button>
+      <button id="RFIBNE" class="IBOBC2 D R P C" onclick="RFIBNE(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">ESTIMATE</button>
+      <button id="RFIBNF" class="IBOBC2 D R P C" onclick="RFIBNF(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">FAILURE</button>
+      <button id="RFIBNV" class="IBOBC2 D R P C" onclick="RFIBNV(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">THE VEHICLE</button>
     </div>
     <div id="CHtwo" class="noShow">
-      <button id="TGAFOBTN" class="IBOBC2 D R P" onclick="TGAFO(this.id)" style="display:none">OOPC</button>
-      <button id="TGAFSBTN" class="IBOBC2 D R P" onclick="TGAFS(this.id)" style="display:none">SHIPPING</button>
-      <button id="TGAFBBTN" class="IBOBC2 D R P" onclick="TGAFB(this.id)" style="display:none">BOTH</button>
+      <button id="TGAFOBTN" class="IBOBC2 D R P" onclick="TGAFO(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">OOPC</button>
+      <button id="TGAFSBTN" class="IBOBC2 D R P" onclick="TGAFS(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">SHIPPING</button>
+      <button id="TGAFBBTN" class="IBOBC2 D R P" onclick="TGAFB(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">BOTH</button>
     </div>
     <div id="CHthree" class="noShow">
-      <button id="TGAFOABTN" class="IBOBC2 D R P C" onclick="TGAFOA(this.id)" style="display:none">AUTHED</button>
-      <button id="TGAFODBTN" class="IBOBC2 D R P C" onclick="TGAFOD(this.id)" style="display:none">DECLINED</button>
-      <button id="TGAFOCBTN" class="IBOBC2 D R P C" onclick="TGAFOC(this.id)" style="display:none">CH WILL CALL BACK</button>
+      <button id="TGAFOABTN" class="IBOBC2 D R P C" onclick="TGAFOA(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">AUTHED</button>
+      <button id="TGAFODBTN" class="IBOBC2 D R P C" onclick="TGAFOD(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">DECLINED</button>
+      <button id="TGAFOCBTN" class="IBOBC2 D R P C" onclick="TGAFOC(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">CH WILL CALL BACK</button>
     </div>
     <div id="CHfour" class="noShow">
-      <button id="TGAFSABTN" class="IBOBC2 D R P C" onclick="TGAFSA(this.id)" style="display:none">AUTHED</button>
-      <button id="TGAFSDBTN" class="IBOBC2 D R P C" onclick="TGAFSD(this.id)" style="display:none">DECLINED</button>
-      <button id="TGAFSCBTN" class="IBOBC2 D R P C" onclick="TGAFSC(this.id)" style="display:none">CH WILL CALL BACK</button>
+      <button id="TGAFSABTN" class="IBOBC2 D R P C" onclick="TGAFSA(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">AUTHED</button>
+      <button id="TGAFSDBTN" class="IBOBC2 D R P C" onclick="TGAFSD(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">DECLINED</button>
+      <button id="TGAFSCBTN" class="IBOBC2 D R P C" onclick="TGAFSC(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">CH WILL CALL BACK</button>
     </div>
     <div id="CHfive" class="noShow">
-      <button id="TGAFOSABTN" class="IBOBC2 D R P C" onclick="TGAFOSA(this.id)" style="display:none">AUTHED BOTH</button>
-      <button id="TGAFOSDSBTN" class="IBOBC2 D R P C" onclick="TGAFOSDS(this.id)" style="display:none">DECLINED SHIPPING <br>APPROVED OOP</button>
-      <button id="TGAFOSDBBTN" class="IBOBC2 D R P C" onclick="TGAFOSDB(this.id)" style="display:none">DECLINED REPAIRS</button>
-      <button id="TGAFOSCBTN" class="IBOBC2 D R P C" onclick="TGAFOSC(this.id)" style="display:none">CH WILL CALL BACK</button>
+      <button id="TGAFOSABTN" class="IBOBC2 D R P C" onclick="TGAFOSA(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">AUTHED BOTH</button>
+      <button id="TGAFOSDSBTN" class="IBOBC2 D R P C" onclick="TGAFOSDS(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">DECLINED SHIPPING <br>APPROVED OOP</button>
+      <button id="TGAFOSDBBTN" class="IBOBC2 D R P C" onclick="TGAFOSDB(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">DECLINED REPAIRS</button>
+      <button id="TGAFOSCBTN" class="IBOBC2 D R P C" onclick="TGAFOSC(this.id)" style="display:none" oncontextmenu="customMenu(this.id, event)">CH WILL CALL BACK</button>
     </div>
     <div id="NoAnsDiv" class="noShow">
-      <button id="NALVM" class="IBOBC2 D R P" onclick="NAV()" style="display:none">NO ANS<br>LEFT VM</button>
-      <button id="NANVM" class="IBOBC2 D R P" onclick="NAN()" style="display:none">NO ANS<br>NO VM</button>
+      <button id="NALVM" class="IBOBC2 D R P" onclick="NAV()" style="display:none" oncontextmenu="customMenu(this.id, event)">NO ANS<br>LEFT VM</button>
+      <button id="NANVM" class="IBOBC2 D R P" onclick="NAN()" style="display:none" oncontextmenu="customMenu(this.id, event)">NO ANS<br>NO VM</button>
     </div>
   </div>
 </div>
@@ -691,55 +797,63 @@ body {
 <div id="auth_module" class="auth_container">
   <div id="auth_display" class="auth_main">
     <div id="auth_inner" class="auth_style">
-      <p class="auth_header">Who's parts at what pricing?</p>
+      Who's parts at what pricing?
       <p class="bodyTab">
         <input type="checkbox" id="nauth1" name="authparts1" class="largerCheckbox"><label for="nauth1">Using RF's OEM parts at or under $250.00.</label><br>
         <input type="checkbox" id="nauth2" name="authparts1" class="largerCheckbox"><label for="nauth2">Using RF's parts at or under sourcing MCE.</label><br>
-        <input type="checkbox" id="nauth3" name="authparts1" class="largerCheckbox"><label for="nauth3">Using sourcing MCE as a credit toward repair facility parts. Shipping not an option.</label><br>
+        <input type="checkbox" id="nauth3" name="authparts1" class="largerCheckbox"><label for="nauth3">Using sourcing MCE as a credit toward repair facility parts. NO Shipping.</label><br>
         <input type="checkbox" id="nauth4" name="authparts1" class="largerCheckbox"><label for="nauth4">Using sourcing MCE as a credit toward repair facility parts or shipping in.</label><br>
         <input type="checkbox" id="nauth5" name="authparts1" class="largerCheckbox"><label for="nauth5">Using RF's parts. Adjusted price to amount near MCE for no OOPC.</label>
       </p>
-      <div class="float_auth">
-      <p class="auth_header">Was Anything Requested?</p>
-      <p class="bodyTab">
-        <input type="checkbox" id="nauth6" name="authreqs1" class="largerCheckbox" onclick="concerned('y')"><label for="nauth6">Inspection</label><br>
-        <input type="checkbox" id="nauth7" name="authreqs1" class="largerCheckbox" onclick="concerned('y')"><label for="nauth7">Photos</label><br>
-        <input type="checkbox" id="nauth8" name="authreqs1" class="largerCheckbox" onclick="concerned('y')"><label for="nauth8">Records</label><br>
-        <input type="checkbox" id="nauth9" name="authreqs1" class="largerCheckbox" onclick="concerned('n')" checked><label for="nauth9">No Requests</label>
-      </p>
-      </div>
-      <div class="float_auth">
-      <p class="auth_header">Is there OOPC or Shipping?</p>
-      <p class="bodyTab">
-        <input type="radio" id="nauth10" name="authoopcs11" class="largerRadio" onclick="show_oopc_option('y')"><label for="nauth10">OOPC</label><br>
-        <input type="radio" id="nauth11" name="authoopcs11" class="largerRadio" onclick="show_oopc_option('n')"><label for="nauth11">Shipping</label><br>
-        <input type="radio" id="nauth12" name="authoopcs11" class="largerRadio" onclick="show_oopc_option('y')"><label for="nauth12">Both</label><br>
-        <input type="radio" id="nauth13" name="authoopcs11" class="largerRadio" onclick="show_oopc_option('n')" checked><label for="nauth13">No Concerns</label>
-      </p>
-      </div>
-      <div class="float_auth">
-      <p class="auth_header">Any non-covered or denied components?</p>
-      <p class="bodyTab">
-        <input type="checkbox" id="nauth14" name="authoops21" class="largerCheckbox" onclick="concerned('d')"><label for="nauth14">Non-Covered</label><br>
-        <input type="checkbox" id="nauth15" name="authoops21" class="largerCheckbox" onclick="concerned('d')"><label for="nauth15">Denied</label><br>
-        <input type="checkbox" id="nauth16" name="authoops21" class="largerCheckbox" onclick="concerned('c')" checked><label for="nauth16">No</label>
-      </p>
-      </div>
-      <div id="oopc_option" class="auth_oop">
-        <p>What is the cause of OOPC?</p>
-        <p class="bodyTab">
-          <input type="radio" id="nauth17" name="authoops31" class="largerRadio"><label for="nauth17">Parts</label><br>
-          <input type="radio" id="nauth18" name="authoops31" class="largerRadio"><label for="nauth18">Labor</label><br>
-          <input type="radio" id="nauth19" name="authoops31" class="largerRadio"><label for="nauth19">Both</label>
-        </p>
-        <p class="bodyTab">
-          <label for="auth20">OOPC + DED = </label>
-          <input type="number" id="nauth20" name="authoops41" step="0.01"><br>
-          <input type="radio" id="nauth21" name="authoops51" class="largerRadio"><label for="nauth21">OOPC not determined yet.</label>
-        </p>
+      <div class="flex_contain">
+        <div class="flex_list">
+          Was Anything Requested?
+          <label for="nauth6" class="top"><input type="checkbox" id="nauth6" name="authreqs1" class="largerCheckbox">Inspection</label>
+          <label for="nauth7"><input type="checkbox" id="nauth7" name="authreqs1" class="largerCheckbox">Photos</label>
+          <label for="nauth8"><input type="checkbox" id="nauth8" name="authreqs1" class="largerCheckbox">Records</label>
+        </div>
+        <div class="flex_list">
+          Is there OOPC or Shipping?
+          <label for="nauth9" class="top"><input type="radio" id="nauth9" name="authoopcs11" class="largerRadio" onclick="show_oopc_option('y')">OOPC</label>
+          <label for="nauth10"><input type="radio" id="nauth10" name="authoopcs11" class="largerRadio" onclick="show_oopc_option()">Shipping</label>
+          <label for="nauth11"><input type="radio" id="nauth11" name="authoopcs11" class="largerRadio" onclick="show_oopc_option('y')">Both</label>
+          <label for="nauth12"><input type="radio" id="nauth12" name="authoopcs11" class="largerRadio" onclick="show_oopc_option()" checked>No Concerns</label>
+        </div>
+        <div class="flex_list">
+          Special circumstances?
+          <label for="nauth13" class="top"><input type="checkbox" id="nauth13" name="authoops21" class="largerCheckbox">Non-Covered Component</label>
+          <label for="nauth14"><input type="checkbox" id="nauth14" name="authoops21" class="largerCheckbox">Denied Component</label>
+          <label for="nauth15"><input type="checkbox" id="nauth15" name="authoops21" class="largerCheckbox">TSB/Recall</label>
+          <label for="nauth16"><input type="checkbox" id="nauth16" name="authoops21" class="largerCheckbox">Prior Related</label>
+          <label for="nauth16a"><input type="checkbox" id="nauth16a" name="authoops21" class="largerCheckbox">Mileage/Vin Issue</label>
+        </div>
+        <div class="flex_list slim">
+          DED Amount:
+          <select id="nauth25" name="authoopcs61" class="largerSelect">
+            <option value="$100.00">$100.00</option>
+            <option value="$0.00">$0.00</option>
+            <option value="$50.00">$50.00</option>
+            <option value="$100.00">$100.00</option>
+            <option value="$150.00">$150.00</option>
+            <option value="$200.00">$200.00</option>
+            <option value="$250.00">$250.00</option>
+            <option value="$500.00">$500.00</option>
+          </select>
+        </div>
+        <div id="oopc_option" class="flex_list">
+          What is the cause of OOPC?
+          <label for="nauth17" class="top"><input type="radio" id="nauth17" name="authoops31" class="largerRadio">Parts</label>
+          <label for="nauth18"><input type="radio" id="nauth18" name="authoops31" class="largerRadio">Labor</label>
+          <label for="nauth19"><input type="radio" id="nauth19" name="authoops31" class="largerRadio">Both</label>
+        </div>
+        <div id="oopc_option2" class="flex_list last">
+          Amount of OOPC?
+          <label for="nauth20" class="top">$<input type="number" id="nauth20" name="authoops41" step="0.01"></label>
+          <label for="nauth21"><input type="radio" id="nauth21" name="authoops51" class="largerRadio">Don't Know Yet.</label>
+        </div>
       </div>
       <button id="cancel_auth" class="auth_button" onclick="cancel_auth()">Cancel</button>
-      <button id="finish_auth" class="auth_button" onclick="auth_initialize()">Finish</button>
+      <button id="finish_auth" class="auth_button" onclick="auth_initialize(2)">Finish</button>
     </div>
   </div>
 </div>
@@ -750,50 +864,67 @@ body {
   <div id="authParts" class="newStyle authStyle">
     <p style="text-align:center;"><b>Who's parts at what pricing?</b><br>
     Select all that apply...</p>
-    <p class="bodyTab"><input type="checkbox" id="auth1" name="authparts" class="FNA largerCheckbox"><label for="auth1"> <b>OEM Under 250</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing RF's OEM parts at or under $250.00.</label><br>
-    <input type="checkbox" id="auth2" name="authparts" class="FNA largerCheckbox"><label for="auth2"> <b>RF Parts at MCE</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing RF's parts at or under sourcing MCE.</label><br>
-    <input type="checkbox" id="auth3" name="authparts" class="FNA largerCheckbox"><label for="auth3"> <b>Sourcing MCE as Credit</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing sourcing MCE as a credit toward repair facility parts. Shipping is not an option.</label><br>
-    <input type="checkbox" id="auth4" name="authparts" class="FNA largerCheckbox"><label for="auth4"> <b>MCE as Credit or Shipped</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing sourcing MCE as a credit toward repair facility parts or shipping in.</label><br>
-    <input type="checkbox" id="auth5" name="authparts" class="FNA largerCheckbox"><label for="auth5"> <b>Negotiated for No OOPC</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing RF's parts. Adjusted price to reasonable amount near MCE.</label></p>
-    <button id="cancelNewauth" class="wefwefwef" onclick="cancelNewauth()">Cancel</button>
+    <p class="bodyTab">
+    <input type="checkbox" id="auth1" name="authparts" class="FNA largerCheckbox"><label for="auth1"><b>OEM Under 250</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing RF's OEM parts at or under $250.00.</label><br>
+    <input type="checkbox" id="auth2" name="authparts" class="FNA largerCheckbox"><label for="auth2"><b>RF Parts at MCE</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing RF's parts at or under sourcing MCE.</label><br>
+    <input type="checkbox" id="auth3" name="authparts" class="FNA largerCheckbox"><label for="auth3"><b>Sourcing MCE as Credit</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing sourcing MCE as a credit toward repair facility parts. Shipping is not an option.</label><br>
+    <input type="checkbox" id="auth4" name="authparts" class="FNA largerCheckbox"><label for="auth4"><b>MCE as Credit or Shipped</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing sourcing MCE as a credit toward repair facility parts or shipping in.</label><br>
+    <input type="checkbox" id="auth5" name="authparts" class="FNA largerCheckbox"><label for="auth5"><b>Negotiated for No OOPC</b><br>&nbsp&nbsp&nbsp&nbsp&nbspUsing RF's parts. Adjusted price to reasonable amount near MCE.</label></p>
+    <button id="cancelNewauth" class="wefwefwef" onclick="cancel_auth()">Cancel</button>
     <button id="authMove" class="wefwefwef" onclick="moveAuth()">Continue</button>
   </div>
   <div id="authRequests" class="newStyle authStyle" style="display:none;">
     <p style="text-align:center;"><b>Did you request anything?</b><br>
     Select all that apply...</p>
-    <p class="bodyTab"><input type="checkbox" id="auth6" name="authreqs" class="FNA largerCheckbox"><label for="auth6"><b>Inspection</b></label><br>
+    <p class="bodyTab">
+    <input type="checkbox" id="auth6" name="authreqs" class="FNA largerCheckbox"><label for="auth6"><b>Inspection</b></label><br>
     <input type="checkbox" id="auth7" name="authreqs" class="FNA largerCheckbox"><label for="auth7"><b>Photos</b></label><br>
     <input type="checkbox" id="auth8" name="authreqs" class="FNA largerCheckbox"><label for="auth8"><b>Records</b></label><br><br>
-    <input type="checkbox" id="auth9" name="authreqs" class="FNA largerCheckbox" onclick="moveAuth2()"><label for="auth9" style="font-size:20px;"><b>No Requests</b></label><br></p>
-    <button id="cancelNewauth" class="wefwefwef" onclick="cancelNewauth()">Cancel</button>
+    <button id="cancelNewauth" class="wefwefwef" onclick="cancel_auth()">Cancel</button>
     <button id="authMove2" class="wefwefwef" onclick="moveAuth2()">Continue</button>
   </div>
   <div id="authOopcs" class="noShow" style="display:none;font-size:18px;">
     <div class="noShow" style="width:50%;float:left;">
     <div class="newStyle authStyle" style="font-size:18px;">
       <b>Is OOPC or shipping a concern?</b><br>
-      <input type="radio" id="auth10" name="authoops" class="FNA largerRadio" onclick="showOOPopt()"><label for="auth10"><b>OOPC</b></label><br>
-      <input type="radio" id="auth11" name="authoops" class="FNA largerRadio"><label for="auth11"><b>Shipping</b></label><br>
-      <input type="radio" id="auth12" name="authoops" class="FNA largerRadio" onclick="showOOPopt()"><label for="auth12"><b>Both</b></label><br><br>
-      <input type="radio" id="auth13" name="authoops" class="FNA largerRadio"><label for="auth13"><b>No Concerns</b></label><br><br>
+      <input type="radio" id="auth9" name="authoops" class="FNA largerRadio" onclick="show_oopc_option('y')"><label for="auth9"><b>OOPC</b></label><br>
+      <input type="radio" id="auth10" name="authoops" class="FNA largerRadio" onclick="show_oopc_option()"><label for="auth10"><b>Shipping</b></label><br>
+      <input type="radio" id="auth11" name="authoops" class="FNA largerRadio" onclick="show_oopc_option('y')"><label for="auth11"><b>Both</b></label><br><br>
+      <input type="radio" id="auth12" name="authoops" class="FNA largerRadio" onclick="show_oopc_option()")><label for="auth12"><b>No Concerns</b></label><br><br>
     </div><br>
     <div class="newStyle authStyle" style="font-size:18px;margin-left:20px;">
       <b>Any non-covered or denied components?</b><br>
-      <input type="checkbox" id="auth18" name="authoops3" class="FNA largerCheckbox"><label for="auth18"><b>Non-Covered</b></label><br>
-      <input type="checkbox" id="auth18a" name="authoops3" class="FNA largerCheckbox"><label for="auth18a"><b>Denied</b></label><br>
-      <input type="checkbox" id="auth19" name="authoops3" class="FNA largerCheckbox"><label for="auth19"><b>No</b></label>
+      <input type="checkbox" id="auth13" name="authoops3" class="FNA largerCheckbox"><label for="auth13"><b>Non-Covered</b></label><br>
+      <input type="checkbox" id="auth14" name="authoops3" class="FNA largerCheckbox"><label for="auth14"><b>Denied</b></label><br>
+      <input type="checkbox" id="auth15" name="authoops3" class="FNA largerCheckbox"><label for="auth15"><b>TSB/Recall</b></label><br>
+      <input type="checkbox" id="auth16" name="authoops3" class="FNA largerCheckbox"><label for="auth16"><b>Prior Related</b></label><br>
+      <input type="checkbox" id="auth16a" name="authoops3" class="FNA largerCheckbox"><label for="auth16a"><b>Mileage/Vin Issue</b></label>
     </div>
     </div>
-    <div id="OOPoptDiv" class="newStyle authStyle" style="display:none;font-size:18px;">
+    <div id="OOPoptDiv" class="newStyle authStyle">
     <b>What is the cause of OOPC?</b><br>
-      <input type="radio" id="auth14" name="authoops2" class="FNA largerRadio"><label for="auth14"><b>Parts</b></label><br>
-      <input type="radio" id="auth15" name="authoops2" class="FNA largerRadio"><label for="auth15"><b>Labor</b></label><br>
-      <input type="radio" id="auth16" name="authoops2" class="FNA largerRadio"><label for="auth16"><b>Both</b></label><br><br>
-      <label for="auth17"><b>Amount of OOPC<br>&nbsp&nbsp&nbspInclude DED</b></label><br><input type="number" style="padding:5px;" id="auth17" name="authoops" class="FNA" step="0.01"><br>
+      <input type="radio" id="auth17" name="authoops2" class="FNA largerRadio"><label for="auth17"><b>Parts</b></label><br>
+      <input type="radio" id="auth18" name="authoops2" class="FNA largerRadio"><label for="auth18"><b>Labor</b></label><br>
+      <input type="radio" id="auth19" name="authoops2" class="FNA largerRadio"><label for="auth19"><b>Both</b></label><br>
+      <label for="auth20"><b>OOPC = $</b></label><input type="number" style="padding:5px;width:90px;" id="auth20" name="authoops" class="FNA" step="0.01"><br>
+      <input type="checkbox" id="auth21" name="authoops2a" class="FNA largerCheckbox"><label for="auth21"><b>Don't Know OOPC.</b></label>
     </div>
+    <div id="OOPoptDiv2" class="newStyle authStyle">
+          DED Amount:
+          <select id="auth25" name="authoopcs61" class="largerSelect">
+            <option value="$100.00">$100.00</option>
+            <option value="$0.00">$0.00</option>
+            <option value="$50.00">$50.00</option>
+            <option value="$100.00">$100.00</option>
+            <option value="$150.00">$150.00</option>
+            <option value="$200.00">$200.00</option>
+            <option value="$250.00">$250.00</option>
+            <option value="$500.00">$500.00</option>
+          </select>
+        </div>
     <div id="authbtns" class="noShow">
-      <button id="cancelNewauth" class="wefwefwef" onclick="cancelNewauth()">Cancel</button>
-      <button id="finishAuth"  class="wefwefwef" onclick="newAuth()">Finish</button>
+      <button id="cancelNewauth" class="wefwefwef" onclick="cancel_auth()">Cancel</button>
+      <button id="finishAuth"  class="wefwefwef" onclick="auth_initialize(1)">Finish</button>
     </div>
   </div>
 </div>
@@ -2100,96 +2231,117 @@ TIME:&nbsp&nbsp</textarea>
 
                                                 <!-- Labor Script Div -->
 
-<div id="laborscriptDiv" class="ls_main" style="display:none;">
-  <div class="ls_sub">
-    <h3 class="head_labor">Labor Rate Script</h3>
-    <div class="left_div revert">
-      <p>
+<div id="laborscriptDiv" class="ls_outer hide">
+  <div class="ls_main">
+    <h3 class="labor_heading">Labor Rate Script</h3>
+    <div class="labor_div_100">
+      <div class="labor_div_60">
         Ask the RF:<br>What is the current posted labor rate at your Repair Facility?
-      </p>
-      <p>
-        Optional:<br>
-        Are they requesting more than the Labor Rate in CMS?
-      </p>
-    </div>
-    <div class="side_div revert">
-      <p>
+      </div>
+      <div class="labor_div_40">
         <label for="asking">RF Posted Labor Rate:</label><br>
         $<input type="number" id="asking" step=".01" required><br>
-      </p>
-      <p>
-        <label for="current">Labor Rate in CMS:</label><br>
-        $<input type="number" id="current" step=".01">
-      </p>
-      <div class="side_sub revert">
-        <div class="drop_sub menu_sub revert">
-          <select id="radius" required>
-            <option selected value="">Radius</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-          </select><br>
-          <select id="type" required>
-            <option selected value="">Facility Type</option>
-            <option value="All">All</option>
-            <option value="Independent">Independent</option>
-            <option value="Domestic">Domestic</option>
-            <option value="European">European</option>
-            <option value="Asian">Asian</option>
-          </select><br>
-          <select id="quant" required>
-            <option selected value="">Facilities</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="All">All</option>
-          </select><br>
-        </div>
-        <div class="drop_sub label_sub revert">
-          <label for="radius">Radius:</label><br>
-          <label for="type">Facility Type:</label><br>
-          <label for="quant">Number of Facilities:</label>
-        </div>
-      </div>
-      <p class="aveRatep">
-        <label for="aveRate">Average Labor Rate:</label><br>
-        $<input type="number" id="aveRate" step=".01" required>
-      </p>
-      <button id="myScript" class="script_btn D R P" onclick="laborScript()">My Response</button>
-      <div id="responseDiv" class="flt_lft revert" style="display:none;">
-        <div id="responseDiv_text" class="revert">The response is:<br></div>
-        <button id="yesScript" class="script_btn D R P" onclick="negotiateScript('y')">Yes</button>
-        <button id="noScript" class="script_btn D R P" onclick="negotiateScript('n')">No</button>
-        <div id="rf_offer_div" class="revert">
-          <div id="sub_offer_div" class="sub_offer revert"><label for="custom">The RF offered: </label><br>
-          $<input type="number" id="custom" step=".01"></div>
-          <button id="acceptScript" class="script_btn D R P" onclick="negotiateScript('a')">Accept</button>
-        </div>
-      <button id="resetScript" class="script_btn D R P" onclick="negotiateScript('r')">Reset</button>
       </div>
     </div>
-    <button id="exitScript" class="script_btn D R P" onclick="negotiateScript('r');openScript()">Exit</button>
-    <button id="instructScript" class="script_btn D R P" onclick="instructScript()">Instructions</button>  <br>
-    <div id="instructL" class="instructLabor">
-      <b>Instructions:</b><br>
-      <ul>
-        <li>Enter the Repair Facility response into RF Posted Labor Rate.</li>
-        <li>*Optional: Enter the labor rate that is currently in CMS.*</li>
-        <li>Select the options for Radius, Facility Type, and Number of Facilities that you used for searching SWIS.</li>
-        <li>Enter the Average Labor Rate SWIS output.</li>
-        <li>Click 'My Response'.</li>
-        <li>It will show a dialog box containing the appropriate response or question.</li>
-        <li>Use the 'Yes' and 'No' buttons to input their response back.</li>
-        <li>*Optional: If they make an offer, enter it into the box and click 'Accept'.*</li>
-        <li>When completed, click 'Exit'.</li>
-        <li>The completed note is already in your clipboard ready to be pasted.</li>
-        <li>Use reset to clear the form and start over if needed.</li>
-      </ul>
-    </div> 
-  </div>
+    <div class="labor_div_100">
+      <div class="labor_div_60">
+        Optional:<br>
+        Are they requesting more than the Labor Rate in CMS?
+      </div>
+      <div class="labor_div_40">
+        <label for="current">Labor Rate in CMS:</label><br>
+        $<input type="number" id="current" step=".01">
+      </div>
+    </div>
+    <div class="labor_div_90">
+      <div class="labor_div_30 NumberBtn">
+        Radius:
+        <div class="labor_width">
+          <button id="radius5" class="laboropt" onclick="radiusSelect(5, this.id)">5</button>
+          <button id="radius10" class="laboropt" onclick="radiusSelect(10, this.id)">10</button>
+          <button id="radius25" class="laboropt" onclick="radiusSelect(25, this.id)">25</button>
+        </div>
+      </div>
+      <div class="labor_div_30 Type">
+        Facility Type:
+        <div class="labor_widther">
+          <button id="typeAll" class="laboropt" onclick="typeSelect('All', this.id)">All</button>
+          <button id="typeIndy" class="laboropt" onclick="typeSelect('Independant', this.id)">Independant</button>
+          <button id="typeDom" class="laboropt" onclick="typeSelect('Domestic', this.id)">Domestic</button>
+          <button id="typeEuro" class="laboropt" onclick="typeSelect('European', this.id)">European</button>
+          <button id="typeAsian" class="laboropt" onclick="typeSelect('Asian', this.id)">Asian</button>
+        </div>
+      </div>
+      <div class="labor_div_30 NumberBtn">
+        Number of Facilities:
+        <div class="labor_width">
+          <button id="quant5" class="laboropt" onclick="quantSelect(5, this.id)">5</button>
+          <button id="quant10" class="laboropt" onclick="quantSelect(10, this.id)">10</button>
+          <button id="quant25" class="laboropt" onclick="quantSelect(25, this.id)">25</button>
+          <button id="quant50" class="laboropt" onclick="quantSelect(50, this.id)">50</button>
+          <button id="quant100" class="laboropt" onclick="quantSelect(100, this.id)">100</button>
+          <button id="quantAll" class="laboropt" onclick="quantSelect('All', this.id)">All</button>
+        </div>
+      </div>
+    </div>
+    <div class="labor_div_100">
+      <label for="aveRate">Average Labor Rate:</label>
+      $<input type="number" id="aveRate" step=".01">
+      <div>
+        <button id="myScript" class="script_button" onclick="laborScript()">My Response</button>
+      </div>
+    </div>
+    <div id="responseDiv">
+      <div class="response_inner">
+        <div id="responseDiv_text">The response is:<br></div>
+        <div id="answerBtns">
+          <div>
+            <button id="yesScript" class="script_button" onclick="negotiateScript('y')">Yes</button>
+          </div>
+          <div>
+            <button id="noScript" class="script_button" onclick="negotiateScript('n')">No</button>
+          </div>
+        </div>
+      </div>
+      <div id="rf_offer_div">
+        <div>
+          <label for="custom">The RF offered: </label><br>
+          $<input type="number" id="custom" step=".01">
+        </div>
+        <div>
+          <button id="acceptScript" class="script_button" onclick="negotiateScript('a')">Accept</button>
+        </div>
+      </div>
+    </div>
+    <div class="labor_div_button_holder">
+      <div>
+        <button id="instructScript" class="script_button" onclick="instructScript()">Instructions</button>
+      </div>
+      <div>
+        <button id="exitScript" class="script_button" onclick="negotiateScript('e')">Exit</button>
+      </div>
+      <div>
+        <button id="resetScript" class="script_button" onclick="negotiateScript('r')">Reset</button>
+      </div>
+    </div>
+  </div> 
 </div>
+<div id="instructL" class="instructLabor hide">
+  <b>Instructions:</b><br>
+  <ul>
+    <li>Enter the Repair Facility response into RF Posted Labor Rate.</li>
+    <li>*Optional: Enter the labor rate that is currently in CMS.*</li>
+    <li>Select the options for Radius, Facility Type, and Number of Facilities that you used for searching SWIS.</li>
+    <li>Enter the Average Labor Rate SWIS output.</li>
+    <li>Click 'My Response'.</li>
+    <li>It will show a dialog box containing the appropriate response or question.</li>
+    <li>Use the 'Yes' and 'No' buttons to input their response back.</li>
+    <li>*Optional: If they make an offer, enter it into the box and click 'Accept'.*</li>
+    <li>When completed, click 'Exit'.</li>
+    <li>The completed note is already in your clipboard ready to be pasted.</li>
+    <li>Use reset to clear the form and start over if needed.</li>
+  </ul>
+</div> 
 
                                                 <!-- CH Statement Questions -->
 
@@ -2302,7 +2454,8 @@ TIME:&nbsp&nbsp</textarea>
      <button id="advanceState" class="wefwefwef" onclick="advanceState()">Next</button>
   </div>
 </div>
-                                                <!-- Trans Auth -->
+  
+                                              <!-- Trans Auth -->
 
 <div id="module_trans_backing" class="module_backing">
   <div id="module_trans_main" class="module_main">
@@ -2404,35 +2557,52 @@ TIME:&nbsp&nbsp</textarea>
     </div>
   </div>
 </div>
+<div id="context-menu">
+  <div class="item" onclick="editDisplay()">Display</div>
+  <div class="item" onclick="editSize()">Size</div>
+  <div class="item" onclick="BuilderShow('o')">Toggle List</div>
+</div>
+<div class="CMeditDIV backing" id="disEdit" style="display:none; text-align: center;">
+  <div id="TitleDisplay" class="noShow"><b>Edit Display</b>
+  </div>
+  <div id="Instruction" class="noShow"> Highlight the text you would like to modify.<br>
+    Press the button to apply the effect<br>
+    Change the font size using the + and - buttons<br><br>
+  </div>
+  <button id="color" class="bones" onclick="submitDisp('c')">Color Change</button>
+  <button id="bold" class="bones" onclick="submitDisp('b')">Toggle Bold</button>
+  <button id="mimic" class="bones" contenteditable></button>
+  <div id="fontSizer" class="noShow"></div>
+  <button id="plus" class="bones" onclick="fontChange('1')"> <b>+</b> </button>
+  <button id="minus" class="bones" onclick="fontChange('-1')"> <b>-</b> </button>
+  <button id="dispCancel" class="bones" onclick="submitDisp('s')">Exit</button>
+  <button id="dispSubmit" class="bones" onclick="submitDisp('s')">Submit</button>
+  <button id="dispDefault" class="bones" onclick="submitDisp('d')">Default</button>
+</div>
+<div class="CMeditDIV backing" id="sizeEdit" style="display:none; text-align: center;">
+  <div id="heightMod" class="noShow" style="text-align: center;">
+    <button id="hplus" class="moveBTNS" onclick="heightChange('5')">&#x2B9E;</button><br><br>
+    <button id="hminus" class="moveBTNS" onclick="heightChange('-5')">&#x2B9C;</button>
+  </div>
+  <div id="widthMod" class="noShow" style="text-align: center;">
+    <button  id="wplus" class="moveBTNS" onclick="widthChange('5')">&#x2B9E;</button>
+    <button  id="wminus" class="moveBTNS" onclick="widthChange('-5')">&#x2B9C;</button>
+  </div>
+    <button id="sizeShow" class="bones"></button>
+    <button id="sizeSubmit" class="bones" onclick="sizeSubmit('s')">Submit</button>
+    <button id="sizeDefault" class="bones" onclick="sizeSubmit('d')">Default</button>
+  <button id="sizeCancel" class="bones" onclick="sizeSubmit()">Exit</button>
+</div>
 
-<div id="pdiv" class="noShow"><p></div>
-<script type="module" src="JavaScript/firebase.js?v=20240628041642"></script>
-<script type="module" src="JavaScript/script.js?v=20240628041642"></script>
-<script src="JavaScript/snipDiv.js?v=20240628041642"></script>
-<script src="JavaScript/keyEvents.js?v=20240628041642"></script>
-<script src="JavaScript/OGLAYOUTJS.js?v=20240628041642"></script>
-<script src="JavaScript/ChangeAppearance2.js?v=20240628041642"></script>
-<script src="JavaScript/commonScript.js?v=20240628041642"></script>
-<script src="JavaScript/jsonParse.js?v=20240628041642"></script>
+<script src="JavaScript/snipDiv.js?v=20240707202844"></script>
+<script src="JavaScript/keyEvents.js?v=20240707202844"></script>
+<script src="JavaScript/OGLAYOUTJS.js?v=20240707202844"></script>
+<script src="JavaScript/dual_claim_authorization.js?v=20240707202844"></script>
+<script src="JavaScript/ChangeAppearance2.js?v=20240707202844"></script>
+<script src="JavaScript/commonScript.js?v=20240707202844"></script>
+<script src="JavaScript/jsonParse.js?v=20240707202844"></script>
+<script src="JavaScript/ContextMenu.js?v=20240707202844"></script>
+<script src="JavaScript/laborRate.js?v=20240707202844"></script>
+<script src="JavaScript/trackerScript.js?v=20240707202844"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
