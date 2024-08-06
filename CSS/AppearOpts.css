@@ -38,9 +38,6 @@ textarea {
   position: absolute;
   outline: 2px solid var(--my-accent-color);
   border-radius: 15px;
-  box-shadow:
-    7px 7px 16px var(--my-shadow-color4),
-   -7px -7px 16px var(--my-shadow-color1);
 }
 
 textarea.origText {
@@ -68,8 +65,8 @@ button {
   border: none;
   border-radius: 15px;
   color: var(--glow-txt-color);
-  background: linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2));
-  box-shadow:  2px 2px 6px var(--my-shadow-color4), -2px -2px 6px var(--my-shadow-color1);
+  background: var(--btn-background);
+  box-shadow: var(--box-shadow1);
   text-shadow:
     1px 1px 1px var(--glow-outline-color),
    -1px -1px 1px var(--glow-outline-color),
@@ -79,8 +76,8 @@ button {
 
 button:active {
   transition: all 0.2s ease;
-  background: linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3));
-  box-shadow: inset -2px -2px 6px var(--my-shadow-color1), inset 2px 2px 6px var(--my-shadow-color4);
+  background: var(--btn-backgroundx);
+  box-shadow: var(--box-shadow1x);
 }
 
 div#original.default button.orig {

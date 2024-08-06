@@ -8,16 +8,16 @@
 <meta name="referrer" content="no-referrer">
 
 
-<link rel="stylesheet" href="CSS/Common.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/Stable.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/auth_module.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/Buttons.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/AppearOpts.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/Resource.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/contextMenu.css?v=156348415154625">
-<link rel="stylesheet" href="CSS/laborRateScript.css?v=156348415154625">
+<link rel="stylesheet" href="CSS/Common.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/Stable.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/auth_module.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/Buttons.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/AppearOpts.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/Resource.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/contextMenu.css?v=20240707202844">
+<link rel="stylesheet" href="CSS/laborRateScript.css?v=20240707202844">
 	<title>Adjuster Console</title>
-<link rel="manifest" href="manifest.webmanifest?v=156348415154625">
+
 <style>
 
 /*Restricted Use License
@@ -162,8 +162,11 @@ body {
   --fancy-dark: #6d7174;
   --fancy-background: #B6BDC1;
 
-  --box-shadow1: 2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1);
+  --box-shadow1: 2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1);
   --btn-background: linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2));
+
+  --box-shadow1x: inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4);
+  --btn-backgroundx: linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3));
 
   --box-shadow2: -5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light);
   --btn-background2: linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight));
@@ -345,11 +348,11 @@ body {
   <button class="navbtn" onclick="diagCenter();openInfo2(event, 'Electrical');closeNav()">Electrical</button>
   <button class="navEnder navbtn" onclick="diagCenter();openInfo2(event, 'Fuel');closeNav()">Fuel</button>
   <button class="navHeader navbtn" onclick="ShowTemps();closeNav()">Templates</button>
-  <button class="navbtn" onclick="PTXFER();ShowTemps();closeNav()">PT Transfer</button>
-  <button class="navbtn" onclick="STMTTEMP('T2');ShowTemps();closeNav()">CH Statement</button>
-  <button class="navbtn" onclick="REVIEW('T3');ShowTemps();closeNav()">Insp/Pic Review</button>
-  <button class="navbtn" onclick="INSPTEMP('T4');ShowTemps();closeNav()">Inspection Template</button>
-  <button class="navbtn" onclick="showAuth();closeNav()">Authorization</button>
+  <button class="navbtn" onclick="PTXFER();closeNav()">PT Transfer</button>
+  <button class="navbtn" onclick="STMTTEMP('T2');closeNav()">CH Statement</button>
+  <button class="navbtn" onclick="REVIEW('T3');closeNav()">Insp/Pic Review</button>
+  <button class="navbtn" onclick="INSPTEMP('T4');closeNav()">Inspection Template</button>
+  <button class="navbtn" onclick="authStart();closeNav()">Authorization</button>
   <button class="navbtn" onclick="statNOTE();closeNav()">Status</button>
 </div>
 

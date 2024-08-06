@@ -34,6 +34,8 @@ function colorObject() {
   this.lightbackground = "#92b1c3";
   this.btnBackground = "linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))";
   this.boxShadow1 = '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1)';
+  this.btnBackgroundx = "linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))";
+  this.boxShadow1x = 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)';
   this.btnBackground2 = 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))';
   this.boxShadow2 = '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)';
 }
@@ -67,14 +69,20 @@ function getPicker() {
   const yOffset = sanitizeInput(document.getElementById("y-offset").value);
   const blur = sanitizeInput(document.getElementById("blur").value);
   const spread = sanitizeInput(document.getElementById("spread").value);
-  const shadDouble = document.getElementById("shadDouble").checked;
+  const shadDouble = document.getElementById("shadDouble");
 
   colorSet.btnBackground = `linear-gradient(145deg, ${colorSet.shadow3}, ${colorSet.shadow2})`;
+  colorSet.btnBackgroundx = `linear-gradient(145deg, ${colorSet.shadow2}, ${colorSet.shadow3})`;
   colorSet.btnBackground2 = `linear-gradient(315deg, ${colorSet.meddark}, ${colorSet.medlight})`;
 
   colorSet.boxShadow1 = `${xOffset}px ${yOffset}px ${blur}px ${spread}px ${colorSet.shadow4}`; 
-  if(shadDouble) {
+  if(shadDouble.checked) {
     colorSet.boxShadow1 += `, ${-xOffset}px ${-yOffset}px ${blur}px ${spread}px ${colorSet.shadow1}`;
+  }
+
+  colorSet.boxShadow1x = `inset ${-xOffset}px ${-yOffset}px ${blur}px ${spread}px ${colorSet.shadow1}`; 
+  if(shadDouble.checked) {
+    colorSet.boxShadow1x += `, inset ${xOffset}px ${yOffset}px ${blur}px ${spread}px ${colorSet.shadow4}`;
   }
 
   const xOffset2 = sanitizeInput(document.getElementById("x-offset2").value);
@@ -160,6 +168,9 @@ function setProperty() {
   document.documentElement.style.setProperty('--box-shadow1', colorSet.boxShadow1 || '');
   document.documentElement.style.setProperty('--btn-background', colorSet.btnBackground || '');
 
+  document.documentElement.style.setProperty('--box-shadow1x', colorSet.boxShadow1x || '');
+  document.documentElement.style.setProperty('--btn-backgroundx', colorSet.btnBackgroundx || '');
+
   document.documentElement.style.setProperty('--box-shadow2', colorSet.boxShadow2 || '');
   document.documentElement.style.setProperty('--btn-background2', colorSet.btnBackground2 || '');
 
@@ -192,7 +203,9 @@ function setColor(colors) {
         dark: "#6d7174",
         lightbackground: "#B6BDC1",
         btnBackground: 'linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))',
-        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1)',
+        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1)',
+        btnBackgroundx: "linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))",
+        boxShadow1x: 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)',
         btnBackground2: 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))',
         boxShadow2: '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)'
       });
@@ -216,7 +229,9 @@ function setColor(colors) {
         dark: "#737373",
         lightbackground: "#bfbfbf",
         btnBackground: 'linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))',
-        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1)',
+        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1)',
+        btnBackgroundx: "linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))",
+        boxShadow1x: 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)',
         btnBackground2: 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))',
         boxShadow2: '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)'
       });
@@ -240,7 +255,9 @@ function setColor(colors) {
         dark: "#997a7a",
         lightbackground: "#ffcccc",
         btnBackground: 'linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))',
-        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1)',
+        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1)',
+        btnBackgroundx: "linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))",
+        boxShadow1x: 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)',
         btnBackground2: 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))',
         boxShadow2: '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)'
       });
@@ -264,7 +281,9 @@ function setColor(colors) {
         dark: "#7f9180",
         lightbackground: "#c5edc6",
         btnBackground: 'linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))',
-        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px var(--my-shadow-color1)',
+        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px var(--my-shadow-color1)',
+        btnBackgroundx: "linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))",
+        boxShadow1x: 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)',
         btnBackground2: 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))',
         boxShadow2: '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)'
       });
@@ -288,7 +307,9 @@ function setColor(colors) {
         dark: "#C392C2",
         lightbackground: "#fbc1fa",
         btnBackground: 'linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))',
-        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1)',
+        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1)',
+        btnBackgroundx: "linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))",
+        boxShadow1x: 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)',
         btnBackground2: 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))',
         boxShadow2: '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)'
       });
@@ -313,7 +334,9 @@ function setColor(colors) {
         dark: "#728d9d",
         lightbackground: "#92b1c3",
         btnBackground: 'linear-gradient(145deg, var(--my-shadow-color3), var(--my-shadow-color2))',
-        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px 2px 6px 0px var(--my-shadow-color1)',
+        boxShadow1: '2px 2px 6px 0px var(--my-shadow-color4), -2px -2px 6px 0px var(--my-shadow-color1)',
+        btnBackgroundx: 'linear-gradient(145deg, var(--my-shadow-color2), var(--my-shadow-color3))',
+        boxShadow1x: 'inset -2px -2px 6px 0px var(--my-shadow-color1), inset 2px 2px 6px 0px var(--my-shadow-color4)',
         btnBackground2: 'linear-gradient(315deg, var(--fancy-meddark), var(--fancy-medlight))',
         boxShadow2: '-5px -5px 16px 0px var(--fancy-dark), 5px 5px 16px 0px var(--fancy-light)'
       });
@@ -324,8 +347,52 @@ function setColor(colors) {
   localStorage.setItem("colorSet2", JSON.stringify(colorSet));
   setPicker();
   setProperty();
+  getPicker();
 }
 
+function adjustValue(input, increment) {
+  let value = parseInt(input.value) + increment;
+  input.value = value;
+  getPicker();
+}
+
+function personalize() {
+  MENU();
+  startListening();
+  document.getElementById("appearDiv").style.display = "inline-block";
+}
+
+function exitColor() {
+  document.getElementById("appearDiv").style.display = "none";
+  location.reload();
+  stopListening();
+}
+
+function saveColors() {
+  getPicker();
+  const colorSet = JSON.parse(localStorage.getItem("colorSet2"));
+  localStorage.setItem("colorSet1", JSON.stringify(colorSet));
+  setProperty();
+  exitColor();
+}
+
+function resetColors() {
+  if (localStorage.getItem("colorSet1") === null) {
+    setColor("ACDF");
+  } else {
+    setPicker();
+    setProperty();
+  }
+  const shadDouble = document.getElementById("shadDouble");
+  const doubleBubble = localStorage.getItem("doubleBubble");
+  if (doubleBubble === 'true' || doubleBubble === null) {
+    shadDouble.checked = true;
+  } else {
+    shadDouble.checked = false;
+  }
+}
+
+function startListening() {
 const xOffsetInput = document.getElementById('x-offset');
 const yOffsetInput = document.getElementById('y-offset');
 const blurInput = document.getElementById('blur');
@@ -391,36 +458,72 @@ blurDecrementBtn2.addEventListener('click', () => adjustValue(blurInput2, -1));
 blurIncrementBtn2.addEventListener('click', () => adjustValue(blurInput2, 1));
 spreadDecrementBtn2.addEventListener('click', () => adjustValue(spreadInput2, -1));
 spreadIncrementBtn2.addEventListener('click', () => adjustValue(spreadInput2, 1));
-
-function adjustValue(input, increment) {
-  let value = parseInt(input.value) + increment;
-  input.value = value;
-  getPicker();
 }
 
-function personalize() {
-  MENU();
-  document.getElementById("appearDiv").style.display = "inline-block";
-}
+function stopListening() {
+const xOffsetInput = document.getElementById('x-offset');
+const yOffsetInput = document.getElementById('y-offset');
+const blurInput = document.getElementById('blur');
+const spreadInput = document.getElementById('spread');
+const xOffsetDecrementBtn = document.getElementById('xOffsetDecrement');
+const xOffsetIncrementBtn = document.getElementById('xOffsetIncrement');
+const yOffsetDecrementBtn = document.getElementById('yOffsetDecrement');
+const yOffsetIncrementBtn = document.getElementById('yOffsetIncrement');
+const blurDecrementBtn = document.getElementById('blurDecrement');
+const blurIncrementBtn = document.getElementById('blurIncrement');
+const spreadDecrementBtn = document.getElementById('spreadDecrement');
+const spreadIncrementBtn = document.getElementById('spreadIncrement');
 
-function exitColor() {
-  document.getElementById("appearDiv").style.display = "none";
-  location.reload();
-}
+const xOffsetInput2 = document.getElementById('x-offset2');
+const yOffsetInput2 = document.getElementById('y-offset2');
+const blurInput2 = document.getElementById('blur2');
+const spreadInput2 = document.getElementById('spread2');
+const xOffsetDecrementBtn2 = document.getElementById('xOffsetDecrement2');
+const xOffsetIncrementBtn2 = document.getElementById('xOffsetIncrement2');
+const yOffsetDecrementBtn2 = document.getElementById('yOffsetDecrement2');
+const yOffsetIncrementBtn2 = document.getElementById('yOffsetIncrement2');
+const blurDecrementBtn2 = document.getElementById('blurDecrement2');
+const blurIncrementBtn2 = document.getElementById('blurIncrement2');
+const spreadDecrementBtn2 = document.getElementById('spreadDecrement2');
+const spreadIncrementBtn2 = document.getElementById('spreadIncrement2');
 
-function saveColors() {
-  getPicker();
-  const colorSet = JSON.parse(localStorage.getItem("colorSet2"));
-  localStorage.setItem("colorSet1", JSON.stringify(colorSet));
-  setProperty();
-  exitColor();
-}
 
-function resetColors() {
-  if (localStorage.getItem("colorSet1") === null) {
-    setColor("ACDF");
-  } else {
-    setPicker();
-    setProperty();
-  }
+document.getElementById("background-picker").removeEventListener('input', getPicker);
+document.getElementById("accent-picker").removeEventListener('input', getPicker);
+document.getElementById("shad1-picker").removeEventListener('input', getPicker);
+document.getElementById("shad2-picker").removeEventListener('input', getPicker);
+document.getElementById("shad3-picker").removeEventListener('input', getPicker);
+document.getElementById("shad4-picker").removeEventListener('input', getPicker);
+
+document.getElementById("fl-picker").removeEventListener('input', getPicker);
+document.getElementById("ml-picker").removeEventListener('input', getPicker);
+document.getElementById("md-picker").removeEventListener('input', getPicker);
+document.getElementById("fd-picker").removeEventListener('input', getPicker);
+document.getElementById("bg2-picker").removeEventListener('input', getPicker);
+
+xOffsetInput.removeEventListener('input', getPicker);
+yOffsetInput.removeEventListener('input', getPicker);
+blurInput.removeEventListener('input', getPicker);
+spreadInput.removeEventListener('input', getPicker);
+xOffsetDecrementBtn.removeEventListener('click', () => adjustValue(xOffsetInput, -1));
+xOffsetIncrementBtn.removeEventListener('click', () => adjustValue(xOffsetInput, 1));
+yOffsetDecrementBtn.removeEventListener('click', () => adjustValue(yOffsetInput, -1));
+yOffsetIncrementBtn.removeEventListener('click', () => adjustValue(yOffsetInput, 1));
+blurDecrementBtn.removeEventListener('click', () => adjustValue(blurInput, -1));
+blurIncrementBtn.removeEventListener('click', () => adjustValue(blurInput, 1));
+spreadDecrementBtn.removeEventListener('click', () => adjustValue(spreadInput, -1));
+spreadIncrementBtn.removeEventListener('click', () => adjustValue(spreadInput, 1));
+
+xOffsetInput2.removeEventListener('input', getPicker);
+yOffsetInput2.removeEventListener('input', getPicker);
+blurInput2.removeEventListener('input', getPicker);
+spreadInput2.removeEventListener('input', getPicker);
+xOffsetDecrementBtn2.removeEventListener('click', () => adjustValue(xOffsetInput2, -1));
+xOffsetIncrementBtn2.removeEventListener('click', () => adjustValue(xOffsetInput2, 1));
+yOffsetDecrementBtn2.removeEventListener('click', () => adjustValue(yOffsetInput2, -1));
+yOffsetIncrementBtn2.removeEventListener('click', () => adjustValue(yOffsetInput2, 1));
+blurDecrementBtn2.removeEventListener('click', () => adjustValue(blurInput2, -1));
+blurIncrementBtn2.removeEventListener('click', () => adjustValue(blurInput2, 1));
+spreadDecrementBtn2.removeEventListener('click', () => adjustValue(spreadInput2, -1));
+spreadIncrementBtn2.removeEventListener('click', () => adjustValue(spreadInput2, 1));
 }

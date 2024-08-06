@@ -304,6 +304,6 @@ function RESET() {
   RESETNOTE();
   cancelState();
   cancelStat();
-  cancelNewauth();
+  cancel_auth();
   cancelPT();
 }
