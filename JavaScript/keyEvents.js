@@ -237,3 +237,11 @@ function saintMullet() {
   animate();
   }, 100);
 }
+
+function showDisclaimer() {
+  document.getElementById('disclaimer2').style.display = "inline-block";
+}
+
+function hideDisclaimer() {
+  document.getElementById('disclaimer2').style.display = "none";
+}
