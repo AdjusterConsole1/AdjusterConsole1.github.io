@@ -242,6 +242,9 @@ function showDisclaimer() {
   document.getElementById('disclaimer2').style.display = "inline-block";
 }
 
-function hideDisclaimer() {
+function hideDisclaimer(x) {
+  let agreed = localStorage.getItem('agreed');
+  if (x === 'y' && agreed !== 'agreed') return;
+  if (x === 'x') localStorage.setItem('agreed', 'agreed');
   document.getElementById('disclaimer2').style.display = "none";
 }
