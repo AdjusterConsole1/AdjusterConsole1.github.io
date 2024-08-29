@@ -489,6 +489,10 @@ window.onload = function PutItBack() {
     document.body.removeChild(splashImage);
   });
 
+  const agreed = localStorage.getItem('agreed');
+  if (agreed !== 'agreed') {
+    showDisclaimer();
+  }
   const authMode = localStorage.getItem('authMode');
   if (authMode === 'newAuth') {
     document.getElementById('newauthSelect').checked = true;
