@@ -569,3 +569,16 @@ input[type="color"] {
   left: -15px;
   z-index: 1000; 
 }
+
+#understand {
+  border: 1px solid black;
+  font-size: 16px;
+}
+
+#understand:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+#understand:active {
+  background: rgba(0,0,0,0.4);
+}
