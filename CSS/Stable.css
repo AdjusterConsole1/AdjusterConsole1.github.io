@@ -573,6 +573,7 @@ input[type="color"] {
 #understand {
   font-weight: bold;
   font-size: 18px;
+  padding: 10px;
 }
 
 #understand:hover {
