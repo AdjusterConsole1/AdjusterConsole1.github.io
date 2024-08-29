@@ -571,8 +571,8 @@ input[type="color"] {
 }
 
 #understand {
-  border: 1px solid black;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 #understand:hover {
