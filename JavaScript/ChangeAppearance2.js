@@ -495,13 +495,13 @@ function adjustValue(input, increment) {
 
 function personalize() {
   MENU();
-  startListening();
+ // startListening();
   document.getElementById("appearDiv").style.display = "inline-block";
 }
 
 function exitColor() {
   document.getElementById("appearDiv").style.display = "none";
-  stopListening();
+  //stopListening();
 }
 
 function saveColors() {
@@ -528,7 +528,7 @@ function resetColors() {
   }
 }
 
-function startListening() {
+//function startListening() {
 const xOffsetInput = document.getElementById('x-offset');
 const yOffsetInput = document.getElementById('y-offset');
 const blurInput = document.getElementById('blur');
@@ -622,7 +622,7 @@ radiusDecrementBtn2.addEventListener('click', () => adjustValue(radiusInput2, -1
 radiusIncrementBtn2.addEventListener('click', () => adjustValue(radiusInput2, 1));
 angleDecrementBtn2.addEventListener('click', () => adjustValue(angleInput2, -1));
 angleIncrementBtn2.addEventListener('click', () => adjustValue(angleInput2, 1));
-}
+//}
 
 function stopListening() {
 const xOffsetInput = document.getElementById('x-offset');
