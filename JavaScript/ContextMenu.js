@@ -444,3 +444,158 @@ function posSubmit(x) {
     location.reload();
   }
 }
+
+function infoCancel() {
+  var infoDiv1 = document.getElementById("infoDiv1");
+  infoDiv1.style.display = "none";
+}
+
+function infoCancel2() {
+  var infoDiv2 = document.getElementById("infoDiv2");
+  infoDiv2.style.display = "none";
+}
+
+function showCustom() {
+  var infoDiv1 = document.getElementById("infoDiv1");
+  infoDiv1.style.display = "inline-block";
+//alert("This function has been disabled");
+}
+
+function infoDone() {
+  infoDiv1.style.display = "none";
+  infoDiv2.style.display = "inline-block";
+}
+
+function infoDone1() {
+  var typeFinder = document.getElementsByName('buttonType');
+  var btnType;
+  for(i = 0; i < typeFinder.length; i++){
+    if(typeFinder[i].checked){
+      btnType = typeFinder[i].value;
+      localStorage.setItem("type", btnType);
+    }
+  }
+  infoDiv2.style.display = "none";
+  infoDiv3.style.display = "inline-block";
+}
+
+var customIDs = [];
+
+function infoDone2() {
+  infoDiv2.style.display = "none";
+  var typeFinder = document.getElementsByName('buttonType');
+  var btnType;
+  for(i = 0; i < typeFinder.length; i++){
+    if(typeFinder[i].checked){
+      btnType = typeFinder[i].value;
+      localStorage.setItem("type", btnType);
+    }
+  }
+  var selectedID = "holder1";
+  var baseKey;
+  var STt = localStorage.getItem(selectedID + "STCB");
+  var PRt = localStorage.getItem(selectedID + "PRIN");
+  var LIt = localStorage.getItem(selectedID + "LINK");
+  var ENt = localStorage.getItem(selectedID + "ENDN");
+  var SOt = localStorage.getItem(selectedID + "SOLO");
+  var but = localStorage.getItem(selectedID + "Count");
+  var STCBCount = parseInt(STt);
+  var PRINCount = parseInt(PRt);
+  var LINKCount = parseInt(LIt);
+  var ENDNCount = parseInt(ENt);
+  var SOLOCount = parseInt(SOt);
+  var buttonCount = parseInt(but);
+  var currID = "cust" + but;
+  var newButton = document.getElementById(currID);
+  var BtnDisplay = sanitizeInput(document.getElementById("BtnDisplay").value);
+  var BtnContent = sanitizeInput(document.getElementById("BtnContent").value);
+  if (BtnDisplay == null || BtnContent == null) {
+  alert("You must pick a button display and content value");
+  return;
+  }
+  switch(btnType) {
+  case "STCB":
+    baseKey = "STCB" + STCBCount;
+    STCBCount = STCBCount + 1;
+    localStorage.setItem(selectedID + "STCB", STCBCount);
+    break;
+  case "PRIN":
+    baseKey = "PRIN" + PRINCount;
+    PRINCount = PRINCount + 1;
+    localStorage.setItem(selectedID + "PRIN", PRINCount);
+    break;
+  case "LINK":
+    baseKey = "LINK" + LINKCount;
+    LINKCount = LINKCount + 1;
+    localStorage.setItem(selectedID + "LINK", LINKCount);
+    break;
+  case "ENDN":
+    baseKey = "ENDN" + ENDNCount;
+    ENDNCount = ENDNCount + 1;
+    localStorage.setItem(selectedID + "ENDN", ENDNCount);
+    break;
+  case "SOLO":
+    baseKey = "SOLO" + SOLOCount;
+    SOLOCount = SOLOCount + 1;
+    localStorage.setItem(selectedID + "SOLO", SOLOCount);
+    break;
+  default:
+    alert("You must pick a button type");
+    return;
+  }
+  newButton.innerHTML = BtnDisplay;
+  newButton.id = baseKey;
+  var currdivID = "custBtn" + but;
+  var newButtonDiv = document.getElementById(currdivID);
+  newButtonDiv.style.display = "inline-block";
+  var curWidth = newButton.offsetWidth;
+  var curHeight = newButton.offsetHeight;
+  newButtonDiv.style.left = "20px";
+  newButtonDiv.style.top = "200px";
+  localStorage.setItem(currdivID + "SHOW", "inline-block");
+  localStorage.setItem(currID, baseKey);
+  localStorage.setItem(baseKey + "Display", BtnDisplay);
+  localStorage.setItem(baseKey + "EDIT", BtnContent);
+  localStorage.setItem(baseKey + "Height", curHeight);
+  localStorage.setItem(baseKey + "Width", curWidth);
+  localStorage.setItem(currdivID + "top", "200px");
+  localStorage.setItem(currdivID + "left", "20px");
+  buttonCount = buttonCount + 1;
+  localStorage.setItem(selectedID + "Count", buttonCount);
+}
+
+function conjunctionJunction(buttonID) {
+  var funct = buttonID.slice(0, 4);
+  var note = localStorage.getItem(buttonID + "EDIT");
+  if (note == null) {
+    alert("No note currently defined");
+    return false;
+  }
+  document.getElementById("EDITarea").value = note;
+  switch(funct) {
+  case "STCB":
+    document.getElementById("textarea5").value = note;
+    let textareaFive = document.getElementById("textarea5");
+    textareaFive.select();
+    document.execCommand("copy");
+    break;
+  case "PRIN":
+    document.getElementById("textarea2").value = note;
+    document.getElementById("textarea2").value =  "\r";
+    break;
+  case "LINK":
+    document.getElementById("textarea2").value += note;
+    document.getElementById("textarea2").value += "\r";
+    break;
+  case "ENDN":
+    document.getElementById("textarea2").value += note;
+    let textarea = document.getElementById("textarea2");
+    textarea.select();
+    document.execCommand("copy");
+    break;
+  case "SOLO":
+    document.getElementById("textarea2").value += note;
+    document.getElementById("textarea2").value += "\r\r";
+    break;
+  }
+}
