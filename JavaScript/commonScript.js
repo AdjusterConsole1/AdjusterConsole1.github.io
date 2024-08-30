@@ -1,18 +1,18 @@
-//Restricted Use License
+//COPYRIGHT © Jesse Williams 2024 – ALL RIGHTS RESERVED WORLDWIDE
+//This website and it's content including, but not limited to, the 'A' logo and 'AdjusterConsole' are protected by copyright law.
+//You are granted a limited license to access and use the materials on this website for personal use only.
+//This code is provided under the following Terms and Conditions:
 //
-//This code is provided under the following terms and conditions:
+//You may not copy, download, reproduce, distribute, publish, display, perform, modify, create derivative works from, transmit, or otherwise exploit any part of this website or its content, in whole or in part, without the express, written permission of the author, Jesse Williams.
+//You are not allowed to use this website or code for any illegal or unethical purpose.
+//This license applies to all versions of the code previously released, as well as all future versions. Any prior statements made about permission given are hereby revoked.
+//This code is provided "as is", without warranty of any kind, express or implied. The author shall not be liable for any damages arising from the use of this code.
 //
-//1. You are not allowed to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of this code in any form, modified or unmodified, without express written permission from the author.
-//
-//2. You are not allowed to use this code for any illegal or unethical purpose.
-//
-//3. This license applies to all versions of the code previously released, as well as all future versions. Any prior statements made about permission given are hereby revoked.
-//
-//4. This code is provided "as is", without warranty of any kind, express or implied. The author shall not be liable for any damages arising from the use of this code.
-//
-//By using this code, you agree to abide by these terms and conditions. Failure to comply with these terms may result in legal action.
-//
+//All trademarks, service marks, proprietary information, and/or documents not owned by Jesse Williams that appear on this website are the property of their respective owners, who may or may not be affiliated with, connected to, or sponsored by Jesse Williams.
+//All proprietary information, documents, and content not owned by Jesse Williams but accessible through this website should be treated as confidential and used solely for their intended and expressly authorized purposes. Unauthorized use, distribution, or disclosure of such proprietary information is strictly prohibited.
 //For inquiries regarding licensing or permission to use this code in ways not covered by this license, please contact the author at AdjusterConsole@gmail.com.
+//By using this code, you agree to abide by these terms and conditions.
+//Failure to comply with these terms may result in legal action.
 
 function openInfo2(evt, cityName) {
   let i, diagcontent, tablinks2;
