@@ -507,42 +507,11 @@ window.onload = function PutItBack() {
   } else if (authMode === 'oldAuth' || authMode == null) {
     document.getElementById('newauthSelect').checked = false;
   }
-  localStorage.setItem("viewNum", "normal");
-  const selected = "holder1";
-  const selectedElem = document.getElementById(selected);
-  const didItRun = localStorage.getItem('Im The Boss');
-  localStorage.setItem("toldem", "false");
-  localStorage.setItem("menuOpen", "false");
-  localStorage.setItem("newpartcount","2");
-  localStorage.setItem("menuState", 0);
-  localStorage.setItem("colorState", 0);
-  if (didItRun == null) {
-    localStorage.setItem("Im The Boss", "It's Been Done");
-    localStorage.setItem(selected + "STCB", '0');
-    localStorage.setItem(selected + "PRIN", '0');
-    localStorage.setItem(selected + "LINK", '0');
-    localStorage.setItem(selected + "ENDN", '0');
-    localStorage.setItem(selected + "SOLO", '0');
-    localStorage.setItem(selected + "Count", '0');
-  }
-  const but = localStorage.getItem(selected + "Count");
-  const buttonCount = parseInt(but);
-  for (i = 0; i < buttonCount; i++) {
-    const count = i.toString();
-    const currID = "cust" + count;
-    const newID = localStorage.getItem(currID);
-    const currdivID = "custBtn" + count;
-    const buttonX = document.getElementById(currID);
-    buttonX.id = newID;
-  }
-  for (i = 0; i < 10; i++) {
-    const count = i.toString();
-    const curdivID = "custBtn" + count;
-    const thsDisp = localStorage.getItem(curdivID + "SHOW");
-    if (thsDisp == null) {
-      localStorage.setItem(curdivID + "SHOW", "none");
-    }
-  }
+  setStorage();
+  const customIDs = JSON.parse(localStorage.getItem('customIDs')) || [];
+  customIDs.forEach(buttonID => {
+    createButtonElement(buttonID);
+  });
   const idNode = document.querySelectorAll('*[id]');
   const idList =  Array.from(idNode);
   for (i = 0; i < idList.length; i++) {
@@ -594,16 +563,22 @@ window.onload = function PutItBack() {
   } else {
     checkbox.checked = false;
   }
-  localStorage.setItem("pageNum", "0");
   resetColors();
   trackerBlank();
+  modePT();
+}
+
+function setStorage() {
+  localStorage.setItem("viewNum", "normal");
+  localStorage.setItem("menuOpen", "false");
+  localStorage.setItem("newpartcount","2");
+  localStorage.setItem("menuState", 0);
+  localStorage.setItem("colorState", 0);
+  localStorage.setItem("pageNum", "0");
   localStorage.removeItem('Diag');
-  const Rev = "Reviewed inspection photos and report.\rReviewed photos sent by repair facility.\rVerified vin.\rVerified mileage.\rNo indication of commercial use.\rNo indication of modification.\r\r";
-  localStorage.setItem("Rev", Rev);
   localStorage.setItem("mode", '2');
   localStorage.setItem('currentVer', '1');
   localStorage.setItem("countLefts", '0');
-  modePT();
 }
 
 function trackerBlank() {

@@ -12,13 +12,14 @@
 <link rel="stylesheet" href="CSS/Stable.css?v=651651651682">
 <link rel="stylesheet" href="CSS/auth_module.css?v=651651651682">
 <link rel="stylesheet" href="CSS/Buttons.css?v=651651651682">
+<link rel="stylesheet" href="CSS/CustomButtons.css?v=651651651682">
 <link rel="stylesheet" href="CSS/AppearOpts.css?v=651651651682">
 <link rel="stylesheet" href="CSS/Resource.css?v=651651651682">
 <link rel="stylesheet" href="CSS/contextMenu.css?v=651651651682">
 <link rel="stylesheet" href="CSS/laborRateScript.css?v=651651651682">
 <link rel="stylesheet" href="CSS/PTSpecific.css?v=651651651682">
 	<title>Adjuster Console</title>
-<link rel="manifest" href="manifest.webmanifest?v=651651651682">
+<!--<link rel="manifest" href="manifest.webmanifest?v=651651651682">-->
 
 <style>
 
@@ -2661,6 +2662,8 @@ TIME:&nbsp&nbsp</textarea>
   <div class="item" onclick="editContent()">Content</div>
   <div class="item" onclick="editSize()">Size</div>
   <div class="item" onclick="editPos()">Position</div>
+  <div class="item" onclick="newButton()">Custom Button</div>
+  <div class="item" onclick="deleteCustom()">Delete Custom</div>
   <div class="item" onclick="BuilderShow('o')">Toggle List</div>
 </div>
 <div class="CMeditDIV backing" id="disEdit" style="display:none; text-align: center;">
@@ -2702,83 +2705,32 @@ TIME:&nbsp&nbsp</textarea>
   <button id="sizeCancel" class="bones" onclick="sizeSubmit()">Exit</button>
 </div>
 <div class="CMeditDIV backing" id="posEdit" style="display:none">
-  <button class="moveBTNS" id="upBTN" onclick="udMove('-5')">&#x2B9E;</button>
-  <button class="moveBTNS" id="downBTN" onclick="udMove('5')">&#x2B9C;</button>
-  <button class="moveBTNS" id="leftBTN" onclick="lrMove('-5')">&#x2B9C;</button>
-  <button class="moveBTNS" id="rightBTN" onclick="lrMove('5')">&#x2B9E;</button>
+  <button class="moveBTNS" id="upBTN" onmousedown="startUdMove(-5)" onmouseup="stopMove()">&#x2B9E;</button>
+  <button class="moveBTNS" id="downBTN" onmousedown="startUdMove(5)" onmouseup="stopMove()">&#x2B9C;</button>
+  <button class="moveBTNS" id="leftBTN" onmousedown="startLrMove(-5)" onmouseup="stopMove()">&#x2B9C;</button>
+  <button class="moveBTNS" id="rightBTN" onmousedown="startLrMove(5)" onmouseup="stopMove()">&#x2B9E;</button>
   <button id="posSubmit" class="astext" onclick="posSubmit('s')">Submit</button>
   <button id="posDefault" class="astext" onclick="posSubmit('d')">Default</button>
   <button id="posCancel" class="astext" onclick="posSubmit('s')">Exit</button>
 </div>
-<div id="custBtns" class="noShow">
-  <div id="custBtn0" class="noShow u0dispStat">
-    <button id="cust0" class="custom0 D R P C X"  oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM0</button>
+
+<div id="infoDiv" class="backing">
+  <div id="infoDiv1" class="noShow">
+    <h2>Button Maker:</h2>
+    <p><b>Select the Button Type</b></p>
+    <p><label for="Solo">Solo Note</label>
+    <input type="radio" id="Solo" name="buttonType"><br>
+    This will send text to the text area.</p>
+    <p><label for="Clip">Send Directly to Clipboard</label>
+    <input type="radio" id="Clip" name="buttonType"><br>
+    This will send text to the clipboard.</p>
   </div>
-  <div id="custBtn1" class="noShow u1dispStat">
-    <button id="cust1" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM1</button>
+  <div id="inputLine" class="noShow">
+    <textarea id="BtnDisplay" placeholder="Button Display..." name="btnDisplay" rows="1" cols="35"></textarea>
+    <textarea id="BtnContent" placeholder="Note Content..." name="btnContent" rows="5" cols="35"></textarea>
   </div>
-  <div id="custBtn2" class="noShow u2dispStat">
-    <button id="cust2" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM2</button>
-  </div>
-  <div id="custBtn3" class="noShow u3dispStat">
-    <button id="cust3" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM3</button>
-  </div>
-  <div id="custBtn4" class="noShow u4dispStat">
-    <button id="cust4" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM4</button>
-  </div>
-  <div id="custBtn5" class="noShow u5dispStat">
-    <button id="cust5" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM5</button>
-  </div>
-  <div id="custBtn6" class="noShow u6dispStat">
-    <button id="cust6" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM6</button>
-  </div>
-  <div id="custBtn7" class="noShow u7dispStat">
-    <button id="cust7" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM7</button>
-  </div>
-  <div id="custBtn8" class="noShow u8dispStat">
-    <button id="cust8" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM8</button>
-  </div>
-  <div id="custBtn9" class="noShow u9dispStat">
-    <button id="cust9" class="custom0 D R P C X" oncontextmenu="customMenu(this.id, event)" onclick="conjunctionJunction(this.id)">CUSTOM9</button>
-  </div>
-</div>
-<div id="buttonSpot" class="noShow"></div>
-  <div id="infoDiv1" class="backing" style="display: none">
-    <b>Button Types:</b><br><br>
-    <b>Solo Note:</b> This is for adding text to the text area.<br>
-    This will not clear the text area or copy to the clipboard.<br>
-    There will be space before and after the inserted text.<br><br>
-    <b>Send Directly to Clipboard:</b> This will send your designated<br>
-    text to the clipboard. It will not display anything or affect <br>
-    any other text.<br><br><br>
-    <b>Note Chains</b><br><br>
-    <b>Primary Note</b>: This is for a starting a Chain Note that you can build upon<br>
-    This will clear the text area and insert your text but not copy it.<br><br>
-    <b>Link Note:</b> This is for a note used to continue the Chain.<br>
-    This will add text to the end of a Starter Note or another Link Note.<br><br>
-    <b>End Note:</b> This is for the last note in a Chain. This will add text<br>
-    to the existing note and copy all of it to the clipboard.<br>
-    <button id="infoDone" class="infoBtn bones D S P" onclick="infoDone()">Ready</button>
-    <button id="infoCancel" class="infoBtn bones D S P" onclick="infoCancel()">Cancel</button>
-  </div>
-  <div id="infoDiv2" class="backing" style="display: none"><br><br>
-    <div id="radioLine" class="noShow">
-      <b>Select the Button Type</b><br><br>
-      <input type="radio" id="SOLO" name="buttonType" value="SOLO">
-      <label for="SOLO">Solo Note</label><br>
-      <input type="radio" id="STCB" name="buttonType" value="STCB">
-      <label for="STCB">Send Directly to Clipboard</label><br>
-      <input type="radio" id="PRIN" name="buttonType" value="PRIN">
-      <label for="PRIN">Primary Note</label><br>
-      <input type="radio" id="LINK" name="buttonType" value="LINK">
-      <label for="LINK">Link Note</label><br>
-      <input type="radio" id="ENDN" name="buttonType" value="ENDN">
-      <label for="ENDN">End Note</label><br>
-   </div>
-    <p><textarea id="BtnDisplay" placeholder="Button Display..." name="btnDisplay" rows="1" cols="35"></textarea></p>
-    <p><textarea id="BtnContent" placeholder="Note Content..." name="btnContent" rows="5" cols="35"></textarea></p>
-    <button id="infoCancel2" class="infoBtn bones D S P" onclick="infoCancel2()">Cancel</button>
-    <button id="infoDone2" class="infoBtn bones D S P" onclick="infoDone2()">Done</button>
+  <button id="infoDone" class="infoBtn bones D S P" onclick="createButton()">Submit</button>
+  <button id="infoCancel" class="infoBtn bones D S P" onclick="buttonCancel()">Cancel</button>
   </div>
 </div>
 <script src="JavaScript/snipDiv.js?v=651651651682"></script>
@@ -2796,5 +2748,6 @@ TIME:&nbsp&nbsp</textarea>
 <script src="JavaScript/laborRate.js?v=651651651682"></script>
 <script src="JavaScript/trackerScript.js?v=651651651682"></script>
 <script src="JavaScript/powertrain.js?v=651651651682"></script>
+<script src="JavaScript/NewButton.js?v=651651651682"></script>
 </body>
 </html>
