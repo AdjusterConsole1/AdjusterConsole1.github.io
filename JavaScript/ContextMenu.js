@@ -118,6 +118,14 @@ window.onkeyup = function (e) {
   }
 };
 
+function MasterReset() {
+  const userConfirmed = confirm('This will reset all settings and delete all custom buttons. Are you sure?');
+  if (userConfirmed) {
+    localStorage.clear();
+    location.reload();
+  }
+}
+
 function deleteCustom() {
   var buttonID = localStorage.getItem("lastCalled");
   var selectedButton = document.getElementById(buttonID);
