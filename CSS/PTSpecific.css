@@ -104,8 +104,16 @@ Failure to comply with these terms may result in legal action.
   position: absolute;
   display: inline-block;
   top: 170px;
-  left: 385px;
   width: 120px;
+  left: 385px;
+}
+
+#authEmail {
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  width: 120px;
+  left: 585px;
 }
 
 #prompt {

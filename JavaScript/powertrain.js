@@ -199,7 +199,7 @@ function copyTextFunc(id) {
 
     case 'prompt':
     text = `I'm going to upload an automotive repair estimate.
-I want you to output the information in the following JSON format as a downloadable file: 
+I want you to output the information in the following JSON format: 
 
 [
   {
@@ -224,13 +224,19 @@ I want you to output the information in the following JSON format as a downloada
   
 
 In the estimate, part numbers will have a red dot to the left, part names will have an orange dot to the left, quantity will have a yellow dot to the left and prices will have a green dot to the left.
-Each line is an individual part and should have its own entry in the JSON output file. Do not include the dollar sign in the part price.`;
+Each line is an individual part and should have its own entry in the JSON output file.
+Do not include the dollar sign in the part price.`;
     copy(text);
     break;
 
-    case 'T101':
-    STMTTEMP();
-    closeSlide();
+    case 'authEmail':
+    text = `The total payable and authorization number are listed in the preceding screenshot.
+Any cost due over the total payable will be the responsibility of the customer and should be discussed with and approved by them prior to any work starting.
+When the work has been completed:
+1. Have the customer sign the invoice.
+2. Put the authorization number on the invoice
+3. Put the claim number in the subject line of an email and email the invoice to us at payments@americanautoshield.com`;
+	copy(text);
     break;
   }
 }
