@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="CSS/laborRateScript.css?v=651651651682">
 <link rel="stylesheet" href="CSS/PTSpecific.css?v=651651651682">
 	<title>Adjuster Console</title>
-<link rel="manifest" href="manifest.webmanifest?v=651651651682">
+<!--<link rel="manifest" href="manifest.webmanifest?v=651651651682">-->
 
 <style>
 
@@ -93,7 +93,7 @@ body {
   position: absolute;
   display: inline-block;
   color: var(--glow-txt-color);
-  font-size: 17px;
+  font-size: 18px;
   text-shadow:
     1px 1px var(--glow-outline-color),
    -1px -1px var(--glow-outline-color),
@@ -101,7 +101,7 @@ body {
     1px -1px var(--glow-outline-color);
   top: 535px;
   left: 645px;
-  z-index: -1;
+  z-index:-1;
 }
 
 .numbersShow {
@@ -619,15 +619,30 @@ Failure to comply with these terms may result in legal action.</b></p>
 
 <div id="PTModeDiv" class="noShow" style="display: none">
   <button class="D R P" id="transAuthBtn" onclick="transAuth()" oncontextmenu="customMenu(this.id, event)">Trans Auth</button>
-  <button class="D R P" id="ringfailDeny" onclick="ringDeny()" oncontextmenu="customMenu(this.id, event)">Denial-Carbon<br>Piston Rings</button>
 
   <button class="D R P" id="denials" onclick="showDenials()" oncontextmenu="customMenu(this.id, event)">Denials</button>
   <button class="D R P" id="reviews" onclick="showReviews()" oncontextmenu="customMenu(this.id, event)">Reviews</button>
   <button class="D R P" id="requests" onclick="showRequests()" oncontextmenu="customMenu(this.id, event)">Requests</button>
 
   <button class="D R P" id="prompt" onclick="copyTextFunc(this.id)" oncontextmenu="customMenu(this.id, event)">AI prompt</button>
+  <button class="D R P" id="autoCopyBtn" onclick="autoEnable()" oncontextmenu="customMenu(this.id, event)">AutoCopy</button>
 
   <button class="D R P" id="flowchartBtn" onclick="flowchart()" oncontextmenu="customMenu(this.id, event)">Flow Chart</button>
+  
+  <button class="D R P" id="xferred" onclick="xferred()" oncontextmenu="customMenu(this.id, event)">Xferred</button>
+  <button class="D R P" id="toGen" onclick="copyTextFunc(this.id)" oncontextmenu="customMenu(this.id, event)">To Gen</button>
+  <button class="D R P" id="newClaim" onclick="copyTextFunc(this.id)" oncontextmenu="customMenu(this.id, event)">New Claims</button>
+  
+  <button class="D R P" id="inform" onclick="inform()" oncontextmenu="customMenu(this.id, event)">Called CH<Br>To Inform of</button>
+  
+  <button class="D R P" id="reasonAuth" onclick="reason('1')" oncontextmenu="customMenu(this.id, event)">Auth</button>
+  <button class="D R P" id="reasonDenial" onclick="reason('2')" oncontextmenu="customMenu(this.id, event)">Denial</button>
+  <button class="D R P" id="reasonStatus" onclick="reason('3')" oncontextmenu="customMenu(this.id, event)">Status</button>
+  
+  <button class="D R P" id="result1" onclick="result('1')" oncontextmenu="customMenu(this.id, event)">CH understood</button>
+  <button class="D R P" id="result2" onclick="result('2')" oncontextmenu="customMenu(this.id, event)">No Ans<br>Left VM</button>
+  
+  
 
 
 
@@ -825,8 +840,8 @@ Failure to comply with these terms may result in legal action.</b></p>
   <div id="quest9" class="newStyle ptQuest" style="display:none;">
     <div class="PT qs"><b>Have the PT claim expectations been reviewed with the repair facility contact?</b></div>
     <div class="PT as">
-      <label for="yes9"">YES</label><input type="radio" onclick="advancePT(this.id)" class="Mradio ptRad"  id="yes9" name="ans9" value="YES"><br>
-      <label for="no9"">NO</label><input type="radio" onclick="advancePT(this.id)" class="Mradio ptRad" id="no9" name="ans9" value="NO">
+      <label for="yes9"">YES</label><input type="radio" onclick="advancePT(this.id)" class="Mradio ptRad"  id="yes9" name="ans9" value="YES"></label><br>
+      <label for="no9"">NO</label><input type="radio" onclick="advancePT(this.id)" class="Mradio ptRad" id="no9" name="ans9" value="NO"></label>
     </div>
   </div>
   <div id="quest10" class="newStyle ptQuest" style="display:none;">
@@ -977,7 +992,7 @@ Failure to comply with these terms may result in legal action.</b></p>
     <p class="bodyTab">
     <input type="checkbox" id="auth6" name="authreqs" class="FNA largerCheckbox"><label for="auth6"><b>Inspection</b></label><br>
     <input type="checkbox" id="auth7" name="authreqs" class="FNA largerCheckbox"><label for="auth7"><b>Photos</b></label><br>
-    <input type="checkbox" id="auth8" name="authreqs" class="FNA largerCheckbox"><label for="auth8"><b>Records</b></label><br><br>
+    <input type="checkbox" id="auth8" name="authreqs" class="FNA largerCheckbox"><label for="auth8"><b>Records</b></label></p><br><br>
     <button id="cancelNewauth" class="wefwefwef" onclick="cancel_auth()">Cancel</button>
     <button id="authMove2" class="wefwefwef" onclick="moveAuth2()">Continue</button>
   </div>
@@ -1019,7 +1034,7 @@ Failure to comply with these terms may result in legal action.</b></p>
             <option value="$250.00">$250.00</option>
             <option value="$500.00">$500.00</option>
           </select>
-        </div>
+    </div>
     <div id="authbtns" class="noShow">
       <button id="cancelNewauth" class="wefwefwef" onclick="cancel_auth()">Cancel</button>
       <button id="finishAuth"  class="wefwefwef" onclick="auth_initialize(1)">Finish</button>
@@ -1173,13 +1188,13 @@ TIME:&nbsp&nbsp</textarea>
     Records Fax<br>303-420-4722<br><br>
     CarShield<br>800-430-1705<br><br>
     Roadside Assistance<br>866-222-7869<br><br>
-    Rental<br>636-626-2189<br><br>
+	Rental<br>636-626-2189<br><br>
     Main<br>800-531-1925</b>
   </div>
 </div>
 
 <div id="myInfo" class="infoOfme" style="display:none;">Created By Jesse Williams - 2024</div>
-<div id="glowDiv" class="neon noShow P" oncontextmenu="customMenu(this.id, event)"></div>
+<div id="glowDiv" class="neon noShow P R" oncontextmenu="customMenu(this.id, event)"></div>
 
                                           <!-- Tools and Policy -->
 
@@ -1326,15 +1341,15 @@ TIME:&nbsp&nbsp</textarea>
     </div>
     <div id="under90hmpd" class="mileage noShow" style="display:none;">
       <p><b>Does the contract have the <b>Commercial</b> or <b>Ride Share</b> surcharge?</b>
-        <input type="radio" onclick="proceed()" class="mdguide" id="md9" name="discrep4" onclick="mileageRadio(this.name)><label for="md9" style="float:right;" required><b>Yes</b></label><br>
-        <input type="radio" onclick="noride()" class="mdguide" id="md10" name="discrep4" onclick="mileageRadio(this.name)><label for="md10" style="float:right;" required><b>No</b></label>
+        <input type="radio" onclick="proceed();mileageRadio(this.name)" class="mdguide" id="md9" name="discrep4"><label for="md9" style="float:right;" required><b>Yes</b></label><br>
+        <input type="radio" onclick="noride();mileageRadio(this.name)" class="mdguide" id="md10" name="discrep4"><label for="md10" style="float:right;" required><b>No</b></label>
       </p>
     </div>
     <div id="norideshare" class="mileage noShow" style="display:none;">
       <p>Contact the customer and ask about usage for potential Commercial/Rideshare use.<br>
       <b>Did the customer admit to commercial or Ride Share use?</b>
-        <input type="radio" onclick="crReview()" class="mdguide" id="md11" name="discrep5" onclick="mileageRadio(this.name)><label for="md11" style="float:right;" required><b>Yes</b></label><br>
-        <input type="radio" onclick="mileageCalc()" class="mdguide" id="md12" name="discrep5" onclick="mileageRadio(this.name)><label for="md12" style="float:right;" required><b>No</b></label>
+        <input type="radio" onclick="crReview();mileageRadio(this.name)" class="mdguide" id="md11" name="discrep5" ><label for="md11" style="float:right;" required><b>Yes</b></label><br>
+        <input type="radio" onclick="mileageCalc();mileageRadio(this.name)" class="mdguide" id="md12" name="discrep5"><label for="md12" style="float:right;" required><b>No</b></label>
       </p>
     </div>
     <div id="proceed" class="mileage noShow" style="display:none;">
@@ -2753,3 +2768,4 @@ TIME:&nbsp&nbsp</textarea>
 <script src="JavaScript/NewButton.js?v=651651651682"></script>
 </body>
 </html>
+=======

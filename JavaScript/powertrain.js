@@ -184,6 +184,18 @@ function copyTextFunc(id) {
     copy(text);
     closeSlide();
     break;
+	
+	case 'toGen':
+    text = 'A Repair Facility called in on an existing Gen Claim.\rI will be transferring to the General Claims queue.';
+    copy(text);
+    xferClose();
+    break;
+	
+	case 'newClaim':
+    text = 'A Repair Facility called in to start a claim.\rI will be transferring to the New Claims queue.';
+    copy(text);
+    xferClose();
+    break;
 
     case 'prompt':
     text = `I'm going to upload an automotive repair estimate.
@@ -221,6 +233,47 @@ Each line is an individual part and should have its own entry in the JSON output
     closeSlide();
     break;
   }
+}
+
+function xferClose() {
+	document.getElementById('toGen').style.display = '';
+	document.getElementById('newClaim').style.display = '';
+	document.getElementById('xferred').style.display = '';
+}
+
+function xferred() {
+	document.getElementById('toGen').style.display = 'inline-block';
+	document.getElementById('newClaim').style.display = 'inline-block';
+	document.getElementById('xferred').style.display = 'none';
+}
+
+function inform() {
+	document.getElementById('reasonAuth').style.display = 'inline-block';
+	document.getElementById('reasonDenial').style.display = 'inline-block';
+	document.getElementById('reasonStatus').style.display = 'inline-block';
+	document.getElementById('inform').style.display = 'none';
+	document.getElementById('textarea5').value = 'I called the CH to inform of ';
+}
+
+function reason(x) {
+	document.getElementById('reasonAuth').style.display = '';
+	document.getElementById('reasonDenial').style.display = '';
+	document.getElementById('reasonStatus').style.display = '';
+	document.getElementById('result1').style.display = 'inline-block';
+	document.getElementById('result2').style.display = 'inline-block';
+	if (x === '1') document.getElementById('textarea5').value += 'authorization.\r';
+	if (x === '2') document.getElementById('textarea5').value += 'denial.\r';
+	if (x === '3') document.getElementById('textarea5').value += 'status.\r';
+}
+
+function result(x) {
+	document.getElementById('result1').style.display = '';
+	document.getElementById('result2').style.display = '';
+	document.getElementById('inform').style.display = '';
+	if (x === '1') document.getElementById('textarea5').value += 'Contract Holder understood.\r';
+	if (x === '2') document.getElementById('textarea5').value += 'There was no answer.\rI left a voicemail and set a task for customer service to call back.';
+	const text = document.getElementById('textarea5').value;
+	copy(text);
 }
 
 function closeChart() {

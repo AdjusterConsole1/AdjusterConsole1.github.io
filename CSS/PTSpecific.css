@@ -42,12 +42,12 @@ Failure to comply with these terms may result in legal action.
   height: 45px;
 }
 
-#ringfailDeny {
+#flowchartBtn {
+  position: absolute;
+  display: inline-block;
+  top: 490px;
   left: 20px;
-  top:  480px;
-  white-space: nowrap;
   width: 150px;
-  height: 65px;
 }
 
 .partsContain.away {
@@ -73,14 +73,6 @@ Failure to comply with these terms may result in legal action.
   left: 10px;
   position: absolute;
   display: inline-block;
-  width: 120px;
-}
-
-#autoBtn {
-  position: absolute;
-  display: inline-block;
-  bottom: 400px;
-  left: 150px;
   width: 120px;
 }
 
@@ -119,15 +111,15 @@ Failure to comply with these terms may result in legal action.
 #prompt {
   position: absolute;
   display: inline-block;
-  top: 230px;
-  left: 385px;
+  top: 190px;
+  left: 215px;
   width: 120px;
 }
 
-#flowchartBtn {
+#autoCopyBtn {
   position: absolute;
   display: inline-block;
-  top: 170px;
+  top: 250px;
   left: 215px;
   width: 120px;
 }
@@ -368,4 +360,76 @@ button.autoCopiers {
    -1px -1px 1px var(--glow-outline-color),
    -1px 1px 1px var(--glow-outline-color),
     1px -1px 1px var(--glow-outline-color);
+}
+
+#xferred {
+  position: absolute;
+  display: inline-block;
+  top: 600px;
+  left: 415px;
+  width: 120px;
+}
+
+#toGen {
+  position: absolute;
+  display: none;
+  top: 600px;
+  left: 415px;
+  width: 120px;
+}
+
+#newClaim {
+  position: absolute;
+  display: none;
+  top: 660px;
+  left: 415px;
+  width: 120px;
+}
+
+#inform {
+  position: absolute;
+  display: inline-block;
+  top: 720px;
+  left: 415px;
+  width: 120px;
+}
+
+#reasonAuth {
+  position: absolute;
+  display: none;
+  top: 720px;
+  left: 415px;
+  width: 120px;
+}
+
+#reasonDenial {
+  position: absolute;
+  display: none;
+  top: 780px;
+  left: 415px;
+  width: 120px;
+}
+
+#reasonStatus {
+  position: absolute;
+  display: none;
+  top: 840px;
+  left: 415px;
+  width: 120px;
+}
+
+#result1 {
+  position: absolute;
+  display: none;
+  top: 720px;
+  left: 415px;
+  width: 120px;
+}
+
+#result2 {
+  position: absolute;
+  display: none;
+  top: 810px;
+  left: 415px;
+  width: 120px;
 }

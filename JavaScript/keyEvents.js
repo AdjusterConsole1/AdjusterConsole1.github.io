@@ -38,9 +38,6 @@ document.addEventListener('keyup', function(e) {
   if (e.ctrlKey && e.altKey && e.shiftKey && e.key === 'A') {
     autoEnable();
   }
-  if (e.ctrlKey && e.altKey && e.shiftKey && e.key === 'M') {
-    downloadAndProcessLatestFile();
-  }
   if (e.ctrlKey && e.altKey && e.shiftKey && e.key === 'F') {
     saintMullet();
   }
@@ -77,13 +74,14 @@ function modePT() {
     document.getElementById("newauthLabel").style.left = "70px";
     document.getElementById("newAuthstarter").style.top = "305px";
     document.getElementById("newAuthstarter").style.left = "20px";
-    document.getElementById("statusNote").style.left = "200px";
-    document.getElementById("statusNote").style.top = "230px";
+    document.getElementById("statusNote").style.display = "none";
     document.getElementById("snipbox").style.left = "-135px";
     document.getElementById("snipbox").style.top = "325px";
     document.getElementById("SOPs").style.display = "none";
     document.getElementById("tools").style.display = "none";
     document.getElementById("T0").style.display = "none";
+	document.getElementById("hlc").style.display = "none";
+    
     document.getElementById("Request").style.display = "none";
     document.getElementById("ptcon").innerHTML = "&#x2666; Gen Console &#x2666;";
     return;
@@ -92,22 +90,22 @@ function modePT() {
     document.getElementById("ITSBRITTNEY").style.display = "inline-block";
     document.getElementById("openScript").style.display = "inline-block";
     document.getElementById("PTModeDiv").style.display = "none";
-    document.getElementById("Request").style.display = "";
-    document.getElementById("newAuthstarter").style.top = "";
-    document.getElementById("newAuthstarter").style.left = "";
-    document.getElementById("newauthSelect").style.top = "";
-    document.getElementById("newauthSelect").style.left = "";
-    document.getElementById("newauthLabel").style.top = "";
-    document.getElementById("newauthLabel").style.left = "";
-    document.getElementById("statusNote").style.left = "";
-    document.getElementById("statusNote").style.top = "";
-    document.getElementById("snipbox").style.left = "";
-    document.getElementById("snipbox").style.top = "";
-    document.getElementById("SOPs").style.display = "";
-    document.getElementById("tools").style.display = "";
-    document.getElementById("T0").style.display = "";
-    document.getElementById("Request").style.left = "";
-    document.getElementById("Request").style.top = "";
+    document.getElementById("Request").style.display = '';
+    document.getElementById("newAuthstarter").style.top = '';
+    document.getElementById("newAuthstarter").style.left = '';
+    document.getElementById("newauthSelect").style.top = '';
+    document.getElementById("newauthSelect").style.left = '';
+    document.getElementById("newauthLabel").style.top = '';
+    document.getElementById("newauthLabel").style.left = '';
+    document.getElementById("statusNote").style.display = '';
+	document.getElementById("hlc").style.display = '';
+    document.getElementById("snipbox").style.left = '';
+    document.getElementById("snipbox").style.top = '';
+    document.getElementById("SOPs").style.display = '';
+    document.getElementById("tools").style.display = '';
+    document.getElementById("T0").style.display = '';
+    document.getElementById("Request").style.left = '';
+    document.getElementById("Request").style.top = '';
     document.getElementById("ptcon").innerHTML = "&#x2666; PT Console &#x2666;";
     return;
   }

@@ -576,7 +576,6 @@ function setStorage() {
   localStorage.setItem("colorState", 0);
   localStorage.setItem("pageNum", "0");
   localStorage.removeItem('Diag');
-  localStorage.setItem("mode", '2');
   localStorage.setItem('currentVer', '1');
   localStorage.setItem("countLefts", '0');
 }
