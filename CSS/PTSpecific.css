@@ -441,3 +441,15 @@ button.autoCopiers {
   left: 415px;
   width: 120px;
 }
+
+#otherFPS {
+  font-size: 24px;
+  top: 875px;
+  left: 590px;
+  color: var(--glow-outline-color);
+  text-shadow:
+    1px 1px 1px var(--glow-txt-color),
+   -1px -1px 1px var(--glow-txt-color),
+   -1px 1px 1px var(--glow-txt-color),
+    1px -1px 1px var(--glow-txt-color);
+}

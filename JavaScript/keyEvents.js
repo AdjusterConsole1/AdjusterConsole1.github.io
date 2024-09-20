@@ -80,10 +80,13 @@ function modePT() {
     document.getElementById("SOPs").style.display = "none";
     document.getElementById("tools").style.display = "none";
     document.getElementById("T0").style.display = "none";
-	document.getElementById("hlc").style.display = "none";
-    
-    document.getElementById("Request").style.display = "none";
-    document.getElementById("ptcon").innerHTML = "&#x2666; Gen Console &#x2666;";
+    document.getElementById("otherFPS").style.display = "inline-block";
+    document.getElementById("subPL2").style.display = "none";
+    document.getElementById("subPL1").style.display = "none";
+	document.getElementById("R2").style.display = "none";
+	document.getElementById("Request").style.display = "none";
+	document.getElementById("ptcon").innerHTML = "&#x2666; Gen Console &#x2666;";
+
     return;
   } 
   if (mode === '2') {
@@ -98,12 +101,15 @@ function modePT() {
     document.getElementById("newauthLabel").style.top = '';
     document.getElementById("newauthLabel").style.left = '';
     document.getElementById("statusNote").style.display = '';
-	document.getElementById("hlc").style.display = '';
     document.getElementById("snipbox").style.left = '';
     document.getElementById("snipbox").style.top = '';
     document.getElementById("SOPs").style.display = '';
     document.getElementById("tools").style.display = '';
     document.getElementById("T0").style.display = '';
+	document.getElementById("otherFPS").style.display = 'none';
+    document.getElementById("subPL2").style.display = '';
+    document.getElementById("subPL1").style.display = '';
+	document.getElementById("R2").style.display = '';
     document.getElementById("Request").style.left = '';
     document.getElementById("Request").style.top = '';
     document.getElementById("ptcon").innerHTML = "&#x2666; PT Console &#x2666;";
