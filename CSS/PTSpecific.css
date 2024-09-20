@@ -111,9 +111,9 @@ Failure to comply with these terms may result in legal action.
 #authEmail {
   position: absolute;
   display: inline-block;
-  top: 50px;
+  top: 230px;
   width: 120px;
-  left: 585px;
+  left: 385px;
 }
 
 #prompt {
@@ -373,7 +373,7 @@ button.autoCopiers {
 #xferred {
   position: absolute;
   display: inline-block;
-  top: 600px;
+  top: 575px;
   left: 415px;
   width: 120px;
 }
@@ -381,7 +381,7 @@ button.autoCopiers {
 #toGen {
   position: absolute;
   display: none;
-  top: 600px;
+  top: 575px;
   left: 415px;
   width: 120px;
 }
@@ -389,7 +389,7 @@ button.autoCopiers {
 #newClaim {
   position: absolute;
   display: none;
-  top: 660px;
+  top: 635px;
   left: 415px;
   width: 120px;
 }
@@ -397,7 +397,7 @@ button.autoCopiers {
 #inform {
   position: absolute;
   display: inline-block;
-  top: 720px;
+  top: 695px;
   left: 415px;
   width: 120px;
 }
@@ -405,7 +405,7 @@ button.autoCopiers {
 #reasonAuth {
   position: absolute;
   display: none;
-  top: 720px;
+  top: 695px;
   left: 415px;
   width: 120px;
 }
@@ -413,7 +413,7 @@ button.autoCopiers {
 #reasonDenial {
   position: absolute;
   display: none;
-  top: 780px;
+  top: 755px;
   left: 415px;
   width: 120px;
 }
@@ -421,7 +421,7 @@ button.autoCopiers {
 #reasonStatus {
   position: absolute;
   display: none;
-  top: 840px;
+  top: 815px;
   left: 415px;
   width: 120px;
 }
@@ -429,7 +429,7 @@ button.autoCopiers {
 #result1 {
   position: absolute;
   display: none;
-  top: 720px;
+  top: 695px;
   left: 415px;
   width: 120px;
 }
@@ -437,14 +437,14 @@ button.autoCopiers {
 #result2 {
   position: absolute;
   display: none;
-  top: 810px;
+  top: 785px;
   left: 415px;
   width: 120px;
 }
 
 #otherFPS {
   font-size: 24px;
-  top: 875px;
+  top: 900px;
   left: 590px;
   color: var(--glow-outline-color);
   text-shadow:

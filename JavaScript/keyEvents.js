@@ -77,6 +77,13 @@ function modePT() {
     document.getElementById("statusNote").style.display = "none";
     document.getElementById("snipbox").style.left = "-135px";
     document.getElementById("snipbox").style.top = "325px";
+    document.getElementById("R15").style.left = "25px";
+    document.getElementById("R15").style.top = "285px";
+
+	const element = document.getElementById("R15");
+    const styles = window.getComputedStyle(element);
+    const width = styles.getPropertyValue("width");
+	document.getElementById("R15").style.width = parseInt(width) - 5;
     document.getElementById("SOPs").style.display = "none";
     document.getElementById("tools").style.display = "none";
     document.getElementById("T0").style.display = "none";
@@ -86,9 +93,9 @@ function modePT() {
 	document.getElementById("R2").style.display = "none";
 	document.getElementById("Request").style.display = "none";
 	document.getElementById("ptcon").innerHTML = "&#x2666; Gen Console &#x2666;";
-
     return;
-  } 
+  }
+  
   if (mode === '2') {
     document.getElementById("ITSBRITTNEY").style.display = "inline-block";
     document.getElementById("openScript").style.display = "inline-block";
@@ -105,6 +112,8 @@ function modePT() {
     document.getElementById("snipbox").style.top = '';
     document.getElementById("SOPs").style.display = '';
     document.getElementById("tools").style.display = '';
+	document.getElementById("R15").style.top = '';
+	document.getElementById("R15").style.width = '';
     document.getElementById("T0").style.display = '';
 	document.getElementById("otherFPS").style.display = 'none';
     document.getElementById("subPL2").style.display = '';
