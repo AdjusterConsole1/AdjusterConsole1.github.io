@@ -114,6 +114,7 @@ function modePT() {
     document.getElementById("tools").style.display = '';
 	document.getElementById("R15").style.top = '';
 	document.getElementById("R15").style.width = '';
+	document.getElementById("R15").style.left = '';
     document.getElementById("T0").style.display = '';
 	document.getElementById("otherFPS").style.display = 'none';
     document.getElementById("subPL2").style.display = '';
