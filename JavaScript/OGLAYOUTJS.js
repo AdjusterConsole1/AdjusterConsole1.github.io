@@ -565,6 +565,12 @@ window.onload = function PutItBack() {
   }
   resetColors();
   trackerBlank();
+  let mode = localStorage.getItem("mode");
+  
+  if (!mode) {
+	localStorage.setItem('mode', '2');
+    mode = '2';
+  }
   modePT();
 }
 

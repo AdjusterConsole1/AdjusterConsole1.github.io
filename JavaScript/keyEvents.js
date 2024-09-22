@@ -53,11 +53,14 @@ function autoEnable() {
 
 function modePTmenu() {
   let mode = localStorage.getItem("mode");
+  
   if (mode === '2') {
     localStorage.setItem('mode', '1');
+	console.log('set2as1');
     modePT();
   } else {
     localStorage.setItem('mode', '2');
+	console.log('setnot2');
     modePT();
   }
 }
@@ -79,7 +82,6 @@ function modePT() {
     document.getElementById("snipbox").style.top = "325px";
     document.getElementById("R15").style.left = "25px";
     document.getElementById("R15").style.top = "285px";
-
 	const element = document.getElementById("R15");
     const styles = window.getComputedStyle(element);
     const width = styles.getPropertyValue("width");
@@ -94,9 +96,7 @@ function modePT() {
 	document.getElementById("Request").style.display = "none";
 	document.getElementById("ptcon").innerHTML = "&#x2666; Gen Console &#x2666;";
     return;
-  }
-  
-  if (mode === '2') {
+  } else if (mode === '2') {
     document.getElementById("ITSBRITTNEY").style.display = "inline-block";
     document.getElementById("openScript").style.display = "inline-block";
     document.getElementById("PTModeDiv").style.display = "none";
@@ -124,8 +124,9 @@ function modePT() {
     document.getElementById("Request").style.top = '';
     document.getElementById("ptcon").innerHTML = "&#x2666; PT Console &#x2666;";
     return;
+  } else {
+    alert("You Broke It.");
   }
- alert("You Broke It.");
 }
 
 function whiteRabbit() {
