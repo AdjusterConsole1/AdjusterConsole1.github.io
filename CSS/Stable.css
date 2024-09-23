@@ -615,7 +615,7 @@ input[type="color"] {
   border: 1px solid var(--fancy-background);
   color: var(--fancy-background);
   cursor: pointer;
-  z-index: 998;
+  z-index: 4;
 }
 
 #disclaimer:hover {
