@@ -155,11 +155,6 @@ function uncheck_All() {
     inputNumber.value = '';
   });
   const authMode = localStorage.getItem('authMode');
-  if (authMode === 'newAuth') { 
-    document.getElementById('newauthSelect').checked = true;
-  } else {
-    document.getElementById('newauthSelect').checked = false;
-  }
 }
 
 function EVACRECH(btnID) {
@@ -500,12 +495,6 @@ window.onload = function PutItBack() {
   const agreed = localStorage.getItem('agreed');
   if (agreed !== 'agreed') {
     showDisclaimer();
-  }
-  const authMode = localStorage.getItem('authMode');
-  if (authMode === 'newAuth') {
-    document.getElementById('newauthSelect').checked = true;
-  } else if (authMode === 'oldAuth' || authMode == null) {
-    document.getElementById('newauthSelect').checked = false;
   }
   setStorage();
   const customIDs = JSON.parse(localStorage.getItem('customIDs')) || [];

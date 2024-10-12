@@ -71,10 +71,6 @@ function modePT() {
     document.getElementById("ITSBRITTNEY").style.display = "none";
     document.getElementById("openScript").style.display = "none";
     document.getElementById("PTModeDiv").style.display = "inline-block";
-    document.getElementById("newauthSelect").style.top = "275px";
-    document.getElementById("newauthSelect").style.left = "50px";
-    document.getElementById("newauthLabel").style.top = "275px";
-    document.getElementById("newauthLabel").style.left = "70px";
     document.getElementById("newAuthstarter").style.top = "305px";
     document.getElementById("newAuthstarter").style.left = "20px";
     document.getElementById("statusNote").style.display = "none";
@@ -103,10 +99,6 @@ function modePT() {
     document.getElementById("Request").style.display = '';
     document.getElementById("newAuthstarter").style.top = '';
     document.getElementById("newAuthstarter").style.left = '';
-    document.getElementById("newauthSelect").style.top = '';
-    document.getElementById("newauthSelect").style.left = '';
-    document.getElementById("newauthLabel").style.top = '';
-    document.getElementById("newauthLabel").style.left = '';
     document.getElementById("statusNote").style.display = '';
     document.getElementById("snipbox").style.left = '';
     document.getElementById("snipbox").style.top = '';
