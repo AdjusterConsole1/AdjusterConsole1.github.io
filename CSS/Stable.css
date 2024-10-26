@@ -649,6 +649,12 @@ input[type="color"] {
 	object-fit: contain;
 }
 
+@media (min-width: 1200px) {
+    #splashLogo {
+        width: 40%;
+    }
+}
+
 .top1 {
 	font-weight: bold;
 	text-align: center;
