@@ -72,7 +72,7 @@ function closeResource() {
 function resrcCenter(x,y) {
   let w = parseInt(x);
   let resrcDiv = document.getElementById("resrcDiv");
-  if (resrcDiv.style.display == "none" && !checkOpen()) {
+  if (!checkOpen()) {
     resrcDiv.style.display = "inline-block";
     if (y == 'p') { document.getElementById("policyDiv").classList.remove("hide"); }
     if (y == 't') { document.getElementById("toolsDiv").classList.remove("hide"); }
