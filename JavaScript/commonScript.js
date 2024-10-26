@@ -385,6 +385,8 @@ function questOpen() {
 		return true;
 	} else if (document.getElementById("anstoquesta3").classList.contains('active')) {
 		return true;
+	} else if (document.getElementById("anstoquesta4").classList.contains('active')) {
+		return true;
 	} else if (document.getElementById("anstoquesta5").classList.contains('active')) {
 		return true;
 	} else {
