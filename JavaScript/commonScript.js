@@ -56,7 +56,7 @@ function closeResource2() {
 
 function diagCenter() {
 	let diagDiv = document.getElementById("diagDiv");
-	if (diagDiv.style.display == "none" && !checkOpen()) {
+	if (!checkOpen()) {
 		diagDiv.style.display = "block";
 		let widthpre = parseInt(window.getComputedStyle(diagDiv).width);
 		let width1 = (widthpre / 4);
