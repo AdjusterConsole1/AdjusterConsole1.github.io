@@ -2609,7 +2609,7 @@ TIME:&nbsp;&nbsp;</textarea>
 		<div class="item" onclick="BuilderShow('o')">Toggle List</div>
 		<div class="item" onclick="MasterReset()">Master Reset</div>
 	</div>
-	<div class="CMeditDIV backing" id="disEdit">
+	<div class="CMeditDIV backing" id="disEdit" style="display:none;">
 		<div id="TitleDisplay" class="noShow"><b>Edit Display</b>
 		</div>
 		<div id="Instruction" class="noShow"> Highlight the text you would like to modify.<br>
@@ -2626,14 +2626,14 @@ TIME:&nbsp;&nbsp;</textarea>
 		<button id="dispSubmit" class="bones" onclick="submitDisp('s')">Submit</button>
 		<button id="dispDefault" class="bones" onclick="submitDisp('d')">Default</button>
 	</div>
-	<div class="CMeditDIV backing" id="contEdit">
+	<div class="CMeditDIV backing" id="contEdit" style="display:none;">
 		<div id="ContentDisplay" class="noShow"><br><br><b>Edit Content</b></div>
 		<div id="ContentEditor" contenteditable></div>
 		<button id="contSubmit" class="bones" onclick="submitCont()">Submit</button>
 		<button id="contCancel" class="bones" onclick="cancelCont()">Exit</button>
 		<button id="contDefault" class="bones" onclick="defaultCont()">Default</button>
 	</div>
-	<div class="CMeditDIV backing" id="sizeEdit">
+	<div class="CMeditDIV backing" id="sizeEdit style="display:none;"">
 		<div id="heightMod" class="noShow center">
 			<button id="hplus" class="moveBTNS" onclick="heightChange('5')">&#x2B9E;</button><br><br>
 			<button id="hminus" class="moveBTNS" onclick="heightChange('-5')">&#x2B9C;</button>
@@ -2647,7 +2647,7 @@ TIME:&nbsp;&nbsp;</textarea>
 		<button id="sizeDefault" class="bones" onclick="sizeSubmit('d')">Default</button>
 		<button id="sizeCancel" class="bones" onclick="sizeSubmit()">Exit</button>
 	</div>
-	<div class="CMeditDIV backing" id="posEdit">
+	<div class="CMeditDIV backing" id="posEdit" style="display:none;">
 		<button class="moveBTNS" id="upBTN" onmousedown="startUdMove(-5)" onmouseup="stopMove()">&#x2B9E;</button>
 		<button class="moveBTNS" id="downBTN" onmousedown="startUdMove(5)" onmouseup="stopMove()">&#x2B9C;</button>
 		<button class="moveBTNS" id="leftBTN" onmousedown="startLrMove(-5)" onmouseup="stopMove()">&#x2B9C;</button>
