@@ -846,7 +846,8 @@ input:checked+.slider:before {
 .module_top.last_top {
 	background: none;
 	box-shadow: none;
-	position: absolute display: inline-block;
+	position: absolute;
+	display: inline-block;
 }
 
 .module_bot.last_bot {
