@@ -31,7 +31,7 @@ function customMenu(sentID, event) {
   var menuList = Array.from(menuNode);
   for (i = 0; i < menuList.length; i++) {
   if (menuList[i].style.display != "none") {
-    console.log("issue");
+    console.log("issue",menuList[i]);
    return;
    }
   }
