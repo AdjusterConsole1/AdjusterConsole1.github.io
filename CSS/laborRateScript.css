@@ -138,10 +138,10 @@ Failure to comply with these terms may result in legal action.
 	text-align: center;
 	width: 100%;
 	margin-top: 2px;
+}
 
-	&:hover {
-		background: rgba(0, 0, 0, 0.2);
-	}
+.labor_div_30:hover {
+	background: rgba(0, 0, 0, 0.2);
 }
 
 .labor_div_30 button.selected {
@@ -166,10 +166,10 @@ Failure to comply with these terms may result in legal action.
 	text-align: center;
 	width: 130px;
 	border: 2px solid var(--my-accent-color);
+}
 
-	&:hover {
-		background: rgba(0, 0, 0, 0.2);
-	}
+.script_button:hover {
+	background: rgba(0, 0, 0, 0.2);
 }
 
 div.labor_div_button_holder {

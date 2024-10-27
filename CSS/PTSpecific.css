@@ -183,7 +183,6 @@ Failure to comply with these terms may result in legal action.
 #imageContainer img {
 	position: relative;
 	max-width: none;
-	/* Remove constraints to allow scaling */
 	max-height: none;
 	transform-origin: center center;
 	overflow: hidden;
@@ -197,7 +196,6 @@ Failure to comply with these terms may result in legal action.
 	display: flex;
 	position: absolute;
 	flex-direction: column;
-	align-items: space-between;
 	left: 530px;
 	background: none;
 	box-shadow: none;
@@ -208,7 +206,6 @@ Failure to comply with these terms may result in legal action.
 	display: flex;
 	position: absolute;
 	flex-direction: column;
-	align-items: space-between;
 	left: 530px;
 	background: none;
 	box-shadow: none;
@@ -219,7 +216,6 @@ Failure to comply with these terms may result in legal action.
 	display: flex;
 	position: absolute;
 	flex-direction: column;
-	align-items: space-between;
 	left: 530px;
 	background: none;
 	box-shadow: none;

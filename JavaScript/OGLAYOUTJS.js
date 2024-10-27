@@ -453,13 +453,7 @@ function toggleConductor(boxId) {
 }
 
 window.onload = function PutItBack() {
-    const splashDiv = document.getElementById('splashContainer');
-    setTimeout(function () {
-        splashDiv.classList.add("exit-effect");
-    }, 1000);
-    splashDiv.addEventListener('transitionend', function () {
-        document.body.removeChild(splashDiv);
-    });
+	splashScreen();
 	
 	const agreed = localStorage.getItem('agreed');
 	if (agreed !== 'agreed') {

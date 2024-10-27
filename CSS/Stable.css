@@ -207,43 +207,24 @@ input[type="color"] {
 	transition: all .1s ease;
 	text-shadow: none;
 	color: black;
-
-	&:before {
-		background: none;
-		box-shadow: none;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 0%;
-		height: 100%;
-		transition: all .4s;
-		z-index: -1;
-	}
-
-	&:hover {
-		background: none;
-		box-shadow: none;
-		color: black;
-
-		&:before {
-			box-shadow: none;
-			background: none;
-			width: 0%;
-		}
-	}
 }
 
-.orig.astext {
+.astext:before {
 	background: none;
 	box-shadow: none;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0%;
+	height: 100%;
+	transition: all .4s;
+	z-index: -1;
 }
 
-.orig.astext:active {
-	box-shadow: none;
-	text-decoration: none;
+.astext:hover {
 	background: none;
-	border: none;
-	text-shadow: 1px 1px 2px red;
+	box-shadow: none;
+	color: black;
 }
 
 #Snippings {
@@ -497,6 +478,18 @@ input[type="color"] {
 	font-size: 11px;
 }
 
+#CopyContactBTN {
+	top: 20px;
+	left: 21px;
+	z-index: 2;
+}
+
+#CopyPaymentBTN {
+	top: 40px;
+	left: 21px;
+	z-index: 2;
+}
+
 #CopyZipBTN {
 	top: 60px;
 	left: 21px;
@@ -509,8 +502,14 @@ input[type="color"] {
 	z-index: 2;
 }
 
-#CopyPaymentBTN {
-	top: 41px;
+#CopyDistanceBTN {
+	top: 100px;
+	left: 21px;
+	z-index: 2;
+}
+
+#CopyTimeBTN {
+	top: 120px;
 	left: 21px;
 	z-index: 2;
 }
@@ -538,43 +537,6 @@ input[type="color"] {
 	transition: top 0.4s ease-in-out;
 	box-shadow: none;
 	z-index: 1000000;
-}
-
-.timer-container {
-	position: absolute;
-	display: none;
-	cursor: pointer;
-	bottom: 20px;
-	left: 120px;
-	background: none;
-	box-shadow: none;
-	border: none;
-	font-size: 18px;
-	height: 25px;
-	color: var(--glow-txt-color);
-	text-shadow:
-		1px 1px var(--glow-outline-color),
-		-1px -1px var(--glow-outline-color),
-		-1px 1px var(--glow-outline-color),
-		1px -1px var(--glow-outline-color);
-
-	&:active {
-		transform: scale(1.05);
-	}
-}
-
-#start_call.glowing {
-	color: white;
-	text-shadow:
-		1px 1px 1px black,
-		-1px -1px 1px black,
-		-1px 1px 1px black,
-		1px -1px 1px black,
-		0px 0px 2px red,
-		0px 0px 3px red,
-		0px 0px 4px red,
-		0px 0px 5px red;
-	animation: Shine 2s 3 linear;
 }
 
 @keyframes Shine {
@@ -686,7 +648,7 @@ input[type="color"] {
 	padding: 5px 10px;
 	font-size: 12px;
 	bottom: 5px;
-	left: 70px;
+	left: 50px;
 	background: none;
 	box-shadow: none;
 	color: var(--fancy-background);

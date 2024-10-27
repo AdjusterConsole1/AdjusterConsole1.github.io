@@ -283,12 +283,12 @@ select {
 		0px 0px 30px black;
 	padding: 0px;
 	transition: all 0s ease;
+}
 
-	&:active {
-		background: none;
-		box-shadow: none;
-		transform: translateY(0px);
-	}
+.otherone:active {
+	background: none;
+	box-shadow: none;
+	transform: translateY(0px);
 }
 
 #swap1 {
@@ -488,12 +488,12 @@ select {
 		-1px -1px 1px var(--glow-txt-color),
 		-1px 1px 1px var(--glow-txt-color),
 		1px -1px 1px var(--glow-txt-color);
+}
 
-	&:active {
-		background: none;
-		box-shadow: none;
-		transform: translateY(0px);
-	}
+.nav_tag:active {
+	background: none;
+	box-shadow: none;
+	transform: translateY(0px);
 }
 
 .nav_tag.neu_style {

@@ -216,7 +216,7 @@ Failure to comply with these terms may result in legal action.
 }
 
 .taAuth {
-	border-radius: none;
+	border-radius: 0px;
 	box-shadow: none;
 }
 

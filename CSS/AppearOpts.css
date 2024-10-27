@@ -334,6 +334,8 @@ button:active {
 #nameLabelDiv {
 	position: absolute;
 	display: inline-block;
+	opacity: 0;
+	visibility: hidden;
 	margin: 0px;
 	width: 135px;
 	top: 720px;
@@ -365,19 +367,19 @@ button:active {
 	border: none;
 	outline: none;
 	border-radius: 4px;
+}
 
-	&:hover {
-		background: #ccc;
-		box-shadow: none;
-		text-shadow: none;
-	}
+.input-with-buttons button:hover {
+	background: #ccc;
+	box-shadow: none;
+	text-shadow: none;
+}
 
-	&:active {
-		background: #A8A8A8;
-		box-shadow: none;
-		text-shadow: none;
-		transform: scale(.9);
-	}
+.input-with-buttons button:active {
+	background: #A8A8A8;
+	box-shadow: none;
+	text-shadow: none;
+	transform: scale(.9);
 }
 
 .input-with-buttons input[type="number"] {
@@ -490,16 +492,16 @@ button:active {
 	box-shadow: none;
 	border-radius: var(--radius2);
 	border: 2px solid var(--my-accent-color);
+}
 
-	&:hover {
-		background: var(--hover-color);
-		box-shadow: none;
-		text-shadow: none;
-	}
+.previewBtn2:hover {
+	background: var(--hover-color);
+	box-shadow: none;
+	text-shadow: none;
+}
 
-	&:active {
-		background: var(--active-color);
-		text-shadow: none;
-		box-shadow: none;
-	}
+.previewBtn2:active {
+	background: var(--active-color);
+	text-shadow: none;
+	box-shadow: none;
 }
