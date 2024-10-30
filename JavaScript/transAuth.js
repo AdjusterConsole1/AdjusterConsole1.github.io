@@ -29,299 +29,178 @@
 //By using this website or its content, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions.
 //Failure to comply with these terms may result in legal action.
 
-function transAuth() {
-	document.getElementById("module_trans_backing").classList.add("trsnActive");
-	localStorage.setItem('transauthPage', '1');
-	localStorage.removeItem("Diag");
-}
+document.getElementById("transAuthBtn").addEventListener('click', function() {
+    if (checkOpen()) {
+        return;
+    }
+    document.getElementById("trans_backing_div").classList.add("show");
+});
 
-function opentransAuth() {
-	if (checkOpen()) {
-		return;
-	}
-	document.getElementById("module_trans_backing").classList.add("trsnActive");
-	document.getElementById("module_trans_1").classList.add("trsnActive");
-}
+document.getElementById("transCancelBtn").addEventListener('click', closeTransAuth);
 
-function closetransAuth() {
-	document.getElementById("module_trans_backing").classList.remove("trsnActive");
-	document.getElementById("module_trans_7").classList.remove("trsnActive");
-	document.getElementById("module_trans_4").classList.remove("trsnActive");
-	document.getElementById('module_trans_1').classList.add('trsnActive');
-	document.getElementById('trans_ans4').value = '';
-	document.getElementById('trans_ans4a').value = '';
-	document.getElementById('trans_ans4b').value = '';
-	document.getElementById('trans_ans4c').value = '';
-	document.getElementById('trans_ans7').value = '';
-	localStorage.removeItem('Diag');
+
+function closeTransAuth() {
+    const container = document.getElementById("trans_backing_div");
+    const inputs = container.querySelectorAll("input");
+    inputs.forEach(input => {
+        if (input.type === "text" || input.type === "number") {
+            input.value = '';
+        } else if (input.type === "radio" || input.type === "checkbox") {
+            input.checked = false;
+        }
+    });
+    document.getElementById("trans_backing_div").classList.remove("show");
 }
 
 function showtransOop() {
-	document.getElementById("module_trans_8qdiv").classList.remove("invisible");
-	document.getElementById("module_trans_8adiv").classList.remove("invisible");
+	document.getElementById("").classList.remove("");
 }
 
 function hidetransOop() {
-	document.getElementById("module_trans_8qdiv").classList.add("invisible");
-	document.getElementById("module_trans_8adiv").classList.add("invisible");
+	document.getElementById("").classList.add("");
 }
 
-function requestorNo(x) {
-	if (x === 'y') {
-		if (document.getElementById("trans_ans3d").checked) {
-			document.getElementById("trans_ans3d").checked = false;
-		}
-	}
-	if (x === 'n') {
-		if (document.getElementById("trans_ans3c").checked) {
-			document.getElementById("trans_ans3c").checked = false;
-		}
-		if (document.getElementById("trans_ans3b").checked) {
-			document.getElementById("trans_ans3b").checked = false;
-		}
-		if (document.getElementById("trans_ans3a").checked) {
-			document.getElementById("trans_ans3a").checked = false;
-		}
-	}
-}
 
-function noncovcomp(x) {
-	if (x === 'y') {
-		if (document.getElementById("trans_ans8g").checked) {
-			document.getElementById("trans_ans8g").checked = false;
-		}
-	}
-	if (x === 'n') {
-		if (document.getElementById("trans_ans8e").checked) {
-			document.getElementById("trans_ans8e").checked = false;
-		}
-		if (document.getElementById("trans_ans8f").checked) {
-			document.getElementById("trans_ans8f").checked = false;
-		}
-	}
-}
-
-function saveDiag(property, id) {
-	let Diag = JSON.parse(localStorage.getItem('Diag'));
-	const totalspark = document.getElementById("totalspark");
-	if (!Diag) {
-		Diag = {
-			trans: false,
-			diag: false,
-			flush: false,
-			press: false,
-			pan: false,
-			pull: false,
-			data: false,
-			spark: 0,
-			point: false
-		};
-	}
-	if (property === 'sparkplus') {
-		Diag.spark += 1;
-		totalspark.innerHTML = Diag.spark;
-	} else if (property === 'sparkminus' && Diag.spark > 0) {
-		Diag.spark -= 1;
-		totalspark.innerHTML = Diag.spark;
-	} else if (property && property !== 'next') {
-		if (Diag.hasOwnProperty(property) && Diag[property] === false) {
-			Diag[property] = true;
-			var elem = document.getElementById(id);
-			elem.innerHTML = "Del";
-			elem.classList.add("butswap");
-		} else if (Diag.hasOwnProperty(property) && Diag[property] === true) {
-			Diag[property] = false;
-			var elem = document.getElementById(id);
-			elem.innerHTML = "Add";
-			elem.classList.remove("butswap");
-		}
-	}
-	localStorage.setItem('Diag', JSON.stringify(Diag));
-	if (property === 'next') {
-		const transauthPage = localStorage.getItem('transauthPage');
-		if (transauthPage === '1') {
-			document.getElementById('module_trans_1').classList.remove('trsnActive');
-			document.getElementById('module_trans_4').classList.add('trsnActive');
-			localStorage.setItem('transauthPage', '2');
-		} else if (transauthPage === '2') {
-			document.getElementById('module_trans_4').classList.remove('trsnActive');
-			document.getElementById('module_trans_7').classList.add('trsnActive');
-			localStorage.setItem('transauthPage', '3');
-		} else if (transauthPage === '3') {
-			finishtransAuth();
-			return;
-		}
-	}
-	if (property === 'back') {
-		const transauthPage = localStorage.getItem('transauthPage');
-		if (transauthPage === '3') {
-			document.getElementById('module_trans_7').classList.remove('trsnActive');
-			document.getElementById('module_trans_4').classList.add('trsnActive');
-			localStorage.setItem('transauthPage', '2');
-		} else if (transauthPage === '2') {
-			document.getElementById('module_trans_4').classList.remove('trsnActive');
-			document.getElementById('module_trans_1').classList.add('trsnActive');
-			localStorage.setItem('transauthPage', '1');
-		} else if (transauthPage === '1') {
-			return;
-		}
-	}
-	if (property === 'cancel') {
-		uncheck_All();
-		closetransAuth();
-		return;
-	}
-}
+document.getElementById("transAuthRoutine").addEventListener('click', function() {
+    if (checkOpen()) {
+        return;
+    }
+    finishtransAuth();
+});
 
 function finishtransAuth() {
 	const rfName = getContact('0');
-	let isDiag = false;
-	let isDiag2 = false;
-	let addOn = false;
-	let addOnrec = false;
-	let Diag = JSON.parse(localStorage.getItem('Diag'));
-	for (let property in Diag) {
-		if (property !== 'trans' && property !== 'diag' && property !== 'flush') {
-			if ((property !== 'spark' && Diag[property] === true) || (property === 'spark' && Diag[property] > 0)) {
-				isDiag = true;
-				isDiag2 = true;
-			}
+	let outputString = "Verified internal failure to the transmission using the ";
+	
+	const sentInsp = document.getElementById("t10a").checked;
+	const requestedPictures = document.getElementById("t10b").checked;
+	const veriMetal = document.getElementById("t11a").checked;
+	const veriDrivability = document.getElementById("t11b").checked;
+	const veriLiveData = document.getElementById("t11c").checked;
+	const veriNoise = document.getElementById("t11d").checked;
+	const veriJudder = document.getElementById("t11e").checked;
+	const veriLine = document.getElementById("t11f").checked;
+	let videoVeri;
+	if (veriDrivability || veriNoise) videoVeri = true;
+	
+	if (requestedPictures) {
+		outputString += "Repair Facility "
+		if (sentInsp) {
+			outputString += "and Inspection ";
+		}
+		outputString += "provided photos";
+	} else if (sentInsp) {
+		outputString += "Inspection provided photos";
+	}
+	if (videoVeri) {
+		outputString += " and videos.\r";
+	} else {
+		outputString += ".\r";
+	}
+	
+	if (veriMetal) {
+        outputString += "There is an excessive amount of contamination in the transmission pan.\r";
+    }
+    if (veriDrivability) {
+       outputString += "We have been provided a video demonstrating the drivability issue\r";
+    }
+    if (veriLiveData) {
+        outputString += "A record of the failure captured on live data was sent in.\r";
+    }
+    if (veriNoise) {
+		outputString += "We have been provided a video verifying a loud, internal transmission noise.\r";
+    }
+    if (veriJudder) {
+        outputString += "Photos of the judder codes have been provided.\r";
+    }
+    if (veriLine) {
+        outputString += "A line pressure test was performed and the system did not meet spec.\r";
+    }
+	outputString += "The transmission has coverage under the terms of the contract.\rVerified OEM parts using Forte and AM parts using PA.\rUsed in-house sourcing to determine the MCE option.\r";
+	
+	const transType = document.querySelector('input[name="transType"]:checked');
+	const transSource = document.querySelector('input[name="transSource"]:checked');
+	const cost = parseInt(document.getElementById("t2").value);
+	
+	if (transType && transSource && cost) {
+		outputString += `The MCE option is a ${transType.value} unit from ${transSource.value} for $${cost.toLocaleString()}\r`;
+	}
+	
+	const transLabor = document.getElementById("t4a").value;
+	const diagLabor = document.getElementById("t4b").value;
+	const flushLabor = document.getElementById("t4c").value;
+	
+	outputString += "Verified labor, fluid type, and capacities in ProDemand.\r";
+	
+	if (transLabor) outputString += `R/R trans: ${transLabor}\r`;
+	if (diagLabor) outputString += `Diag: ${diagLabor}\r`;
+	if (flushLabor) outputString += `Flush: ${flushLabor}\r`;
+
+	const requestedRecord = document.getElementById("t10c").checked;
+	
+	if (requestedRecord) {
+		outputString += "Requested and reviewed records.\r";
+	} else {
+		outputString += "No records requested as history will not change claim decision.\r";
+	}
+	
+	const sequence = document.getElementById("t3").value;
+	
+	outputString += `Contract Holder is in sequence ${sequence}.\rVehicle is not in waiting period.\rNo prior related claims.\rNo recalls, TSBs, or unresolved mileage concerns.\r`;
+	
+	const hasNonCovered = document.getElementById("t6").checked;
+	const hasDenied = document.getElementById("t7").checked;
+	
+	if (hasNonCovered && hasDenied) {
+		outputString += "I have tasked Customer Service to inform Contract Holder of non-covered and denied components.\r";
+	} else if (hasNonCovered) {
+		outputString += "I have tasked Customer Service to inform Contract Holder of non-covered components.\r";
+	} else if (hasDenied) {
+		outputString += "I have tasked Customer Service to inform Contract Holder of denied components.\r";
+	}
+	
+	outputString += "After reviewing all relevant documentation, we are moving forward with verified failures.\r";
+	
+	const hasOOPC = document.getElementById("t8a").checked;
+	const hasShipping = document.getElementById("t8b").checked;
+	
+	const hasOOPCauseParts = document.getElementById("t9a").checked;
+	const hasOOPCauseLabor = document.getElementById("t9b").checked;
+	let hasOOPCauseBoth;
+	if (hasOOPCauseParts && hasOOPCauseLabor) hasOOPCauseBoth = true;
+	
+	if (hasShipping) {
+		outputString += "Need to have Contract Holder approve shipping option";
+		if (hasOOPC) {
+			outputString += " and OOPC.\r";
+		} else {
+			outputString += ".\r";
+		}
+	} else if (hasOOPC) {
+		outputString += "Contract Holder will have OOPC related to "
+		if (hasOOPCauseBoth) {
+			outputString += "parts and labor.\r";
+		} else if (hasOOPCauseParts) {
+			outputString += "parts.\r";
+		} else {
+			outputString += "labor.\r";
 		}
 	}
-	const transLabor = document.getElementById("trans_ans4a").value;
-	const diagLabor = document.getElementById("trans_ans4b").value;
-	const flushLabor = document.getElementById("trans_ans4c").value;
-	const trans_Ans_1 = document.querySelector('input[name="trans_ans1"]:checked');
-	const trans_Ans_2 = document.querySelector('input[name="trans_ans2"]:checked');
-	const cost = parseInt(document.getElementById("trans_ans4").value);
-	const trans_ans7 = document.getElementById("trans_ans7").value;
-	const testElec = .3 * Diag.spark;
-	const propertyStrings = {
-		trans: "Pro Demand shows " + transLabor + " hours to R/R transmission.\r",
-		diag: "Pro Demand shows " + diagLabor + " hours for diagnostics.\r",
-		flush: "Pro Demand shows " + flushLabor + " hours to the flush the cooler.\r",
-		press: ".X for line pressure test ",
-		pan: ".X for pan drop ",
-		pull: ".3 for code pull ",
-		data: ".2 for data monitoring ",
-		spark: "electrical tests: " + Diag.spark + " @ .3 each is " + testElec.toFixed(2) + " ",
-		point: ".4 for pinpoint test. "
-	};
-	const transAuth1 = "The Repair Facility sent supporting photos and video showing excessive metal debris present.\r";
-	const transAuth2 = "The inspection showed excessive metal debris present.";
-	const recordsTrans1 = "No records requested as history will not change claim decision.\rVehicle is not in waiting period. No prior related claims.\rNo recalls, TSBs, or unresolved mileage concerns.\rContract Holder is in sequence " + trans_ans7 + ".";
-	const recordsTrans2 = "Requested and reviewed records and statement.\rRecord review note is completed.";
-	const requestedTrans1 = "After reviewing all relevant documentation, we are moving forward with verified failures.";
-	const beenVerified = "Verified labor, fluid type, and capacities in ProDemand.\r";
-	const oopcsTrans1 = "Need to review OOPC of $";
-	const oopcsTrans1a = "Need to review OOPC when OOPC is determined";
-	const oopcsTrans2a = " with Contract Holder.";
-	const oopcsTrans2b = " and shipping option with Contract Holder.";
-	const oopcsTrans2c = "OOPC is due to differences in ";
-	const oopcsTrans3 = "Need to review shipping option with Contract Holder.";
-	const oopcsTrans3a = "Have not given authorization info to the Repair Facility at this time.";
-	const oopcsTrans4 = "Contract Holder has no OOPC besides deductible.";
-	const oopcsTrans4a = "Gave authorization info and payment instructions to ";
-	const noncovTrans1 = "Will inform Contract Holder of non-covered components";
-	const noncovTrans2 = "There were denied items on this claim.\rReview denial note for more details";
-	let outputString = '';
-	const inspSent = document.getElementById('trans_ans3a').checked;
-	const picsSent = document.getElementById('trans_ans3b').checked;
-	const recSent = document.getElementById('trans_ans3c').checked;
-	if (!inspSent && picsSent) {
-		outputString += 'Verified internal failure to the transmission using the Repair Facility diagnostic and photos.\r' + transAuth1;
-	} else if (inspSent) {
-		outputString += 'Verified internal failure to the transmission using the inspection photos and report.\r' + transAuth2;
+	if (!hasOOPC) {
+		outputString += "Contract Holder has no OOPC besides deductible.\r";
 	}
-	outputString += 'The transmission has coverage under the terms of the contract.\rVerified OEM parts using Forte and AM parts using PA.\rUsed in-house sourcing to determine the MCE option.\rThe MCE option is a ';
-	if (trans_Ans_1.value === null) {
-		uncheck_All();
-		return;
-	}
-	outputString += trans_Ans_1.value + " unit from " + trans_Ans_2.value + " for $" + cost.toFixed(2) + ".\r" + beenVerified;
-	for (let property in Diag) {
-		if (Diag.hasOwnProperty(property)) {
-			if ((property !== 'spark' && Diag[property] === true) || (property === 'spark' && Diag[property] > 0)) {
-				outputString += propertyStrings[property];
-				if (isDiag && property === 'flush') {
-					outputString += "Diag completed: ";
-					isDiag = false;
-				}
-			}
-		}
-	}
-	if (isDiag2) {
-		outputString += "\r";
-	}
-	if (inspSent === true || picsSent === true) {
-		addOn = true;
-		addOnrec = true;
-	}
-	if (recSent === true) {
-		addOn = true;
-	}
-	if (addOnrec) {
-		outputString += recordsTrans1 + "\r";
-	}
-	if (addOn) {
-		outputString += requestedTrans1 + "\r";
-	}
-	const trans_ans9a = document.getElementById("trans_ans9a");
-	if (!trans_ans9a.checked) {
-		if (document.getElementById("trans_ans8d").checked) {
-			outputString += oopcsTrans4 + "\r" + oopcsTrans4a + rfName + "\r";
-		} else if (document.getElementById("trans_ans8b").checked) {
-			outputString += oopcsTrans3 + "\r" + oopcsTrans3a + "\r";
-		} else if (document.getElementById("trans_ans8a").checked || document.getElementById("trans_ans8c").checked) {
-			const oopcCausep = document.getElementById("trans_ans8h");
-			const oopcCausel = document.getElementById("trans_ans8i");
-			const oopcCauseb = document.getElementById("trans_ans8j");
-			const oopcAmt1 = document.getElementById("trans_ans8k").value;
-			const num = parseFloat(oopcAmt1);
-			if (isNaN(num)) {
-				alert("Please enter a valid amount for OOPC");
-				return;
-			}
-			const oopcAmt2 = num.toFixed(2);
-			const oopcAmt = oopcAmt2.toString();
-			let oopcCausedBy;
-			if (oopcCauseb.checked) {
-				oopcCausedBy = "parts and labor.";
-			}
-			if (oopcCausel.checked) {
-				oopcCausedBy = "labor.";
-			}
-			if (oopcCausep.checked) {
-				oopcCausedBy = "parts.";
-			}
-			outputString += oopcsTrans1 + oopcAmt;
-			outputString += (document.getElementById("trans_ans8c").checked ? oopcsTrans2b : oopcsTrans2a) + "\r";
-			outputString += oopcsTrans2c + oopcCausedBy + "\r" + oopcsTrans3a + "\r";
-			document.getElementById("trans_ans8a").checked = false;
-			document.getElementById("trans_ans8c").checked = false;
-		}
-	}
-	if (document.getElementById("trans_ans8a").checked || document.getElementById("trans_ans8c").checked) {
-		if (trans_ans9a.checked) {
-			outputString += oopcsTrans1a + "\r";;
-		}
-	}
-	trans_ans9a.checked = false;
-	document.getElementById("trans_ans8a").checked = false;
-	document.getElementById("trans_ans8c").checked = false;
-	const noncovComps = document.getElementById("trans_ans8e");
-	if (noncovComps.checked) {
-		outputString += noncovTrans1 + "\r";
-		noncovComps.checked = false;
-	}
-	const deniedComps = document.getElementById("trans_ans8f");
-	if (deniedComps.checked) {
-		outputString += noncovTrans2 + "\r";;
-		deniedComps.checked = false;
+	const outputDisclaimer = document.getElementById("t12").checked;
+	if (!hasShipping && outputDisclaimer) {
+		outputString += `Giving auth and payment info to RF with following disclaimer:
+		
+The total payable and authorization number are listed in the preceding screenshot.
+Any cost due over the total payable will be the responsibility of the customer and should be discussed with and approved by them prior to any work starting.
+Once the work has been completed:
+1. Have the customer sign the invoice,
+2. Put the authorization number on the invoice,
+3. Put the claim number in the subject line of an email and email the invoice to us at payments@americanautoshield.com.`;
 	}
 	copy(outputString);
-
-	uncheck_All();
-	closetransAuth();
+	closeTransAuth();
 	return;
 }
