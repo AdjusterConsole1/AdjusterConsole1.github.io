@@ -31,6 +31,8 @@
 
 function PTXFER() {
   const showTemp = document.getElementById("transferTemplate");
+  document.getElementById("q3ansExplain").value = '';
+  document.getElementById("q11ansExplain").value = '';
   showTemp.style.display = "inline-block";
   const rfEmail = getContact('1');
   const rfName = getContact('0');
