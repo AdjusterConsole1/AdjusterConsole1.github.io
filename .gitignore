@@ -1,0 +1,4 @@
+clean/
+obfuscate.js
+runObfuscate.bat
+timestamps.json
