@@ -181,9 +181,18 @@ function auth_initialize() {
 		output += `The Contract Holder has a deductible of ${deductibleValue}.\r`;
 	}
 
-	const oopc = document.getElementById('nauth9').checked;
-	const shipping = document.getElementById('nauth10').checked;
+
+	let oopc;
+	let shipping;
 	const both = document.getElementById('nauth11').checked;
+	if (both) {
+		oopc = true;
+		shipping = true;
+	} else {
+		oopc = document.getElementById('nauth9').checked;
+		shipping = document.getElementById('nauth10').checked;
+	}
+	
 	const none = document.getElementById('nauth12').checked;
 	const oopcamount = parseInt(document.getElementById('nauth20').value);
 	const noncovered = document.getElementById('nauth13').checked;
