@@ -139,14 +139,14 @@ function finishtransAuth() {
 	const requestedRecord = document.getElementById("t10c").checked;
 	
 	if (requestedRecord) {
-		outputString += "Requested and reviewed records.\r";
+		outputString += "Records were requested and reviewed.\r";
 	} else {
-		outputString += "No records requested as history will not change claim decision.\r";
+		outputString += "No records were requested as history will not change claim decision.\r";
 	}
 	
 	const sequence = document.getElementById("t3").value;
 	
-	outputString += `Contract Holder is in sequence ${sequence}.\rVehicle is not in waiting period.\rNo prior related claims.\rNo recalls, TSBs, or unresolved mileage concerns.\r`;
+	outputString += `Contract Holder is in sequence ${sequence}.\rVehicle is not in the waiting period.\rNo prior related claims.\rNo recalls, TSBs, or unresolved mileage concerns.\r`;
 	
 	const hasNonCovered = document.getElementById("t6").checked;
 	const hasDenied = document.getElementById("t7").checked;
@@ -170,11 +170,11 @@ function finishtransAuth() {
 	if (hasOOPCauseParts && hasOOPCauseLabor) hasOOPCauseBoth = true;
 	
 	if (hasShipping) {
-		outputString += "Need to have Contract Holder approve shipping option";
+		outputString += "The Contract Holder's decision on the shipping option";
 		if (hasOOPC) {
 			outputString += " and OOPC.\r";
 		} else {
-			outputString += ".\r";
+			outputString += " is needed..\r";
 		}
 	} else if (hasOOPC) {
 		outputString += "Contract Holder will have OOPC related to "
@@ -191,7 +191,7 @@ function finishtransAuth() {
 	}
 	const outputDisclaimer = document.getElementById("t12").checked;
 	if (!hasShipping && outputDisclaimer) {
-		outputString += `Giving auth and payment info to RF with following disclaimer:
+		outputString += `Giving authorization and payment info to the Repair Facility with following disclaimer:
 		
 The total payable and authorization number are listed in the preceding screenshot.
 Any cost due over the total payable will be the responsibility of the customer and should be discussed with and approved by them prior to any work starting.

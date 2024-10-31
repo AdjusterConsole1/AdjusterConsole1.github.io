@@ -38,13 +38,22 @@ Failure to comply with these terms may result in legal action.
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 90%;
-	height: 90%;
-	padding: 30px;
+	width: calc(100% - 30px);
+	height: calc(100% - 30px);
+	padding: 0px;
 	margin: 15px;
 	z-index: 1000;
 	overflow: hidden;
 	text-align: center;
+}
+
+#helpDiv div {
+	margin: 60px;
+	text-align: left;
+}
+
+#helpDiv p {
+	text-indent: 50px;
 }
 
 #helpDiv.show {
