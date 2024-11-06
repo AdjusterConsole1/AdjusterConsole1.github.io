@@ -12,3 +12,6 @@ function validateAccess(event) {
 }
 
 document.getElementById("accessFormFields").addEventListener("submit", validateAccess);
+document.getElementById("logOutBtn").addEventListener("click", function() {
+	alert("Do you remember signing in, Goofball?");	
+});
