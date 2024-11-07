@@ -1,8 +1,7 @@
 cleanJavaScript/
 cleanCSS/
-obfuscate.js
-runObfuscate.bat
 timestamps.json
 .tmp.driveupload
 versionKey.txt
-comboBatFull.bat
+build.js
+build.bat
