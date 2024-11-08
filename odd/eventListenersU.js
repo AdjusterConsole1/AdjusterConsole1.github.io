@@ -510,5 +510,6 @@ document.getElementById("suspensionMag").addEventListener("click", () => magnify
 document.getElementById("acMag").addEventListener("click", () => magnify("ac"));
 document.getElementById("ac2Mag").addEventListener("click", () => magnify("ac2"));
 document.getElementById("timingMag").addEventListener("click", () => magnify("timing"));
+document.getElementById("theDepot").addEventListener("click", () => magnify("back"));
 
 });
