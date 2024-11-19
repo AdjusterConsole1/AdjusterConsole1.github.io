@@ -11,7 +11,7 @@ function validateAccess(event) {
 	name.value = "";
 }
 
-document.getElementById("accessFormFields").addEventListener("submit", validateAccess);
-document.getElementById("logOutBtn").addEventListener("click", function() {
+document.getElementById("accessFormFields")?.addEventListener("submit", validateAccess);
+document.getElementById("logOutBtn")?.addEventListener("click", function() {
 	alert("Do you remember signing in, Goofball?");	
 });

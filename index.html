@@ -3,22 +3,22 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<link rel="stylesheet" href="CSS/main.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/Common.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/Stable.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/auth_module.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/Buttons.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/CustomButtons.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/AppearOpts.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/Resource.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/contextMenu.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/laborRateScript.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/PTSpecific.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/Instructions.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/transAuth.css?v=20241111022416">
-		<link rel="stylesheet" href="CSS/linebacker.css?v=20241111022416">
-        <link rel="stylesheet" href="CSS/navAndSopMenus.css?v=20241111022416">
-        <link rel="stylesheet" href="CSS/accessDiv.css?v=20241111022416">
+		<link rel="stylesheet" href="CSS/main.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/Common.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/Stable.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/auth_module.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/Buttons.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/CustomButtons.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/AppearOpts.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/Resource.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/contextMenu.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/PTSpecific.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/Instructions.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/transAuth.css?v=20241119002710">
+		<link rel="stylesheet" href="CSS/linebacker.css?v=20241119002710">
+        <link rel="stylesheet" href="CSS/navAndSopMenus.css?v=20241119002710">
+        <link rel="stylesheet" href="CSS/accessDiv.css?v=20241119002710">
+        <link rel="stylesheet" href="CSS/dashboard.css?v=20241119002710">
 		<title>Adjuster Console</title>
 		<link rel="manifest" href="manifest.webmanifest">
 	</head>
@@ -34,6 +34,65 @@
             </form>
             <p>Clap your hands or Forte Guy rains vengence.</p>
             <p>I'm just kidding. But you do have to 'clap'</p>
+        </div>
+    </div>
+    
+    <!-- Metrics Dashboard-->
+    
+    <div id="dashContainer" class="hidden">
+        <div class="dashboard" id="mainDash">
+            <a href="javascript:void(0)" id="closeDash">&times;</a>
+            <a href="javascript:void(0)" id="csvDownload">.CSV</a>
+            <a href="javascript:void(0)" id="jsonDownload">.JSON</a>
+            <h1>Metrics Dashboard</h1>
+            <div class="filter-panel">
+                <label for="typeFilter">Filter by Type:</label>
+                <select id="typeFilter">
+                    <option value="timed">Timed</option>
+                    <option value="complex">Complex Notes</option>
+                    <option value="tool">Tools</option>
+                    <option value="info">Info and SOPs</option>
+                    <option value="simple">Simple Notes</option>
+                    <option value="menu">Menus</option>
+                    <option value="customization">Customization</option>
+                    <option value="all">All</option>
+                </select>
+                <label for="dateFilter">Date Range:</label>
+                <select id="dateFilter">
+                    <option value="today">Today</option>
+                    <option value="last7Days">Last 7 Days</option>
+                    <option value="lastMonth">Last Month</option>
+                    <option value="custom">Custom Range</option>
+                </select>
+                <div id="customDateRange">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate">
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Count</th>
+                            <th>Cancelled</th>
+                            <th>Average Time (s)</th>
+                            <th>Fastest Time (s)</th>
+                            <th>Slowest Time (s)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="detailContainer" class="hidden">
+            <a href="javascript:void(0)" id="closeMetricDetail">&times;</a>
+            <div id="detailsContent"></div>
+            <div id="contentFooter"></div>
         </div>
     </div>
     <div id="splashContainer">
@@ -123,6 +182,7 @@
         <button id="ptcon" class="astext menu">&#x2666; PT Console &#x2666;</button>
         <button id="tutorials" class="astext menu">&#x2666; Help &#x2666;</button>
 		<button id="logOutBtn" class="astext menu">&#x2666; Log Out &#x2666;</button>
+        <button id="metricMenu" class="astext menu">&#x2666; Metrics &#x2666;</button>
     </div>
 
     <!-- SOP Menu -->
@@ -184,14 +244,13 @@
         <button class="sop_btn neu" id="pdf0046">State Tax</button>
     </div>
     <div id="PDFdepot" class="PDF_depot">
-        <button class="close_button">Close</button>
+        <button id="pdfClose" class="close_button">Close</button>
     </div>
 
     <!-- Side Nav -->
 
     <div id="mySidenav" class="sidenav closed_nav">
         <button class="navHeader navbtn">Tools</button>
-        <button class="navbtn">Labor Rate Script</button>
         <button class="navbtn">Tracker Tool</button>
         <button class="navbtn">Pricing Guide</button>
         <button class="navbtn">Mileage Issues</button>
@@ -420,7 +479,6 @@
         <div id="navtag" class="nav_tag neu_style">Browse Full SOPs</div>
         <button id="newAuthstarter" class="D R P s7dispStat">Authorize Claim</button>
         <button id="statusNote" class="D R P s8dispStat">Status Note</button>
-        <button id="openScript" class="D R P s4dispStat">Labor Rate<br>Script</button>
         <div id="Request" class="REQUESTDIV noShow">
             <button id="picR" class="D R P C s1dispStat">PICTURE REQUEST</button>
             <button id="recR" class="D R P C s2dispStat">RECORDS REQUEST</button>
@@ -795,9 +853,6 @@
             </div><br>
             <div id="switchdivs3" class="noShow sd">
                 <label id="switchs3" class="switch"><input type="checkbox" id="s3" checked><span class="slider round"></span>Recds Reqst No Ans</label>
-            </div><br>
-            <div id="switchdivs4" class="noShow sd">
-                <label id="switchs4" class="switch"><input type="checkbox" id="s4" checked><span class="slider round"></span>Labor Rate Script</label>
             </div><br>
             <div id="switchdivs6" class="noShow sd">
                 <label id="switchs6" class="switch"><input type="checkbox" id="s6" checked><span class="slider round"></span>Templates</label>
@@ -2053,120 +2108,6 @@ TIME:&nbsp;&nbsp;</textarea>
         </div>
     </div>
 
-    <!-- Labor Script Div -->
-
-    <div id="laborscriptDiv" class="ls_outer hide">
-        <div class="ls_main">
-            <h3 class="labor_heading">Labor Rate Script</h3>
-            <div class="labor_div_100">
-                <div class="labor_div_60">
-                    Ask the RF:<br>What is the current posted labor rate at your Repair Facility?
-                </div>
-                <div class="labor_div_40">
-                    <label for="asking">RF Posted Labor Rate:</label><br>
-                    $<input type="number" id="asking" step=".01" required><br>
-                </div>
-            </div>
-            <div class="labor_div_100">
-                <div class="labor_div_60">
-                    Optional:<br>
-                    Are they requesting more than the current Labor Rate?
-                </div>
-                <div class="labor_div_40">
-                    <label for="current">Labor Rate:</label><br>
-                    $<input type="number" id="current" step=".01">
-                </div>
-            </div>
-            <div class="labor_div_90">
-                <div class="labor_div_30 NumberBtn">
-                    Radius:
-                    <div class="labor_width">
-                        <button id="radius5" class="laboropt">5</button>
-                        <button id="radius10" class="laboropt">10</button>
-                        <button id="radius25" class="laboropt">25</button>
-                    </div>
-                </div>
-                <div class="labor_div_30 Type">
-                    Facility Type:
-                    <div class="labor_widther">
-                        <button id="typeAll" class="laboropt">All</button>
-                        <button id="typeIndy" class="laboropt">Independant</button>
-                        <button id="typeDom" class="laboropt">Domestic</button>
-                        <button id="typeEuro" class="laboropt">European</button>
-                        <button id="typeAsian" class="laboropt">Asian</button>
-                    </div>
-                </div>
-                <div class="labor_div_30 NumberBtn">
-                    Number of Facilities:
-                    <div class="labor_width">
-                        <button id="quant5" class="laboropt">5</button>
-                        <button id="quant10" class="laboropt">10</button>
-                        <button id="quant25" class="laboropt">25</button>
-                        <button id="quant50" class="laboropt">50</button>
-                        <button id="quant100" class="laboropt">100</button>
-                        <button id="quantAll" class="laboropt">All</button>
-                    </div>
-                </div>
-            </div>
-            <div class="labor_div_100">
-                <label for="aveRate">Average Labor Rate:</label>
-                $<input type="number" id="aveRate" step=".01">
-                <div>
-                    <button id="myScript" class="script_button">My Response</button>
-                </div>
-            </div>
-            <div id="responseDiv">
-                <div class="response_inner">
-                    <div id="responseDiv_text">The response is:<br></div>
-                    <div id="answerBtns">
-                        <div>
-                            <button id="yesScript" class="script_button">Yes</button>
-                        </div>
-                        <div>
-                            <button id="noScript" class="script_button">No</button>
-                        </div>
-                    </div>
-                </div>
-                <div id="rf_offer_div">
-                    <div>
-                        <label for="custom">The RF offered: </label><br>
-                        $<input type="number" id="custom" step=".01">
-                    </div>
-                    <div>
-                        <button id="acceptScript" class="script_button">Accept</button>
-                    </div>
-                </div>
-            </div>
-            <div class="labor_div_button_holder">
-                <div>
-                    <button id="instructScript" class="script_button">Instructions</button>
-                </div>
-                <div>
-                    <button id="exitScript" class="script_button">Exit</button>
-                </div>
-                <div>
-                    <button id="resetScript" class="script_button">Reset</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="instructL" class="instructLabor hide">
-        <b>Instructions:</b><br>
-        <ul>
-            <li>Enter the Repair Facility response into RF Posted Labor Rate.</li>
-            <li>*Optional: Enter the labor rate that is currently in system.*</li>
-            <li>Select the options for Radius, Facility Type, and Number of Facilities that you used for searching.</li>
-            <li>Enter the Average Labor Rate output.</li>
-            <li>Click 'My Response'.</li>
-            <li>It will show a dialog box containing the appropriate response or question.</li>
-            <li>Use the 'Yes' and 'No' buttons to input their response back.</li>
-            <li>*Optional: If they make an offer, enter it into the box and click 'Accept'.*</li>
-            <li>When completed, click 'Exit'.</li>
-            <li>The completed note is already in your clipboard ready to be pasted.</li>
-            <li>Use reset to clear the form and start over if needed.</li>
-        </ul>
-    </div>
-
     <!-- CH Statement Questions -->
 
     <div id="statement" class="state_back noDisp">
@@ -2689,28 +2630,30 @@ TIME:&nbsp;&nbsp;</textarea>
         <button id="helpNext" class="helpBtn">Next</button>
         <button id="helpPrev" class="helpBtn" disabled>Previous</button>
     </div>
-    <script src="JavaScript/splash.js?v=20241111022416"></script>
-    <script src="JavaScript/snipDiv.js?v=20241111022416"></script>
-    <script src="JavaScript/keyEvents.js?v=20241111022416"></script>
-    <script src="JavaScript/originalAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/authorizationAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/transAuthAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/CHStatement.js?v=20241111022416"></script>
-    <script src="JavaScript/PTXfer.js?v=20241111022416"></script>
-    <script src="JavaScript/statusNote.js?v=20241111022416"></script>
-    <script src="JavaScript/ChangeAppearance.js?v=20241111022416"></script>
-    <script src="JavaScript/diagCenter.js?v=20241111022416"></script>
-    <script src="JavaScript/jsonParse.js?v=20241111022416"></script>
-    <script src="JavaScript/ContextMenu.js?v=20241111022416"></script>
-    <script src="JavaScript/laborRate.js?v=20241111022416"></script>
-    <script src="JavaScript/trackerScript.js?v=20241111022416"></script>
-    <script src="JavaScript/powertrainAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/NewButton.js?v=20241111022416"></script>
-    <script src="JavaScript/authGuideAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/navAndSopMenuAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/qAndAAS.js?v=20241111022416"></script>
-    <script src="JavaScript/toggle.js?v=20241111022416"></script>
-    <script src="Arrow/eventListeners.js?v=20241111022416"></script>
-    <script src="Arrow/testDriveLive.js?v=20241111022416"></script>
+    <script src="JavaScript/splash.js?v=20241119002710"></script>
+    <script src="JavaScript/snipDiv.js?v=20241119002710"></script>
+    <script src="JavaScript/keyEvents.js?v=20241119002710"></script>
+    <script src="JavaScript/originalAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/authorizationAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/transAuthAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/CHStatement.js?v=20241119002710"></script>
+    <script src="JavaScript/PTXfer.js?v=20241119002710"></script>
+    <script src="JavaScript/statusNote.js?v=20241119002710"></script>
+    <script src="JavaScript/ChangeAppearance.js?v=20241119002710"></script>
+    <script src="JavaScript/diagCenter.js?v=20241119002710"></script>
+    <script src="JavaScript/jsonParse.js?v=20241119002710"></script>
+    <script src="JavaScript/ContextMenu.js?v=20241119002710"></script>
+    <script src="JavaScript/trackerScript.js?v=20241119002710"></script>
+    <script src="JavaScript/powertrainAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/NewButton.js?v=20241119002710"></script>
+    <script src="JavaScript/authGuideAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/navAndSopMenuAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/qAndAAS.js?v=20241119002710"></script>
+    <script src="JavaScript/toggle.js?v=20241119002710"></script>
+    <script src="Arrow/eventListeners.js?v=20241119002710"></script>
+    <script src="Arrow/testDriveLive.js?v=20241119002710"></script>
+    <script src="Arrow/metrics.js?v=20241119002710"></script>
+    <script src="Arrow/buttonTracker.js?v=20241119002710"></script>
+    <script src="Arrow/dataDownload.js?v=20241119002710"></script>
 </body>
 </html>

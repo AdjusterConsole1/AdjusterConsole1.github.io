@@ -25,7 +25,7 @@ function validateAccess(event) {
 	accessForm.classList.add("hidden");
 }
 
-document.getElementById("accessFormFields").addEventListener("submit", validateAccess);
+document.getElementById("accessFormFields")?.addEventListener("submit", validateAccess);
 
 async function sendDataToCloudflare(data) {
     try {
@@ -39,7 +39,6 @@ async function sendDataToCloudflare(data) {
 
         if (response.ok) {
             document.getElementById("accessForm").style.display = "none";
-            document.getElementById("mainContent").style.display = "block";
             return;
         } else {
             console.error("There was an issue submitting your data. Please try again.");
