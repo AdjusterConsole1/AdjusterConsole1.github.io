@@ -1,15 +1,23 @@
 let buttonTracker;
+let root;
 const today = daysSinceEpoch();
 localStorage.setItem("currentDay", today);
 document.addEventListener('DOMContentLoaded', initializeButtonTrackerData);
 
 function initializeButtonTrackerData() {
 	const storedTracker = localStorage.getItem("buttonTracker");
+	const storedRoot = localStorage.getItem("root");
 	if (!storedTracker) {
 		buttonTracker = newTracker();
 		localStorage.removeItem("currentDay");
 	} else {
 		buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
+	}
+	if (!storedRoot) {
+		root = newRoot();
+		initializeRoot();
+	} else {
+		root = JSON.parse(localStorage.getItem("root"));
 	}
 	let savedDay = localStorage.getItem("currentDay");
 	const todayString = today.toString();
@@ -27,15 +35,29 @@ function initializeButtonTrackerData() {
 
 function savebuttonTracker() {
 	localStorage.setItem('buttonTracker', JSON.stringify(buttonTracker));
-	filterAndDisplayData();
+	localStorage.setItem('root', JSON.stringify(root));
+	if (document.getElementById('dashContainer').classList.contains('show')) filterAndDisplayData();
+}
+
+function initializeRoot() {
+	root[today] = {
+		totalClicks: 0,
+		allTimeSaved: 0,
+		totalWords: 0,
+		notesOutput: 0
+	};
 }
 
 function trackerDay(button) {
-	button.data[today] = {
-		count: 0,
-		cancelled: 0,
-		times: []
-	};
+	if (button.type !== "none") {
+		button.data[today] = {
+			count: 0,
+			cancelled: 0,
+			words: 0,
+			totalTimeSaved: 0,
+			times: []
+		};
+	}
 }
 
 function daysSinceEpoch() {
@@ -58,12 +80,14 @@ function validate(buttonId) {
 	return button;
 }
 
-function addCount(button) {
+function addCount(buttonId) {
+	const button = validate(buttonId);
 	button.data[today].count += 1;
 	savebuttonTracker();
 }
 
-function startTimer(button) {
+function startTimer(buttonId) {
+	const button = validate(buttonId);
 	button.timeStarted = Date.now();
 	if (button.description.includes("pdf00")) {
 		localStorage.setItem("pdfId", button.description);
@@ -74,23 +98,25 @@ function startTimer(button) {
 function stopTimer(buttonId) {
 	const button = validate(buttonId);
 	if (!button) return;
-	const startTime = button.timeStarted; //retrieve start time
-	if (!startTime || isNaN(startTime)) { //if it's null or not a number
-		return; //quit
+	const startTime = button.timeStarted;
+	if (!startTime || isNaN(startTime)) {
+		return;
 	}
-	const elapsedRaw = (Date.now() - startTime) / 1000; // Convert to seconds
-	const elapsed = elapsedRaw.toFixed(2); // Format to 2 decimal places
-	button.data[today].times.push(elapsed); //store in todays times array
-	button.timeStarted = null; //reset time start
+	const elapsedRaw = (Date.now() - startTime) / 1000;
+	const elapsed = elapsedRaw.toFixed(2);
+	button.data[today].times.push(elapsed);
+	button.timeStarted = null;
 	savebuttonTracker();
 }
 
 function cancelTimer(buttonId) {
 	const button = validate(buttonId);
 	if (!button) return;
-	button.timeStarted = null; //reset time start
+	button.timeStarted = null;
 	button.data[today].cancelled += 1;
-	button.data[today].count -= 1;
+	if (button.data[today].count > 0) {
+		button.data[today].count -= 1;
+	}
 	savebuttonTracker();
 }
 
@@ -101,7 +127,6 @@ function handlePdfs() {
 }
 
 document.addEventListener('DOMContentLoaded', initButtonListeners);
-
 function initButtonListeners() {
 	document.addEventListener("click", (event) => {
 		const buttonId = event.target.id;
@@ -113,7 +138,7 @@ function initButtonListeners() {
 
 function processClicks(buttonId) {
 	const button = validate(buttonId);
-	if (!button)
+	if (!button || ["tools", "SOPs", "tutorials"].includes(buttonId) || ["policy", "diag", "pdfsop"].includes(button.type))
 		return;
 	const remapId = button.remap;
 	if (remapId) { 
@@ -122,7 +147,7 @@ function processClicks(buttonId) {
 	}
 	const targetId = button.target;
 	if (targetId) {
-		addCount(button);
+		addCount(buttonId);
 		cancelTimer(targetId);
 		return;
 	}
@@ -133,18 +158,19 @@ function processClicks(buttonId) {
 	}
 	const finishId = button.finish;
 	if (finishId) {
-		addCount(button);
+		addCount(finishId);
 		stopTimer(finishId);
 		return;
 	}
 	if (button.isTimed) {
 		const timerValue = button.timeStarted;
 		if (timerValue) {
-			cancelTimer(button);
+			cancelTimer(buttonId);
 		}
-		startTimer(button);
+		startTimer(buttonId);
+		return;
 	}
-	addCount(button);
+	addCount(buttonId);
 }
 
 document.getElementById('metricMenu')?.addEventListener('click', function () {
@@ -158,296 +184,17 @@ document.getElementById('closeDash')?.addEventListener('click', function () {
     document.getElementById("endDate").value = '';
 });
 
-function filterAndDisplayData() {
-    const typeFilter = document.getElementById("typeFilter").value;
-    const dateFilter = document.getElementById("dateFilter").value;
-    let dateRange = [];
-    const today = parseInt(daysSinceEpoch());
-    if (dateFilter === "today") {
-        dateRange = [today];
-    } else if (dateFilter === "last7Days") {
-        for (let i = 0; i < 7; i++) {
-            dateRange.push(today - i);
-        }
-    } else if (dateFilter === "lastMonth") {
-        for (let i = 0; i < 30; i++) {
-            dateRange.push(today - i);
-        }
-    } else if (dateFilter === "custom") {
-        const startDateInput = document.getElementById("startDate").value;
-        const endDateInput = document.getElementById("endDate").value;
-        const startDate = new Date(startDateInput);
-        const endDate = new Date(endDateInput);
-
-        if (isNaN(startDate) || isNaN(endDate)) {
-            return;
-        }
-        const startEpoch = Math.floor(startDate.getTime() / (24 * 60 * 60 * 1000));
-        const endEpoch = Math.floor(endDate.getTime() / (24 * 60 * 60 * 1000));
-        if (startEpoch > endEpoch) {
-            alert("Start date must be earlier than or equal to end date.");
-            return;
-        }
-        for (let i = startEpoch; i <= endEpoch; i++) {
-            dateRange.push(i);
-        }
-    }
-    const tableBody = document.getElementById("resultsTable").querySelector("tbody");
-    tableBody.innerHTML = "";
-	
-    for (const buttonKey in buttonTracker) {
-        const button = buttonTracker[buttonKey];
-		
-        if (typeFilter !== "all") {
-            if (typeFilter === "timed" && !button.isTimed) continue;
-            if (typeFilter !== "timed" && button.type !== typeFilter) continue;
-        }
-		
-        const aggregated = {
-            count: 0,
-            cancelled: 0,
-            times: []
-        };
-		
-        dateRange.forEach(day => {
-            const dayStr = day.toString();
-            const dataForDay = button.data[dayStr];
-
-            if (dataForDay) {
-                aggregated.count += dataForDay.count;
-                aggregated.cancelled += dataForDay.cancelled;
-                aggregated.times = aggregated.times.concat(dataForDay.times);
-            }
-        });
-		aggregated.times = aggregated.times.map(item => {
-			let num = Number(item);
-			return isNaN(num) ? 0 : num;
-			});
-        let averageTime = aggregated.times.length
-            ? (aggregated.times.reduce((sum, time) => sum + time, 0) / aggregated.times.length).toFixed(2)
-            : "N/A";
-        let fastestTime = aggregated.times.length
-            ? Math.min(...aggregated.times).toFixed(2)
-            : "N/A";
-        let slowestTime = aggregated.times.length
-            ? Math.max(...aggregated.times).toFixed(2)
-            : "N/A";
-        const row = document.createElement("tr");
-        row.dataset.buttonKey = buttonKey; // Assign buttonKey for click events
-        row.innerHTML = `
-            <td>${button.description}</td>
-            <td>${button.type}</td>
-            <td>${aggregated.count}</td>
-            <td>${aggregated.cancelled}</td>
-            <td>${averageTime}</td>
-            <td>${fastestTime}</td>
-            <td>${slowestTime}</td>
-        `;
-        tableBody.appendChild(row);
-    }
-}
-
-function calculateAggregatedMetrics(button, dateRange) {
-    if (!Array.isArray(dateRange)) {
-        console.error("Invalid dateRange passed to calculateAggregatedMetrics:", dateRange);
-        return {
-            totalClicks: 0,
-            avgClicks: "N/A",
-            totalTime: "N/A",
-            avgTotalTime: "N/A",
-            fastestTime: "N/A",
-            slowestTime: "N/A",
-            avgTime: "N/A",
-        };
-    }
-
-    const metrics = {
-        totalClicks: 0,
-        times: [],
-        daysWithClicks: 0,
-        daysWithTimes: 0,
-    };
-
-    dateRange.forEach(day => {
-        const dayStr = day.toString();
-        const dataForDay = button.data[dayStr];
-
-        if (dataForDay) {
-			dataForDay.times.forEach((item, index, arr) => {
-				arr[index] = Number(item);
-			});
-						
-            metrics.totalClicks += dataForDay.count;
-
-            if (dataForDay.count > 0) {
-                metrics.daysWithClicks++;
-            }
-
-            const totalTimeForDay = dataForDay.times.reduce((sum, time) => sum + time, 0);
-            if (totalTimeForDay > 0) {
-                metrics.daysWithTimes++;
-            }
-
-            metrics.times.push(...dataForDay.times);
-        }
-    });
-
-    const totalTime = metrics.times.reduce((sum, time) => sum + time, 0);
-    const avgClicks = metrics.daysWithClicks > 0
-        ? (metrics.totalClicks / metrics.daysWithClicks).toFixed(2)
-        : "N/A";
-    const avgTotalTime = metrics.daysWithTimes > 0
-        ? (totalTime / metrics.daysWithTimes).toFixed(2)
-        : "N/A";
-    const fastestTime = metrics.times.length
-        ? Math.min(...metrics.times).toFixed(2)
-        : "N/A";
-    const slowestTime = metrics.times.length
-        ? Math.max(...metrics.times).toFixed(2)
-        : "N/A";
-    const avgTime = metrics.times.length
-        ? (totalTime / metrics.times.length).toFixed(2)
-        : "N/A";
-
-    return {
-        totalClicks: metrics.totalClicks,
-        avgClicks,
-        totalTime: totalTime.toFixed(2),
-        avgTotalTime,
-        fastestTime,
-        slowestTime,
-        avgTime,
-    };
-}
-
-
-document.getElementById("resultsTable")?.addEventListener("click", (event) => {
-    const row = event.target.closest("tr");
-    if (!row || !row.dataset.buttonKey) return;
-
-    const buttonKey = row.dataset.buttonKey;
-    const button = buttonTracker[buttonKey];
-
-    const detailContainer = document.getElementById("detailContainer");
-    const detailsContent = document.getElementById("detailsContent");
-	const contentFooter = document.getElementById("contentFooter");
-
-    if (button) {
-        const today = parseInt(daysSinceEpoch());
-        const dateRanges = {
-            "7": Array.from({ length: 7 }, (_, i) => today - i),
-            "30": Array.from({ length: 30 }, (_, i) => today - i),
-            "90": Array.from({ length: 90 }, (_, i) => today - i),
-        };
-
-        const metrics = {
-            totalClicks: {},
-            avgClicks: {},
-            totalTime: {},
-            avgTotalTime: {},
-            fastestTime: {},
-            slowestTime: {},
-            avgTime: {},
-        };
-
-        // Calculate metrics for all date ranges
-        for (const rangeKey in dateRanges) {
-            const rangeMetrics = calculateAggregatedMetrics(button, dateRanges[rangeKey]);
-            metrics.totalClicks[rangeKey] = rangeMetrics.totalClicks;
-            metrics.avgClicks[rangeKey] = rangeMetrics.avgClicks;
-
-            if (button.isTimed) {
-                metrics.totalTime[rangeKey] = rangeMetrics.totalTime;
-                metrics.avgTotalTime[rangeKey] = rangeMetrics.avgTotalTime;
-            }
-
-            if (button.core) {
-                metrics.fastestTime[rangeKey] = rangeMetrics.fastestTime;
-                metrics.slowestTime[rangeKey] = rangeMetrics.slowestTime;
-                metrics.avgTime[rangeKey] = rangeMetrics.avgTime;
-            }
-        }
-
-        // Build the details content
-        let content = `
-			<div class="metrics_details">
-				<p>Total Clicks:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.totalClicks["7"]}</li>
-					<li>Past 30 Days: ${metrics.totalClicks["30"]}</li>
-					<li>Past 90 Days: ${metrics.totalClicks["90"]}</li>
-				</ul>
-				<p>Average Clicks Per Day:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.avgClicks["7"]}</li>
-					<li>Past 30 Days: ${metrics.avgClicks["30"]}</li>
-					<li>Past 90 Days: ${metrics.avgClicks["90"]}</li>
-				</ul>
-			</div>
-        `;
-
-        if (button.isTimed) {
-            content += `
-			<div class="metrics_details">
-				<p>Total Time Used:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.totalTime["7"]}s</li>
-					<li>Past 30 Days: ${metrics.totalTime["30"]}s</li>
-					<li>Past 90 Days: ${metrics.totalTime["90"]}s</li>
-				</ul>
-				<p>Average Time Per Day Used:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.avgTotalTime["7"]}s</li>
-					<li>Past 30 Days: ${metrics.avgTotalTime["30"]}s</li>
-					<li>Past 90 Days: ${metrics.avgTotalTime["90"]}s</li>
-				</ul>
-			</div>
-            `;
-        }
-
-        if (button.core) {
-            content += `
-			<div class="metrics_details">
-				<p>Fastest Time:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.fastestTime["7"]}s</li>
-					<li>Past 30 Days: ${metrics.fastestTime["30"]}s</li>
-					<li>Past 90 Days: ${metrics.fastestTime["90"]}s</li>
-				</ul>
-				<p>Slowest Time:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.slowestTime["7"]}s</li>
-					<li>Past 30 Days: ${metrics.slowestTime["30"]}s</li>
-					<li>Past 90 Days: ${metrics.slowestTime["90"]}s</li>
-				</ul>
-				<p>Average Time:</p>
-				<ul>
-					<li>Past 7 Days: ${metrics.avgTime["7"]}s</li>
-					<li>Past 30 Days: ${metrics.avgTime["30"]}s</li>
-					<li>Past 90 Days: ${metrics.avgTime["90"]}s</li>
-				</ul>
-			</div>
-            `;
-        }
-
-		
-        detailsContent.innerHTML = content;
-        detailContainer.classList.remove("hidden");
-		document.getElementById("mainDash").classList.add("share");
-		contentFooter.innerHTML = `<h3>Details for ${button.description}</h3>`;
-    }
-});
-
 function resetMetricDisplay() {
 	document.getElementById("detailsContent").innerHTML = '';
-	document.getElementById("contentFooter").innerHTML = '';
 	document.getElementById("detailContainer").classList.add("hidden");
 	document.getElementById("mainDash").classList.remove("share");
 }
 
+document.getElementById("endDate")?.addEventListener("change", filterAndDisplayData);
+document.getElementById("startDate")?.addEventListener("change", filterAndDisplayData);
 document.getElementById("closeMetricDetail")?.addEventListener("click", resetMetricDisplay);
-
 document.getElementById("typeFilter")?.addEventListener("change", filterAndDisplayData);
+
 document.getElementById("dateFilter")?.addEventListener("change", () => {
 	const customDateRange = document.getElementById("customDateRange");
 	if (document.getElementById("dateFilter").value === "custom") {
@@ -458,9 +205,523 @@ document.getElementById("dateFilter")?.addEventListener("change", () => {
 	}
 });
 
-document.getElementById("endDate")?.addEventListener("change", filterAndDisplayData);
+function resetBodyDisplay() {
+	document.getElementById("basicMapBody").innerHTML = '';
+	document.getElementById("timeMapBody").innerHTML = '';
+	document.getElementById("complexMapBody").innerHTML = '';
+	document.getElementById("basicMapTable").style.display = 'none';
+	document.getElementById("timeMapTable").style.display = 'none';
+	document.getElementById("complexMapTable").style.display = 'none';
+}
 
-document.getElementById("startDate")?.addEventListener("change", filterAndDisplayData);
+function determineOutputTime(secs) {
+	let seconds = Number(secs);
+    if (seconds < 0 || isNaN(seconds)) {
+		seconds = 0;
+    }
+    const hours = Math.floor(seconds / 3600) || 0;
+    const minutes = Math.floor((seconds % 3600) / 60) || 0;
+    const remainingSeconds = Math.floor(seconds % 60) || 0;
+	let formattedTime;
+	if (hours > 0) {
+		if (minutes > 0) {
+			if (remainingSeconds > 0) {
+				formattedTime = `${hours} hours\r${minutes} mins\r${remainingSeconds} secs`;
+			} else {
+				formattedTime = `\r${hours} hours\r${minutes} mins\r`;
+			}
+		} else {
+			if (remainingSeconds > 0) {
+				formattedTime = `\r${hours} hours\r${remainingSeconds} secs`;
+			} else {
+				formattedTime = `${hours} hours`;
+			}
+		}
+	} else {
+		if (minutes > 0) {
+			if (remainingSeconds > 0) {
+				formattedTime = `${minutes} mins\r${remainingSeconds} secs`;
+			} else {
+				formattedTime = `${minutes} mins`;
+			}
+		} else {
+			formattedTime = `${remainingSeconds} secs`;
+		}
+	}
+	return formattedTime;
+}
+	
+function filterAndDisplayData() {
+	resetBodyDisplay();
+	const dateRange = getDateRange();
+	const filteredButtons = filterButtons();
+	const sortedMap = getSortedButtons(filteredButtons);
+	outputSelection(sortedMap);
+}
+
+function getDateRange() {
+    let dateRange = [];
+    const today = parseInt(daysSinceEpoch());
+	const dateFilter = document.getElementById("dateFilter").value;
+    switch (dateFilter) {
+        case "today":
+            dateRange = [today];
+            break;
+        case "last7Days":
+            for (let i = 0; i < 7; i++) {
+                dateRange.push(today - i);
+            }
+            break;
+        case "lastMonth":
+            for (let i = 0; i < 30; i++) {
+                dateRange.push(today - i);
+            }
+            break;
+        case "custom": {
+			const startDateInput = document.getElementById("startDate").value;
+			const endDateInput = document.getElementById("endDate").value;
+			const startDate = new Date(startDateInput);
+			const endDate = new Date(endDateInput);
+            if (isNaN(start) || isNaN(end)) {
+                console.error("Invalid start or end date.");
+                return null;
+            }
+            const startEpoch = Math.floor(start.getTime() / (24 * 60 * 60 * 1000));
+            const endEpoch = Math.floor(end.getTime() / (24 * 60 * 60 * 1000));
+            if (startEpoch > endEpoch) {
+                console.error("Start date must be earlier than or equal to end date.");
+                return null;
+            }
+            for (let i = startEpoch; i <= endEpoch; i++) {
+                dateRange.push(i);
+            }
+            break;
+        }
+        default:
+            console.error("Invalid date filter provided.");
+            return null;
+    }
+    return dateRange;
+}
+
+function filterButtons() {
+    const buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
+    if (!buttonTracker) {
+        console.error("buttonTracker not found in localStorage.");
+        return null;
+    }
+    const selectedFilter = document.getElementById('typeFilter').value;
+    const tempTracker = {};
+    const filterGroups = {
+        basic: ["function", "customization", "menu", "info"],
+        timed: ["tool", "diag", "complex", "policy", "pdfsop"],
+        notes: ["simple", "complex"],
+        all: Object.keys(buttonTracker),
+    };
+    for (const buttonId in buttonTracker) {
+        const button = buttonTracker[buttonId];
+        if (!button.type) continue;
+		if (["finish", "cancel", "none"].includes(button.type)) continue;
+        if (selectedFilter === "all" || (filterGroups[selectedFilter] && filterGroups[selectedFilter].includes(button.type)) || button.type === selectedFilter) {
+            tempTracker[buttonId] = button;
+        }
+    }
+    return tempTracker;
+}
+
+function getSortedButtons(inputTracker) {
+    if (!inputTracker || typeof inputTracker !== "object") {
+        console.error("Invalid inputTracker provided. It must be a valid object.");
+        return null;
+    }
+    const trackerCopy = JSON.parse(JSON.stringify(inputTracker));
+    const typeOrder = [
+        "complex", "simple", "tool", "info", 
+        "policy", "diag", "pdfsop", "functions", "customization", "menu"
+    ];
+    const typeBuckets = {
+        complex: [],
+        simple: [],
+        tool: [],
+        info: [],
+        policy: [],
+        diag: [],
+		pdfsop: [],
+        functions: [],
+        customization: [],
+        menu: []
+    };
+    Object.keys(trackerCopy).forEach(key => {
+        const button = trackerCopy[key];
+        if (typeOrder.includes(button.type)) {
+            typeBuckets[button.type].push({ key, button });
+        }
+    });
+    const sortedMap = new Map();
+    typeOrder.forEach(type => {
+        if (typeBuckets[type].length > 0) {
+            typeBuckets[type].forEach(({ key, button }) => {
+                sortedMap.set(key, button);
+            });
+        }
+    });
+    return sortedMap;
+}
+
+function outputSelection(sortedMap) {
+    const basicMap = new Map();
+    const timeMap = new Map();
+	const complexMap = new Map();
+    for (const [key, button] of sortedMap.entries()) {
+        if (button.isTimed && button.type !== "complex") {
+            timeMap.set(key, button);
+        } else if (["functions", "customization", "menu", "info"].includes(button.type)) {
+            basicMap.set(key, button);
+        } else if (["simple", "complex"].includes(button.type)) {
+            complexMap.set(key, button);
+        }
+    }
+    if (basicMap.size > 0) basicMapOutput(basicMap);
+    if (timeMap.size > 0) timeMapOutput(timeMap);
+	if (complexMap.size > 0) complexMapOutput(complexMap);
+}
+
+function wordParseCount(text, buttonId) {
+    const words = text.split(/\s+/).filter(word => word.trim().length > 0);
+    let wordCount = 0;
+    words.forEach(word => {
+        const charPerWord = word.length;
+        wordCount++;
+        if (charPerWord > 5) {
+            wordCount++;
+        }
+    });
+    wordCount += Math.ceil(wordCount * 0.05);
+    const estimatedTime = ((wordCount / 35) * 60).toFixed(2);
+    addWordMetrics(wordCount, buttonId, estimatedTime);
+	savebuttonTracker();
+}
+
+function addWordMetrics(wordCount, buttonId, estimatedTime) {
+    const button = validate(buttonId);
+    const today = daysSinceEpoch();
+    if (!root[today]) {
+        initializeRoot();
+    }
+    let timeSaved;
+    if (button.isTimed) {
+        const timesArray = button.data[today]?.times || [];
+        const lastSaved = parseFloat(timesArray[timesArray.length - 1]) || 0;
+        timeSaved = parseFloat(estimatedTime) - lastSaved;
+    } else {
+        timeSaved = parseFloat(estimatedTime);
+    }
+    const totalTimeSaved = parseFloat(button.data[today]?.totalTimeSaved || 0);
+    const currentWords = parseFloat(button.data[today]?.words || 0);
+    button.data[today].totalTimeSaved = parseFloat((totalTimeSaved + timeSaved).toFixed(2));
+    button.data[today].words = parseFloat((currentWords + wordCount).toFixed(2));
+    const allTimeSaved = parseFloat(root[today]?.allTimeSaved || 0);
+    const totalWords = parseFloat(root[today]?.totalWords || 0);
+    const notesOutput = parseInt(root[today]?.notesOutput || 0, 10);
+    root[today].allTimeSaved = parseFloat((allTimeSaved + timeSaved).toFixed(2));
+    root[today].notesOutput = notesOutput + 1;
+    root[today].totalWords = Math.round(totalWords + wordCount);
+}
+
+function basicMapOutput(basicMap, range = null) {
+    const dateRange = range || getDateRange();
+    const basicMapTable = document.getElementById("basicMapTable");
+    basicMapTable.style.display = "table";
+    const basicMapBody = document.getElementById("basicMapBody");
+    basicMapBody.innerHTML = "";
+    for (const [key, button] of basicMap.entries()) {
+        const {
+			totalClicks, 
+			averageClicksPerDay,
+		} = computeMetrics(button, dateRange);
+        const row = document.createElement("tr");
+        row.classList.add("metricRow");
+        row.dataset.key = key;
+        row.innerHTML = `
+            <td>${button.description}</td>
+            <td>${button.type}</td>
+            <td>${totalClicks}</td>
+            <td>${averageClicksPerDay}</td>`;
+        basicMapBody.appendChild(row);
+    }
+}
+
+function timeMapOutput(timeMap, range = null) {
+    const dateRange = range || getDateRange();
+    const timeMapTable = document.getElementById("timeMapTable");
+    timeMapTable.style.display = "table";
+    const timeMapBody = document.getElementById("timeMapBody");
+    timeMapBody.innerHTML = "";
+    for (const [key, button] of timeMap.entries()) {
+		const {
+			totalClicks,
+			averageClicksPerDay,
+			averageTime,
+		} = computeMetrics(button, dateRange);
+
+		const row = document.createElement("tr");
+		row.classList.add("metricRow");
+		row.dataset.key = key;
+		row.innerHTML = `
+			<td>${button.description}</td>
+			<td>${button.type}</td>
+			<td>${totalClicks}</td>
+			<td>${averageClicksPerDay}</td>
+			<td>${averageTime}</td>`;
+		timeMapBody.appendChild(row);
+	}
+}
+
+function complexMapOutput(complexMap, range = null) {
+    const dateRange = range || getDateRange();
+    const complexMapTable = document.getElementById("complexMapTable");
+    complexMapTable.style.display = "table";
+    const complexMapBody = document.getElementById("complexMapBody");
+    complexMapBody.innerHTML = "";
+    for (const [key, button] of complexMap.entries()) {
+        const {
+            totalClicks,
+			averageClicksPerDay,
+            totalWordsOutput,
+            totalTimeSaved,
+            averageTimeSavedPerClick,
+        } = computeMetrics(button, dateRange);
+        const row = document.createElement("tr");
+        row.classList.add("metricRow");
+        row.dataset.key = key;
+        row.innerHTML = `
+            <td>${button.description}</td>
+            <td>${button.type}</td>
+            <td>${totalClicks}</td>
+			<td>${averageClicksPerDay}</td>
+            <td>${totalWordsOutput}</td>
+			<td>${totalTimeSaved}</td>
+            <td>${averageTimeSavedPerClick}</td>`;
+        complexMapBody.appendChild(row);
+    }
+}
+
+function computeMetrics(button, dateRange) {
+    let totalClicks = 0;
+    let totalWordsOutput = 0;
+    let totalTimeSaved = 0;
+	let totalTimeUsed = 0;
+    let totalCancelled = 0;
+    let times = [];
+    let mostClicksSingle = 0;
+    const validDays = dateRange.filter(date => {
+        const dataForDate = button.data[date.toString()];
+        return dataForDate && dataForDate.count > 0;
+    });
+    dateRange.forEach(date => {
+        const dataForDate = button.data[date.toString()];
+        if (dataForDate) {
+            const clicks = dataForDate.count || 0;
+            const words = dataForDate.words || 0;
+            const timeSaved = dataForDate.totalTimeSaved || 0;
+            const cancelled = dataForDate.cancelled || 0;
+            totalClicks += clicks;
+            totalWordsOutput += words;
+            totalTimeSaved += timeSaved;
+            totalCancelled += cancelled;
+            if (clicks > mostClicksSingle) {
+                mostClicksSingle = clicks;
+            }
+            if (dataForDate.times) {
+                times = times.concat(dataForDate.times.map(Number));
+            }
+        }
+    });
+    const averageClicksPerDay = validDays.length > 0
+        ? (totalClicks / validDays.length).toFixed(0)
+        : "N/A";
+    const averageWordsOutput = totalClicks > 0
+        ? (totalWordsOutput / totalClicks).toFixed(2)
+        : "N/A";
+    totalTimeUsed = times.length
+        ? times.reduce((sum, time) => sum + time, 0)
+        : 0;
+    const wordsPerMinNum = totalTimeUsed > 0
+        ? (totalWordsOutput / (totalTimeUsed / 60)).toFixed(2)
+        : "N/A";
+	const wordsPerMin = `${wordsPerMinNum} wpm`;
+    const averageTimeSavedPerClickTemp = totalClicks > 0
+        ? (totalTimeSaved / totalClicks).toFixed(2)
+        : "N/A";
+    const averageTimeTemp = times.length
+        ? (times.reduce((sum, time) => sum + time, 0) / times.length).toFixed(2)
+        : "N/A";
+    const fastestTimeTemp = times.length ? Math.min(...times).toFixed(2) : "N/A";
+    const slowestTimeTemp = times.length ? Math.max(...times).toFixed(2) : "N/A";
+	
+	totalTimeUsed = determineOutputTime(totalTimeUsed);
+	totalTimeSaved = determineOutputTime(totalTimeSaved);
+	
+	const averageTimeSavedPerClick = determineOutputTime(averageTimeSavedPerClickTemp);
+	const averageTime = determineOutputTime(averageTimeTemp);
+	const fastestTime = determineOutputTime(fastestTimeTemp);
+	const slowestTime = determineOutputTime(slowestTimeTemp);
+    return {
+        totalClicks,
+        averageClicksPerDay,
+        mostClicksSingle,
+        totalCancelled,
+        totalWordsOutput,
+        averageWordsOutput,
+        totalTimeUsed,
+        wordsPerMin,
+        totalTimeSaved,
+        averageTimeSavedPerClick,
+        averageTime,
+        fastestTime,
+        slowestTime
+    };
+}
+
+document.getElementById("closeMetricDetail")?.addEventListener("click", function () {
+	document.getElementById("mainDash").classList.remove("share");
+	document.getElementById("detailContainer").classList.add("hidden");
+});
+
+document.getElementById("basicMapTable")?.addEventListener("click", handleRowClick);
+document.getElementById("timeMapTable")?.addEventListener("click", handleRowClick);
+document.getElementById("complexMapTable")?.addEventListener("click", handleRowClick);
+
+function handleRowClick(event) {
+    const row = event.target.closest("tr");
+    if (!row || !row.dataset.key) return;
+    const key = row.dataset.key;
+    const button = buttonTracker[key];
+    if (!button) {
+        return;
+    }
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    let currentFriday = new Date(today);
+    currentFriday.setDate(today.getDate() - ((dayOfWeek + 2) % 7));
+    const dateRanges = [];
+    for (let i = 0; i < 4; i++) {
+        const friday = new Date(currentFriday);
+        const monday = new Date(currentFriday);
+        monday.setDate(friday.getDate() - 4);
+        dateRanges.unshift({
+            start: monday.toISOString().split("T")[0],
+            end: friday.toISOString().split("T")[0],
+        });
+        currentFriday.setDate(currentFriday.getDate() - 7);
+    }
+	const metricsDivRow0 = document.getElementById("metricsDivRow0");
+	metricsDivRow0.innerHTML = `
+		<div class="metricsDivblock">
+			<p>Week Starting</p>
+		</div>
+	`;
+	dateRanges.forEach(range => {
+    const mondayDate = new Date(range.start);
+    const formattedDate = `${(mondayDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}/${mondayDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}/${mondayDate.getFullYear()}`;
+		const div = document.createElement("div");
+		div.classList.add("metricsDivBlock");
+		const p = document.createElement("p");
+		p.textContent = formattedDate;
+		div.appendChild(p);
+		metricsDivRow0.appendChild(div);
+	});
+    const metricsByWeek = dateRanges.map(range => {
+        const startEpoch = Math.floor(new Date(range.start).getTime() / (24 * 60 * 60 * 1000));
+        const endEpoch = Math.floor(new Date(range.end).getTime() / (24 * 60 * 60 * 1000));
+        const dateRange = Array.from(
+            { length: endEpoch - startEpoch + 1 },
+            (_, i) => startEpoch + i
+        );
+        return computeMetrics(button, dateRange);
+    });
+	const metricsDivRowx = document.getElementById("metricsDivRowx");
+	const metricsDivRow1 = document.getElementById("metricsDivRow1");
+    const metricsDivRow2 = document.getElementById("metricsDivRow2");
+    const metricsDivRow3 = document.getElementById("metricsDivRow3");
+    const metricsDivRow4 = document.getElementById("metricsDivRow4");
+
+	metricsDivRowx.innerHTML = `
+		<div class="metricsDivblock" id="block1">
+			<p>Description: ${button.description}</p>
+			<p>Type: ${button.type}</p>
+		</div>
+	`;
+    metricsDivRow1.innerHTML = `
+		<div class="metricsDivblock">
+			<p>Total Clicks</p>
+			<p>Average Clicks/Day</p>
+            <p>Most Clicks/Day</p>
+            <p>Total Cancelled</p>
+		</div>
+	`;
+    metricsDivRow2.innerHTML = `
+		<div class="metricsDivblock">
+			<p>Total Words Output</p>
+            <p>Clicks/Day</p>
+            <p>Words Per Min</p>
+		</div>
+	`;
+    metricsDivRow3.innerHTML = `
+		<div class="metricsDivblock">
+			<p>Total Time Used</p>
+			<p>Total Time Saved</p>
+			<p>Ave Time Saved/Note</p>
+		</div>
+	`;
+    metricsDivRow4.innerHTML = `
+		<div class="metricsDivblock">
+			<p>Least Time</p>
+			<p>Average Time</p>
+			<p>Most Time</p>
+		</div>
+	`;
+    function appendMetricsData(container, dataValues) {
+        const div = document.createElement("div");
+        div.classList.add("metricsDivBlock");
+        dataValues.forEach(value => {
+            const p = document.createElement("p");
+            p.textContent = value !== undefined ? value : "N/A";
+            div.appendChild(p);
+        });
+        container.appendChild(div);
+    }
+    metricsByWeek.forEach(metrics => {
+        appendMetricsData(metricsDivRow1, [
+            metrics.totalClicks,
+            metrics.averageClicksPerDay,
+            metrics.mostClicksSingle,
+            metrics.totalCancelled,
+        ]);
+        appendMetricsData(metricsDivRow2, [
+            metrics.totalWordsOutput,
+            metrics.averageWordsOutput,
+            metrics.wordsPerMin,
+        ]);
+        appendMetricsData(metricsDivRow3, [
+            metrics.totalTimeUsed,
+            metrics.totalTimeSaved,
+            metrics.averageTimeSavedPerClick,
+        ]);
+        appendMetricsData(metricsDivRow4, [
+            metrics.fastestTime,
+            metrics.averageTime,
+            metrics.slowestTime,
+        ]);
+    });
+	document.getElementById("mainDash").classList.add("share");
+	document.getElementById("detailContainer").classList.remove("hidden");
+}
 
 document.getElementById("fakeRecord")?.addEventListener("click", () => {
 	generateTestData();
@@ -484,12 +745,16 @@ function generateTestData(days = 90) {
 			button.data[day] = { 
 				count,
 				cancelled: Math.floor(Math.random() * 4),
-				times: []
+				times: [],
+				totalTimeSaved: 0,
+				words: 0
 			};
 			if (button.isTimed) {
 				for (let i = 0; i < count; i++) {
 					const time = (Math.random() * (15 - 4) + 4).toFixed(2);
 					button.data[day].times.push(parseFloat(time));
+					button.data[day].words += Math.floor(Math.random() * (250 - 50 + 1) + 50);
+					button.data[day].totalTimeSaved += Math.floor(Math.random() * (550 - 300 + 1) + 300);
 				}
 			}
 		}

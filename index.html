@@ -23,19 +23,6 @@
 		<link rel="manifest" href="manifest.webmanifest">
 	</head>
 <body>
-    <div id="accessForm" class="modal">
-        <div class="modal-content">
-            <h2>If you're happy and you know it</h2>
-            <p>Clap your hands.</p>
-            <form id="accessFormFields">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <button id="clapClap" type="submit">Your Hands</button>
-            </form>
-            <p>Clap your hands or Forte Guy rains vengence.</p>
-            <p>I'm just kidding. But you do have to 'clap'</p>
-        </div>
-    </div>
     
     <!-- Metrics Dashboard-->
     
@@ -48,13 +35,18 @@
             <div class="filter-panel">
                 <label for="typeFilter">Filter by Type:</label>
                 <select id="typeFilter">
-                    <option value="timed">Timed</option>
                     <option value="complex">Complex Notes</option>
-                    <option value="tool">Tools</option>
-                    <option value="info">Info and SOPs</option>
                     <option value="simple">Simple Notes</option>
-                    <option value="menu">Menus</option>
+                    <option value="tool">Tools</option>
+                    <option value="info">Info</option>
+                    <option value="policy">Policy</option>
+                    <option value="diag">Diag</option>
+                    <option value="functions">Function</option>
                     <option value="customization">Customization</option>
+                    <option value="menu">Menus</option>
+                    <option value="basic">Basic Group</option>
+                    <option value="timed">Timed Group</option>
+                    <option value="notes">Notes Group</option>
                     <option value="all">All</option>
                 </select>
                 <label for="dateFilter">Date Range:</label>
@@ -72,36 +64,73 @@
                 </div>
             </div>
             <div class="table-container">
-                <table id="resultsTable">
+                <table id="basicMapTable">
                     <thead>
                         <tr>
                             <th>Description</th>
                             <th>Type</th>
-                            <th>Count</th>
-                            <th>Cancelled</th>
-                            <th>Average Time (s)</th>
-                            <th>Fastest Time (s)</th>
-                            <th>Slowest Time (s)</th>
+                            <th>Clicks</th>
+                            <th>Average Clicks/Day</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody id="basicMapBody"></tbody>
+                </table>
+                <table id="timeMapTable">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Clicks</th>
+                            <th>Average Clicks/Day</th>
+                            <th>Average Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timeMapBody"></tbody>
+                </table>
+                <table id="complexMapTable">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Clicks</th>
+                            <th>Average Clicks/Day</th>
+                            <th>Total Words Output</th>
+                            <th>Total Time Saved</th>
+                            <th>Ave Time Saved/Click</th>
+                        </tr>
+                    </thead>
+                    <tbody id="complexMapBody"></tbody>
                 </table>
             </div>
         </div>
         <div id="detailContainer" class="hidden">
             <a href="javascript:void(0)" id="closeMetricDetail">&times;</a>
-            <div id="detailsContent"></div>
-            <div id="contentFooter"></div>
+            <div id="detailsContent">
+                <div class="metricsDivRow" id="metricsDivRowx"></div>
+                <div class="metricsDivRow" id="metricsDivRow0"></div>
+                <div class="metricsDivRow" id="metricsDivRow1"></div>
+                <div class="metricsDivRow" id="metricsDivRow2"></div>
+                <div class="metricsDivRow" id="metricsDivRow3"></div>
+                <div class="metricsDivRow" id="metricsDivRow4"></div>
+            </div>
         </div>
     </div>
+    
+    <!-- Splash Screen -->
+         
     <div id="splashContainer">
-        <img src="./Images/Other/embossedLogo.svg" alt="Embossed Logo" id="splashLogo">
+        <img src="./Images/Other/embossedLogo1.svg" alt="Embossed Logo" id="splashLogo">
     </div>
+    
+    <!-- Claim Review Div  -->
+    
     <button id="closeChartBtn" class="closeChart">X</button>
     <div id="imageContainer">
         <img src="./Images/Other/ClaimsReview.jpg" alt="./imgBackup/Other/ClaimsReview.jpg" class="flowchart" id="flowchartImg">
     </div>
+    
+    <!-- COPYRIGHT -->
+    
     <div id="disclaimer">COPYRIGHT © AdjusterConsole, LLC 2024</div>
     <div id="disclaimer2">
         <p class="top1">COPYRIGHT © AdjusterConsole, LLC 2024 – ALL RIGHTS RESERVED</p>
@@ -181,7 +210,6 @@
         <button id="BtnBuilder" class="astext menu">&#x2666; Toggle On/Off &#x2666;</button>
         <button id="ptcon" class="astext menu">&#x2666; PT Console &#x2666;</button>
         <button id="tutorials" class="astext menu">&#x2666; Help &#x2666;</button>
-		<button id="logOutBtn" class="astext menu">&#x2666; Log Out &#x2666;</button>
         <button id="metricMenu" class="astext menu">&#x2666; Metrics &#x2666;</button>
     </div>
 
@@ -2651,7 +2679,6 @@ TIME:&nbsp;&nbsp;</textarea>
     <script src="JavaScript/qAndAAS.js?v=20241119004704"></script>
     <script src="JavaScript/toggle.js?v=20241119004704"></script>
     <script src="Arrow/eventListeners.js?v=20241119004704"></script>
-    <script src="Arrow/testDriveLive.js?v=20241119004704"></script>
     <script src="Arrow/metrics.js?v=20241119004704"></script>
     <script src="Arrow/buttonTracker.js?v=20241119004704"></script>
     <script src="Arrow/dataDownload.js?v=20241119004704"></script>

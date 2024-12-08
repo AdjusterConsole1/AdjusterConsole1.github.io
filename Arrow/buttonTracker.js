@@ -1,3 +1,6 @@
+function newRoot() {
+	return {};
+}
 function newTracker() {
 	return {
 		PNLCBTN: {
@@ -120,24 +123,6 @@ function newTracker() {
 			type: "simple",
 			data: {}
 		},
-		T81: {
-			description: "record_request_pt",
-			type: "simple",
-			remap: "recR",
-			data: {}
-		},
-		T91: {
-			description: "record_request_noans_pt",
-			type: "simple",
-			remap: "noansR",
-			data: {}
-		},
-		T71: {
-			description: "picture_request_pt",
-			type: "simple",
-			remap: "picR",
-			data: {}
-		},
 		picR: {
 			description: "picture_request",
 			type: "simple",
@@ -165,7 +150,7 @@ function newTracker() {
 		},
 		R2: {
 			description: "copy_textarea2",
-			type: "function",
+			type: "functions",
 			data: {}
 		},
 		R8: {
@@ -225,172 +210,17 @@ function newTracker() {
 		},
 		clearIntake: {
 			description: "clear_intake",
-			type: "function",
+			type: "functions",
 			data: {}
 		},
 		DJKahlid: {
 			description: "add_box_intake",
-			type: "function",
+			type: "functions",
 			data: {}
 		},
 		MTVsNEXT: {
 			description: "next_intake",
-			type: "function",
-			data: {}
-		},
-		statusNote: {
-			description: "status_note_main",
-			type: "complex",
-			core: true,
-			isTimed: true,
-			timeStarted: null,
-			data: {}
-		},
-		submitStat: {
-			description: "submit_stat",
-			type: "finish",
-			finish: "statusNote",
-			data: {}
-		},
-		cancelStat: {
-			description: "cancel_stat",
-			type: "cancel",
-			target: "statusNote",
-			data: {}
-		},
-		newAuthstarter: {
-			description: "auth_note_main",
-			type: "complex",
-			core: true,
-			isTimed: true,
-			timeStarted: null,
-			data: {}
-		},
-		finish_auth: {
-			description: "finish_auth",
-			type: "finish",
-			finish: "newAuthstarter",
-			data: {}
-		},
-		cancel_auth: {
-			description: "cancel_auth",
-			type: "cancel",
-			target: "newAuthstarter",
-			data: {}
-		},
-		T101: {
-			description: "ch_statement_pt",
-			type: "altcomplex",
-			remap: "T2",
-			data: {}
-		},
-		cancelState: {
-			description: "cancel_statement",
-			type: "cancel",
-			target: "T2",
-			data: {}
-		},
-		PAPriceBtn: {
-			description: "price_tool_main",
-			type: "tool",
-			isTimed: true,
-			core: true,
-			timeStarted: null,
-			data: {}
-		},
-		DiagDivBtn: {
-			description: "diag_tool_main",
-			type: "tool",
-			isTimed: true,
-			timeStarted: null,
-			data: {}
-		},
-		exitRcrce2: {
-			description: "diag_tool_exit",
-			type: "finish",
-			finish: "DiagDivBtn",
-			timeStarted: null,
-			data: {}
-		},
-		T1: {
-			description: "pt_transfer_main",
-			type: "complex",
-			isTimed: true,
-			core: true,
-			timeStarted: null,
-			data: {}
-		},
-		cancelPT: {
-			description: "pt_transfer_cancel",
-			type: "cancel",
-			target: "T1",
-			timeStarted: null,
-			data: {}
-		},
-		T2: {
-			description: "ch_statement_main",
-			type: "complex",
-			isTimed: true,
-			core: true,
-			timeStarted: null,
-			data: {}
-		},
-		transAuthBtn: {
-			description: "trans_auth_main",
-			type: "complex",
-			isTimed: true,
-			core: true,
-			timeStarted: null,
-			data: {}
-		},
-		transAuthRoutine: {
-			description: "trans_auth_finish",
-			type: "finish",
-			finish: "transAuthBtn",
-			data: {}
-		},
-		transCancelBtn: {
-			description: "trans_auth_cancel",
-			type: "cancel",
-			target: "transAuthBtn",
-			data: {}
-		},
-		QuickAnsBtn: {
-			description: "quick_ans_main",
-			type: "info",
-			core: true,
-			data: {}
-		},
-		MileDiscrepBtn: {
-			description: "mile_discrep_main",
-			type: "tool",
-			core: true,
-			isTimed: true,
-			timeStarted: null,
-			data: {}
-		},
-		mileagebtn: {
-			description: "mile_discrep_finish",
-			type: "finish",
-			finish: "MileDiscrepBtn",
-			data: {}
-		},
-		exitRec: {
-			description: "exit_tool_policy",
-			type: "function",
-			data: {}
-		},
-		trackerToolBtn: {
-			description: "tracker_tool_main",
-			type: "tool",
-			core: true,
-			isTimed: true,
-			timeStarted: null,
-			data: {}
-		},
-		checkIt: {
-			description: "tracker_generate",
-			type: "function",
+			type: "functions",
 			data: {}
 		},
 		displayItem: {
@@ -458,54 +288,117 @@ function newTracker() {
 			type: "info",
 			data: {}
 		},
-		resetRep: {
-			description: "tracker_reset",
-			type: "function",
+		swap1: {
+			description: "side_nav_access",
+			type: "menu",
 			data: {}
 		},
-		MBIClaimsBtn: {
-			description: "mbi_policy",
-			type: "info",
+		T71: {
+			remap: "picR",
+			type: "none",
 			data: {}
 		},
-		xfer2790Btn: {
-			description: "xfer_policy",
-			type: "info",
+		T81: {
+			remap: "recR",
+			type: "none",
 			data: {}
 		},
-		TeslaBtn: {
-			description: "tesla_policy",
-			type: "info",
+		T91: {
+			remap: "noansR",
+			type: "none",
 			data: {}
 		},
-		DoNotUseBtn: {
-			description: "donotuse_policy",
-			type: "info",
+		T101: {
+			remap: "T2",
+			type: "none",
 			data: {}
 		},
-		IsItPTBtn: {
-			description: "isitpt_policy",
-			type: "info",
+		statusNote: {
+			description: "status_note_main",
+			type: "complex",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		partsResBtn: {
-			description: "parts_res_policy",
-			type: "info",
+		submitStat: {
+			description: "submit_stat",
+			type: "finish",
+			finish: "statusNote",
 			data: {}
 		},
-		DiagnosticBtn: {
-			description: "diagnostic_policy",
-			type: "info",
+		cancelStat: {
+			description: "cancel_stat",
+			type: "cancel",
+			target: "statusNote",
 			data: {}
 		},
-		PANoOrderBtn: {
-			description: "noorder_policy",
-			type: "info",
+		newAuthstarter: {
+			description: "auth_note_main",
+			type: "complex",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		finish_auth: {
+			description: "finish_auth",
+			type: "finish",
+			finish: "newAuthstarter",
+			data: {}
+		},
+		cancel_auth: {
+			description: "cancel_auth",
+			type: "cancel",
+			target: "newAuthstarter",
+			data: {}
+		},
+		transAuthBtn: {
+			description: "trans_auth_main",
+			type: "complex",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		transAuthRoutine: {
+			description: "trans_auth_finish",
+			type: "finish",
+			finish: "transAuthBtn",
+			data: {}
+		},
+		transCancelBtn: {
+			description: "trans_auth_cancel",
+			type: "cancel",
+			target: "transAuthBtn",
+			data: {}
+		},
+		T1: {
+			description: "pt_transfer_main",
+			type: "complex",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		cancelPT: {
+			description: "pt_transfer_cancel",
+			type: "cancel",
+			target: "T1",
+			data: {}
+		},
+		T2: {
+			description: "ch_statement_main",
+			type: "complex",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		cancelState: {
+			description: "cancel_statement",
+			type: "cancel",
+			target: "T2",
 			data: {}
 		},
 		tutorials: {
-			description: "menu_Help",
-			type: "info",
+			description: "tutorial",
+			type: "tool",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
@@ -516,563 +409,687 @@ function newTracker() {
 			finish: "tutorials",
 			data: {}
 		},
-		coolingBtn: {
-			description: "Cooling",
-			type: "info",
+		tools: {
+			description: "tool_center",
+			type: "tool",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},		
+		PAPriceBtn: {
+			description: "price_tool_main",
+			type: "tool",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		turboBtn: {
-			description: "Turbo",
-			type: "info",
+		QuickAnsBtn: {
+			description: "quick_ans_main",
+			type: "tool",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		timingBtn: {
-			description: "Timing",
-			type: "info",
+		MileDiscrepBtn: {
+			description: "mile_discrep_main",
+			type: "tool",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		steeringBtn: {
-			description: "Steering",
-			type: "info",
+		mileagebtn: {
+			description: "mile_discrep_finish",
+			type: "finish",
+			finish: "MileDiscrepBtn",
 			data: {}
 		},
-		suspensionBtn: {
-			description: "Suspension",
-			type: "info",
+		trackerToolBtn: {
+			description: "tracker_tool_main",
+			type: "tool",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		acBtn: {
-			description: "AC",
-			type: "info",
+		checkIt: {
+			description: "tracker_generate",
+			type: "functions",
 			data: {}
 		},
-		electricalBtn: {
-			description: "Electrical",
-			type: "info",
-			data: {}
-		},
-		fuelBtn: {
-			description: "Fuel",
-			type: "info",
-			data: {}
-		},
-		InspReviewsidenav: {
-			description: "inspreview_side_nav",
-			type: "simple",
-			data: {}
-		},
-		InspectionTemplatesidenav: {
-			description: "inspectiontemplate_side_nav",
-			type: "simple",
-			data: {}
-		},
-		Authorizationsidenav: {
-			description: "authorization_side_nav",
-			type: "nav",
-			remap: "newAuthstarter",
-			data: {}
-		},
-		Statussidenav: {
-			description: "status_side_nav",
-			type: "nav",
-			remap: "statusNote",
-			data: {}
-		},
-		Toolssidenav: {
-			description: "tools_side_nav",
-			type: "menu",
-			remap: "tools",
-			data: {}
-		},
-		TrackerToolsidenav: {
-			description: "trackertool_side_nav",
-			type: "nav",
-			remap: "trackerToolBtn",
-			data: {}
-		},
-		PricingGuidesidenav: {
-			description: "pricingguide_side_nav",
-			type: "nav",
-			remap: "PAPriceBtn",
-			data: {}
-		},
-		MileageIssuessidenav: {
-			description: "mileageissues_side_nav",
-			type: "nav",
-			remap: "MileDiscrepBtn",
-			data: {}
-		},
-		QuickAnswerssidenav: {
-			description: "quickanswers_side_nav",
-			type: "nav",
-			remap: "QuickAnsBtn",
-			data: {}
-		},
-		Templatessidenav: {
-			description: "templates_side_nav",
-			type: "nav",
-			data: {}
-		},
-		PTTransfersidenav: {
-			description: "pttransfer_side_nav",
-			type: "nav",
-			remap: "T1",
-			data: {}
-		},
-		CHStatementsidenav: {
-			id: "CHStatementsidenav",
-			description: "chstatement_side_nav",
-			type: "nav",
-			remap: "T2",
-			data: {}
-		},
-		DiagnosticAssistancesidenav: {
-			description: "diagnostic_assistance_side_nav",
-			type: "nav",
-			remap: "DiagDivBtn",
-			data: {}
-		},
-		Coolingsidenav: {
-			description: "cooling_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Turbosidenav: {
-			description: "turbo_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Timingsidenav: {
-			description: "timing_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Steeringsidenav: {
-			description: "steering_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Suspensionsidenav: {
-			description: "suspension_side_nav",
-			type: "nav",
-			data: {}
-		},
-		ACsidenav: {
-			description: "ac_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Electricalsidenav: {
-			description: "electrical_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Fuelsidenav: {
-			description: "fuel_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Policysidenav: {
-			description: "policy_side_nav",
-			type: "nav",
-			data: {}
-		},
-		GL6sidenav: {
-			description: "gl6_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Xfer2024sidenav: {
-			description: "xfer_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Teslasidenav: {
-			description: "tesla_side_nav",
-			type: "nav",
-			data: {}
-		},
-		DoNotUsesidenav: {
-			description: "donotuse_side_nav",
-			type: "nav",
-			data: {}
-		},
-		IsItPT: {
-			description: "isitpt_side_nav",
-			type: "nav",
-			data: {}
-		},
-		PartsReturnssidenav: {
-			description: "partsreturns_side_nav",
-			type: "nav",
-			data: {}
-		},
-		Diagnosticsidenav: {
-			description: "diagnostic_side_nav",
-			type: "nav",
-			data: {}
-		},
-		DoNotOrdersidenav: {
-			description: "donotorder_side_nav",
-			type: "nav",
-			data: {}
-		},
-		T0: {
-			description: "template_menu",
-			type: "menu",
+		resetRep: {
+			description: "tracker_reset",
+			type: "functions",
 			data: {}
 		},
 		SOPs: {
-			description: "policy_center",
-			type: "menu",
+			description: "policy_center_main",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		tools: {
-			description: "tool_center",
-			type: "menu",
+		MBIClaimsBtn: {
+			description: "mbi_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
-		swap1: {
-			description: "side_nav_access",
-			type: "menu",
+		xfer2790Btn: {
+			description: "xfer_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		TeslaBtn: {
+			description: "tesla_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		DoNotUseBtn: {
+			description: "donotuse_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		IsItPTBtn: {
+			description: "isitpt_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		partsResBtn: {
+			description: "parts_res_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		DiagnosticBtn: {
+			description: "diagnostic_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		PANoOrderBtn: {
+			description: "noorder_policy_info",
+			type: "policy",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		exitRec: {
+			description: "exit_tool_policy",
+			type: "finish",
+			finish: "tools",
+			data: {}
+		},
+		DiagDivBtn: {
+			description: "diag_tool_main",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		exitRcrce2: {
+			description: "diag_tool_exit",
+			type: "finish",
+			finish: "DiagDivBtn",
+			data: {}
+		},
+		coolingBtn: {
+			description: "Cooling_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		turboBtn: {
+			description: "Turbo_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		timingBtn: {
+			description: "Timing_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		steeringBtn: {
+			description: "Steering_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		suspensionBtn: {
+			description: "Suspension_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		acBtn: {
+			description: "AC_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		electricalBtn: {
+			description: "Electrical_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		fuelBtn: {
+			description: "Fuel_diag_info",
+			type: "diag",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		DiagnosticAssistancesidenav: {
+			remap: "DiagDivBtn",
+			type: "none",
+			data: {}
+		},
+		Coolingsidenav: {
+			remap: "coolingBtn",
+			type: "none",
+			data: {}
+		},
+		Turbosidenav: {
+			remap: "turboBtn",
+			type: "none",
+			data: {}
+		},
+		Timingsidenav: {
+			remap: "timingBtn",
+			type: "none",
+			data: {}
+		},
+		Steeringsidenav: {
+			remap: "steeringBtn",
+			type: "none",
+			data: {}
+		},
+		Suspensionsidenav: {
+			remap: "suspensionBtn",
+			type: "none",
+			data: {}
+		},
+		ACsidenav: {
+			remap: "acBtn",
+			type: "none",
+			data: {}
+		},
+		Electricalsidenav: {
+			remap: "electricalBtn",
+			type: "none",
+			data: {}
+		},
+		Fuelsidenav: {
+			remap: "fuelBtn",
+			type: "none",
+			data: {}
+		},
+		InspReviewsidenav: {
+			remap: "T3",
+			type: "none",
+			data: {}
+		},
+		InspectionTemplatesidenav: {
+			remap: "T4",
+			type: "none",
+			data: {}
+		},
+		Authorizationsidenav: {
+			remap: "newAuthstarter",
+			type: "none",
+			data: {}
+		},
+		Statussidenav: {
+			remap: "statusNote",
+			type: "none",
+			data: {}
+		},
+		Toolssidenav: {
+			remap: "tools",
+			type: "none",
+			data: {}
+		},
+		TrackerToolsidenav: {
+			remap: "trackerToolBtn",
+			type: "none",
+			data: {}
+		},
+		PricingGuidesidenav: {
+			remap: "PAPriceBtn",
+			type: "none",
+			data: {}
+		},
+		MileageIssuessidenav: {
+			remap: "MileDiscrepBtn",
+			type: "none",
+			data: {}
+		},
+		QuickAnswerssidenav: {
+			remap: "QuickAnsBtn",
+			type: "none",
+			data: {}
+		},
+		PTTransfersidenav: {
+			remap: "T1",
+			type: "none",
+			data: {}
+		},
+		CHStatementsidenav: {
+			remap: "T2",
+			type: "none",
+			data: {}
+		},
+		Policysidenav: {
+			remap: "tools",
+			type: "none",
+			data: {}
+		},
+		GL6sidenav: {
+			remap: "coolingBtn",
+			type: "none",
+			data: {}
+		},
+		MBIsidenav: {
+			remap: "MBIClaimsBtn",
+			type: "none",
+			data: {}
+		},
+		Xfer2024sidenav: {
+			remap: "Xfer2024",
+			type: "none",
+			data: {}
+		},
+		Xfer2790sidenav: {
+			remap: "xfer2790Btn",
+			type: "none",
+			data: {}
+		},
+		Teslasidenav: {
+			remap: "TeslaBtn",
+			type: "none",
+			data: {}
+		},
+		DoNotUsesidenav: {
+			remap: "DoNotUseBtn",
+			type: "none",
+			data: {}
+		},
+		IsItPTsidenav: {
+			remap: "IsItPTBtn",
+			type: "none",
+			data: {}
+		},
+		PartsReturnssidenav: {
+			remap: "partsResBtn",
+			type: "none",
+			data: {}
+		},
+		PartsRessidenav: {
+			remap: "partsResBtn",
+			type: "none",
+			data: {}
+		},
+		Diagnosticsidenav: {
+			remap: "DiagnosticBtn",
+			type: "none",
+			data: {}
+		},
+		DoNotOrdersidenav: {
+			remap: "PANoOrderBtn",
+			type: "none",
 			data: {}
 		},
 		navtag: {
 			description: "sop_access",
-			type: "menu",
-			data: {}
-		},
-		pdfClose: {
-			description: "pdf_close",
-			type: "finish",
-			hook: "endPDF",
+			type: "info",
+			isTimed: true,
+			timeStarted: null,
 			data: {}
 		},
 		pdf0001: {
 			description: "pdf0001",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0002: {
 			description: "pdf0002",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0003: {
 			description: "pdf0003",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0004: {
 			description: "pdf0004",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0005: {
 			description: "pdf0005",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0006: {
 			description: "pdf0006",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0007: {
 			description: "pdf0007",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0008: {
 			description: "pdf0008",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0009: {
 			description: "pdf0009",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0010: {
 			description: "pdf0010",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0011: {
 			description: "pdf0011",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0012: {
 			description: "pdf0012",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0013: {
 			description: "pdf0013",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0014: {
 			description: "pdf0014",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0015: {
 			description: "pdf0015",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0016: {
 			description: "pdf0016",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0017: {
 			description: "pdf0017",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0018: {
 			description: "pdf0018",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0019: {
 			description: "pdf0019",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0020: {
 			description: "pdf0020",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0021: {
 			description: "pdf0021",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0022: {
 			description: "pdf0022",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0023: {
 			description: "pdf0023",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0024: {
 			description: "pdf0024",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0025: {
 			description: "pdf0025",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0026: {
 			description: "pdf0026",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0027: {
 			description: "pdf0027",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0028: {
 			description: "pdf0028",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0029: {
 			description: "pdf0029",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0030: {
 			description: "pdf0030",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0031: {
 			description: "pdf0031",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0032: {
 			description: "pdf0032",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0033: {
 			description: "pdf0033",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0034: {
 			description: "pdf0034",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0035: {
 			description: "pdf0035",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0036: {
 			description: "pdf0036",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0037: {
 			description: "pdf0037",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0038: {
 			description: "pdf0038",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0039: {
 			description: "pdf0039",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0040: {
 			description: "pdf0040",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0041: {
 			description: "pdf0041",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0042: {
 			description: "pdf0042",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0043: {
 			description: "pdf0043",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0044: {
 			description: "pdf0044",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0045: {
 			description: "pdf0045",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0046: {
 			description: "pdf0046",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
 		pdf0047: {
 			description: "pdf0047",
-			type: "info",
+			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
