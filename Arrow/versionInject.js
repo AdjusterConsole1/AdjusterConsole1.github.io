@@ -4,16 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		if (element) element.innerText = content;
 	}
 
-	function isAC() {
-		const currentUrl = window.location.href;
-		if (currentUrl.toLowerCase().includes('adjusterconsole1')) {
-			return true;
-		}
-		console.log(`Current URL: ${currentUrl}`);
-		return false;
-	}
-
-
 	const versionMBI = isAC() ? "MBI" : "GL6";
 
 	const mbiBody1Text = `
