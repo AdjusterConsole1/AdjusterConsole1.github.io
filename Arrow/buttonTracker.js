@@ -1,6 +1,3 @@
-function newRoot() {
-	return {};
-}
 function newTracker() {
 	return {
 		PNLCBTN: {
@@ -113,6 +110,21 @@ function newTracker() {
 			type: "simple",
 			data: {}
 		},
+		conopdeny: {
+			description: "continued_op_deny",
+			type: "simple",
+			data: {}
+		},
+		sludgedeny: {
+			description: "sludge_deny",
+			type: "simple",
+			data: {}
+		},
+		waitdeny: {
+			description: "wait_deny",
+			type: "simple",
+			data: {}
+		},
 		result1: {
 			description: "ch_understood",
 			type: "simple",
@@ -200,6 +212,11 @@ function newTracker() {
 		},
 		SENDLABOR: {
 			description: "sent_labor_intake",
+			type: "simple",
+			data: {}
+		},
+		prompt: {
+			description: "ai_prompt",
 			type: "simple",
 			data: {}
 		},

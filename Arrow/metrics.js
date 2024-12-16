@@ -1,23 +1,16 @@
 let buttonTracker;
-let root;
 const today = daysSinceEpoch();
 sessionStorage.setItem("currentDay", today);
 document.addEventListener('DOMContentLoaded', initializeButtonTrackerData);
 
 function initializeButtonTrackerData() {
 	const storedTracker = localStorage.getItem("buttonTracker");
-	const storedRoot = localStorage.getItem("root");
 	if (!storedTracker || storedTracker === null || storedTracker === "undefined") {
 		buttonTracker = newTracker();
 		sessionStorage.removeItem("currentDay");
 	} else {
-		buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
-	}
-	if (!storedRoot) {
-		root = newRoot();
-		initializeRoot();
-	} else {
-		root = JSON.parse(localStorage.getItem("root"));
+		const existingTracker = JSON.parse(localStorage.getItem("buttonTracker"));
+		buttonTracker = { ...newTracker(), ...existingTracker };
 	}
 	let savedDay = sessionStorage.getItem("currentDay");
 	const todayString = today.toString();
@@ -35,17 +28,7 @@ function initializeButtonTrackerData() {
 
 function savebuttonTracker() {
 	localStorage.setItem('buttonTracker', JSON.stringify(buttonTracker));
-	localStorage.setItem('root', JSON.stringify(root));
 	if (document.getElementById('dashContainer').classList.contains('show')) filterAndDisplayData();
-}
-
-function initializeRoot() {
-	root[today] = {
-		totalClicks: 0,
-		allTimeSaved: 0,
-		totalWords: 0,
-		notesOutput: 0
-	};
 }
 
 function trackerDay(button) {
@@ -70,7 +53,6 @@ function daysSinceEpoch() {
 function validate(buttonId) {
 	const button = buttonTracker[buttonId];
 	if (!button) {
-		console.error(`Button ID ${buttonId} not found in buttonTracker.`);
 		return null;
 	}
 	if (!button.data[today]) {
@@ -282,13 +264,11 @@ function getDateRange() {
 			const startDate = new Date(startDateInput);
 			const endDate = new Date(endDateInput);
             if (isNaN(start) || isNaN(end)) {
-                console.error("Invalid start or end date.");
                 return null;
             }
             const startEpoch = Math.floor(start.getTime() / (24 * 60 * 60 * 1000));
             const endEpoch = Math.floor(end.getTime() / (24 * 60 * 60 * 1000));
             if (startEpoch > endEpoch) {
-                console.error("Start date must be earlier than or equal to end date.");
                 return null;
             }
             for (let i = startEpoch; i <= endEpoch; i++) {
@@ -297,7 +277,6 @@ function getDateRange() {
             break;
         }
         default:
-            console.error("Invalid date filter provided.");
             return null;
     }
     return dateRange;
@@ -306,7 +285,6 @@ function getDateRange() {
 function filterButtons() {
     const buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
     if (!buttonTracker) {
-        console.error("buttonTracker not found in localStorage.");
         return null;
     }
     const selectedFilter = document.getElementById('typeFilter').value;
@@ -330,7 +308,6 @@ function filterButtons() {
 
 function getSortedButtons(inputTracker) {
     if (!inputTracker || typeof inputTracker !== "object") {
-        console.error("Invalid inputTracker provided. It must be a valid object.");
         return null;
     }
     const trackerCopy = JSON.parse(JSON.stringify(inputTracker));
@@ -404,9 +381,7 @@ function wordParseCount(text, buttonId) {
 function addWordMetrics(wordCount, buttonId, estimatedTime) {
     const button = validate(buttonId);
     const today = daysSinceEpoch();
-    if (!root[today]) {
-        initializeRoot();
-    }
+
     let timeSaved;
     if (button.isTimed) {
         const timesArray = button.data[today]?.times || [];
@@ -419,12 +394,6 @@ function addWordMetrics(wordCount, buttonId, estimatedTime) {
     const currentWords = parseFloat(button.data[today]?.words || 0);
     button.data[today].totalTimeSaved = parseFloat((totalTimeSaved + timeSaved).toFixed(2));
     button.data[today].words = parseFloat((currentWords + wordCount).toFixed(2));
-    const allTimeSaved = parseFloat(root[today]?.allTimeSaved || 0);
-    const totalWords = parseFloat(root[today]?.totalWords || 0);
-    const notesOutput = parseInt(root[today]?.notesOutput || 0, 10);
-    root[today].allTimeSaved = parseFloat((allTimeSaved + timeSaved).toFixed(2));
-    root[today].notesOutput = notesOutput + 1;
-    root[today].totalWords = Math.round(totalWords + wordCount);
 }
 
 function basicMapOutput(basicMap, range = null) {
@@ -732,7 +701,6 @@ function generateTestData(days = 95) {
 	for (const buttonId in buttonTracker) {
 		const button = buttonTracker[buttonId];
 		if (!button || typeof button !== "object") {
-			console.error(`Invalid button object for ID: ${buttonId}`);
 			continue;
 		}
 		if (!button.data || typeof button.data !== "object") {
@@ -764,7 +732,6 @@ function generateTestData(days = 95) {
 function pruneButtonTrackerData() {
     let buttonTracker = JSON.parse(localStorage.getItem('buttonTracker')) || {};
     if (Object.keys(buttonTracker).length === 0) {
-        console.warn("No buttonTracker data found in localStorage.");
         return;
     }
     Object.keys(buttonTracker).forEach((key) => {
@@ -774,7 +741,6 @@ function pruneButtonTrackerData() {
             while (sortedDays.length > 90) {
                 const oldestDay = sortedDays.shift();
                 delete data[oldestDay];
-                console.log(`Removed day ${oldestDay} for key: ${key}`);
             }
         }
     });
