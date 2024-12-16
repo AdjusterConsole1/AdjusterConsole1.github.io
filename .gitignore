@@ -1,7 +1,5 @@
-cleanJavaScript/
-cleanCSS/
-timestamps.json
 .tmp.driveupload
-versionKey.txt
-build.js
+/Build/
+/cleanJavaScript/
+/cleanCSS/
 build.bat

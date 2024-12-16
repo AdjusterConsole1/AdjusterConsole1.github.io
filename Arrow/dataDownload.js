@@ -33,7 +33,7 @@ function downloadRawData() {
     URL.revokeObjectURL(url);
 }
 
-function downloadRawDataAsJSONx() {
+function downloadRawDataAsJSON() {
     const buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
     if (!buttonTracker) {
         alert("No data available to download.");
@@ -54,13 +54,3 @@ function downloadRawDataAsJSONx() {
 document.getElementById('csvDownload').addEventListener('click', downloadRawData);
 
 document.getElementById('jsonDownload').addEventListener('click', downloadRawDataAsJSON);
-
-function downloadRawDataAsJSON() {
-    const metricDisplay = document.getElementById("metricDisplay");
-    metricDisplay.style.display = "inline-block";
-    const outputObject = getSortedButtons(buttonTracker);
-    const keys = Object.keys(outputObject);
-    const keysHtml = keys.map(key => `<div>${key}</div>`).join("");
-    metricDisplay.innerHTML = keysHtml;
-    
-}

@@ -703,18 +703,8 @@ function newTracker() {
 			type: "none",
 			data: {}
 		},
-		GL6sidenav: {
-			remap: "coolingBtn",
-			type: "none",
-			data: {}
-		},
 		MBIsidenav: {
 			remap: "MBIClaimsBtn",
-			type: "none",
-			data: {}
-		},
-		Xfer2024sidenav: {
-			remap: "Xfer2024",
 			type: "none",
 			data: {}
 		},
@@ -765,330 +755,337 @@ function newTracker() {
 			timeStarted: null,
 			data: {}
 		},
-		pdf0001: {
-			description: "pdf0001",
+		Start_a_Claim: {
+			description: "pdf_Start_a_Claim",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0002: {
-			description: "pdf0002",
+		Search_For_Claims: {
+			description: "pdf_Search_For_Claims",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0003: {
-			description: "pdf0003",
+		Contract_Holder_Verification: {
+			description: "pdf_Contract_Holder_Verification",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0004: {
-			description: "pdf0004",
+		Parts_Verification: {
+			description: "pdf_Parts_Verification",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0005: {
-			description: "pdf0005",
+		Labor_Verification: {
+			description: "pdf_Labor_Verification",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0006: {
-			description: "pdf0006",
+		Assign_A_Task: {
+			description: "pdf_Assign_A_Task",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0007: {
-			description: "pdf0007",
+		Set_An_Inspection: {
+			description: "pdf_Set_An_Inspection",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0008: {
-			description: "pdf0008",
+		Request_Records: {
+			description: "pdf_Request_Records",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0009: {
-			description: "pdf0009",
+		Upload_Documents: {
+			description: "pdf_Upload_Documents",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0010: {
-			description: "pdf0010",
+		Add_Or_Update_Repair_Facilites: {
+			description: "pdf_Add_Or_Update_Repair_Facilites",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0011: {
-			description: "pdf0011",
+		Finalizing_Claims: {
+			description: "pdf_Finalizing_Claims",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0012: {
-			description: "pdf0012",
+		Claim_Notes: {
+			description: "pdf_Claim_Notes",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0013: {
-			description: "pdf0013",
+		Handling_Escalations: {
+			description: "pdf_Handling_Escalations",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0014: {
-			description: "pdf0014",
+		Parts_Resolution: {
+			description: "pdf_Parts_Resolution",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0015: {
-			description: "pdf0015",
+		Part_Returns_and_Freight: {
+			description: "pdf_Part_Returns_and_Freight",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0016: {
-			description: "pdf0016",
+		Close_Or_Set_Inactive: {
+			description: "pdf_Close_Or_Set_Inactive",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0017: {
-			description: "pdf0017",
+		Warranties_Recalls_TSBs: {
+			description: "pdf_Warranties_Recalls_TSBs",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0018: {
-			description: "pdf0018",
+		Recognizing_Altered_Records: {
+			description: "pdf_Recognizing_Altered_Records",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0019: {
-			description: "pdf0019",
+		Escalating_Misrepresentation_to_Legal: {
+			description: "pdf_Escalating_Misrepresentation_to_Legal",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0020: {
-			description: "pdf0020",
+		RF_Management_Case: {
+			description: "pdf_RF_Management_Case",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0021: {
-			description: "pdf0021",
+		TL_Request_Support_Regarding_Network_RF: {
+			description: "pdf_TL_Request_Support_Regarding_Network_RF",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0022: {
-			description: "pdf0022",
+		TL_Help_Request_Vendor_Network: {
+			description: "pdf_TL_Help_Request_Vendor_Network",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0023: {
-			description: "pdf0023",
+		Reviewing_Branded_Title: {
+			description: "pdf_Reviewing_Branded_Title",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0024: {
-			description: "pdf0024",
+		Reviewing_Commerical_Usage: {
+			description: "pdf_Reviewing_Commerical_Usage",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0025: {
-			description: "pdf0025",
+		Reviewing_Mileage_Discrepancies: {
+			description: "pdf_Reviewing_Mileage_Discrepancies",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0026: {
-			description: "pdf0026",
+		Reviewing_Modifications: {
+			description: "pdf_Reviewing_Modifications",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0027: {
-			description: "pdf0027",
+		Reviewing_Oversized_Tires: {
+			description: "pdf_Reviewing_Oversized_Tires",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0028: {
-			description: "pdf0028",
+		Reviewing_Suspension_Modification: {
+			description: "pdf_Reviewing_Suspension_Modification",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0029: {
-			description: "pdf0029",
+		Handle_MBI_Claims: {
+			description: "pdf_Handle_MBI_Claims",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0030: {
-			description: "pdf0030",
+		Handle_Preferred_Customers: {
+			description: "pdf_Handle_Preferred_Customers",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0031: {
-			description: "pdf0031",
+		Key_And_Authorize_Tow: {
+			description: "pdf_Key_And_Authorize_Tow",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0032: {
-			description: "pdf0032",
+		Key_Rental_Reimbursement: {
+			description: "pdf_Key_Rental_Reimbursement",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0033: {
-			description: "pdf0033",
+		Key_Roadside_Reimbursement: {
+			description: "pdf_Key_Roadside_Reimbursement",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0034: {
-			description: "pdf0034",
+		Request_Tracking: {
+			description: "pdf_Request_Tracking",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0035: {
-			description: "pdf0035",
+		Make_A_3Way_Call: {
+			description: "pdf_Make_A_3Way_Call",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0036: {
-			description: "pdf0036",
+		Reach_Out_To_DataManagement: {
+			description: "pdf_Reach_Out_To_DataManagement",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0037: {
-			description: "pdf0037",
+		Terms_And_Abbreviations: {
+			description: "pdf_Terms_And_Abbreviations",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0038: {
-			description: "pdf0038",
+		Enhanced_Deductible: {
+			description: "pdf_Enhanced_Deductible",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0039: {
-			description: "pdf0039",
+		Fluid_Pricing_Sheet: {
+			description: "pdf_Fluid_Pricing_Sheet",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0040: {
-			description: "pdf0040",
+		Employee_Handbook: {
+			description: "Employee_Handbook",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0041: {
-			description: "pdf0041",
+		PT_Or_General_Claim: {
+			description: "pdf_PT_Or_General_Claim",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0042: {
-			description: "pdf0042",
+		Repair_Facility_Types: {
+			description: "pdf_Repair_Facility_Types",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0043: {
-			description: "pdf0043",
+		PRF_Location: {
+			description: "pdf_PRF_Location",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0044: {
-			description: "pdf0044",
+		CMS_Emails: {
+			description: "pdf_CMS_Emails",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0045: {
-			description: "pdf0045",
+		Text_Notifications: {
+			description: "pdf_Text_Notifications",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0046: {
-			description: "pdf0046",
+		PT_First_Contact: {
+			description: "pdf_PT_First_Contact",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,
 			data: {}
 		},
-		pdf0047: {
-			description: "pdf0047",
+		State_Tax: {
+			description: "pdf_State_Tax",
+			type: "pdfsop",
+			isTimed: true,
+			timeStarted: null,
+			data: {}
+		},
+		Check_Available_PTO: {
+			description: "pdf_Check_Available_PTO",
 			type: "pdfsop",
 			isTimed: true,
 			timeStarted: null,

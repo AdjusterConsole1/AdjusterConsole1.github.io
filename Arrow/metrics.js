@@ -1,15 +1,15 @@
 let buttonTracker;
 let root;
 const today = daysSinceEpoch();
-localStorage.setItem("currentDay", today);
+sessionStorage.setItem("currentDay", today);
 document.addEventListener('DOMContentLoaded', initializeButtonTrackerData);
 
 function initializeButtonTrackerData() {
 	const storedTracker = localStorage.getItem("buttonTracker");
 	const storedRoot = localStorage.getItem("root");
-	if (!storedTracker) {
+	if (!storedTracker || storedTracker === null || storedTracker === "undefined") {
 		buttonTracker = newTracker();
-		localStorage.removeItem("currentDay");
+		sessionStorage.removeItem("currentDay");
 	} else {
 		buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
 	}
@@ -19,7 +19,7 @@ function initializeButtonTrackerData() {
 	} else {
 		root = JSON.parse(localStorage.getItem("root"));
 	}
-	let savedDay = localStorage.getItem("currentDay");
+	let savedDay = sessionStorage.getItem("currentDay");
 	const todayString = today.toString();
 	if (todayString === savedDay) {
 		return;
@@ -28,7 +28,7 @@ function initializeButtonTrackerData() {
 			const button = buttonTracker[buttonKey];
 			trackerDay(button);
 		}
-		localStorage.setItem("currentDay", today);
+		sessionStorage.setItem("currentDay", today);
 	}
 	savebuttonTracker();
 }
@@ -61,11 +61,10 @@ function trackerDay(button) {
 }
 
 function daysSinceEpoch() {
-	const millisecondsPerDay = 24 * 60 * 60 * 1000;
-	const now = new Date();
-	const epoch = new Date(0);
-	const daysSinceEpoch = Math.floor((now - epoch) / millisecondsPerDay);
-	return daysSinceEpoch.toString();
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    const now = new Date();
+    const utcMidnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    return Math.floor(utcMidnight / millisecondsPerDay).toString();
 }
 
 function validate(buttonId) {
@@ -89,8 +88,8 @@ function addCount(buttonId) {
 function startTimer(buttonId) {
 	const button = validate(buttonId);
 	button.timeStarted = Date.now();
-	if (button.description.includes("pdf00")) {
-		localStorage.setItem("pdfId", button.description);
+	if (button.description.includes("pdf")) {
+		sessionStorage.setItem("pdfId", button.description);
 	}
 	savebuttonTracker();
 }
@@ -121,9 +120,9 @@ function cancelTimer(buttonId) {
 }
 
 function handlePdfs() {
-	const pdfId = localStorage.getItem("pdfId");
+	const pdfId = sessionStorage.getItem("pdfId");
 	stopTimer(pdfId);
-	localStorage.removeItem("pdfId");
+	sessionStorage.removeItem("pdfId");
 }
 
 document.addEventListener('DOMContentLoaded', initButtonListeners);
@@ -727,7 +726,7 @@ document.getElementById("fakeRecord")?.addEventListener("click", () => {
 	generateTestData();
 });
 
-function generateTestData(days = 90) {
+function generateTestData(days = 95) {
 	buttonTracker = JSON.parse(localStorage.getItem("buttonTracker"));
 	const today = parseInt(daysSinceEpoch());
 	for (const buttonId in buttonTracker) {
@@ -761,3 +760,25 @@ function generateTestData(days = 90) {
 	}
 	savebuttonTracker();
 }
+
+function pruneButtonTrackerData() {
+    let buttonTracker = JSON.parse(localStorage.getItem('buttonTracker')) || {};
+    if (Object.keys(buttonTracker).length === 0) {
+        console.warn("No buttonTracker data found in localStorage.");
+        return;
+    }
+    Object.keys(buttonTracker).forEach((key) => {
+        const data = buttonTracker[key]?.data;
+        if (data && typeof data === 'object' && Object.keys(data).length > 90) {
+            const sortedDays = Object.keys(data).sort((a, b) => parseInt(a) - parseInt(b));
+            while (sortedDays.length > 90) {
+                const oldestDay = sortedDays.shift();
+                delete data[oldestDay];
+                console.log(`Removed day ${oldestDay} for key: ${key}`);
+            }
+        }
+    });
+    localStorage.setItem('buttonTracker', JSON.stringify(buttonTracker));
+}
+
+

@@ -3,46 +3,74 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<link rel="stylesheet" href="CSS/main.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/Common.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/Stable.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/auth_module.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/Buttons.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/CustomButtons.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/AppearOpts.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/Resource.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/contextMenu.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/PTSpecific.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/Instructions.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/transAuth.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/linebacker.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/navAndSopMenus.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/accessDiv.css?v=20241119004704">
-		<link rel="stylesheet" href="CSS/dashboard.css?v=20241119004704">
-        <link rel="stylesheet" href="CSS/layoutProfiles.css?v=20241119004704">
+		<link rel="stylesheet" href="CSS/main.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/Common.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/Stable.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/auth_module.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/Buttons.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/CustomButtons.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/AppearOpts.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/Resource.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/contextMenu.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/PTSpecific.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/Instructions.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/transAuth.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/linebacker.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/navAndSopMenus.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/accessDiv.css?v=675635254376344">
+		<link rel="stylesheet" href="CSS/dashboard.css?v=675635254376344">
+        <link rel="stylesheet" href="CSS/layoutProfiles.css?v=675635254376344">
 		<title>Adjuster Console</title>
-		<!--<link rel="manifest" href="manifest.webmanifest">-->
+		<link rel="manifest" href="manifest.webmanifest">
 	</head>
 <body>
 
 	<!-- Layout Editor -->
-
-	<div id="button-container">
-		<button class="button" id="new-profile-btn">New Profile</button>
-		<button class="button" id="save-current-btn">Save Current</button>
-		<button class="button" id="load-btn">Load</button>
+	
+	<div id="layoutBacker">
+		<div id="profileManagerContainer">
+			<a href="javascript:void(0)" id="closeLayouts">&times;</a>
+			<h1 class="title">Profile Manager</h1>
+			<div class="layoutGroup">
+				<input id="profileName" type="text" placeholder="Enter profile name" class="input-text" />
+				<button id="addProfileBtn" class="btn">Add Profile</button>
+			</div>
+			<div class="layoutGroup">
+				<select id="profileSelect">
+					<option value="">-- Select Profile --</option>
+				</select>
+				<div class="layoutRow">
+					<button id="cloneProfileBtn" class="btn">Clone Profile</button>
+					<button id="changeProfileBtn" class="btn">Change Profile</button>
+				</div>
+				<div class="layoutRow">
+					<button id="deleteProfileBtn" class="btn">Delete Profile</button>
+					<button id="resetProfileBtn" class="btn">Reset Profile</button>
+				</div>
+			</div>
+			<div class="layoutGroup">
+				<input id="renameProfileInput" type="text" placeholder="New profile name" class="input-text" />
+				<button id="renameProfileBtn" class="btn">Rename Profile</button>
+			</div>
+			<div class="layoutGroup">
+				<button id="cancelBtn" class="btn">Cancel</button>
+			</div>
+		</div>
 	</div>
-    <div class="modal-overlay" id="modal-overlay"></div>
-    <div class="modal" id="new-profile-modal">
-        <p>You are leaving the current profile. You will lose these settings if they are not saved. Continue?</p>
-        <div class="modal-buttons">
-            <button class="button" id="cancel-btn">Cancel</button>
-            <button class="button" id="continue-btn">Continue</button>
-        </div>
-    </div>
+	<div id="profileModal"></div>
+	
+	<div class="profileDropdown">
+		<button class="profileDropdownButton">Select Profile</button>
+		<ul class="profileDropdownUL noShow">
+		</ul>
+	</div>
 
+	<!-- Layout Training 
+	<div id="helpLayoutModal">
+		<a href="javascript:void(0)" class="closeHelp">&times;</a>
+	</div>-->
 	<!-- Splash Screen -->
-		 
+
 	<div id="splashContainer">
 		<img src="./Images/Other/embossedLogo1.svg" alt="Embossed Logo" id="splashLogo">
 	</div>
@@ -129,19 +157,22 @@
 
 	<!-- Menu -->
 
-	<div id="Mystery" class="TheGang noShow">
-		<button id="LOCK1" class="astext">&#x2666; Settings &#x2666;</button>
-		<button id="appearance" class="astext menu">&#x2666; Appearance &#x2666;</button>
-		<button id="BtnBuilder" class="astext menu">&#x2666; Toggle On/Off &#x2666;</button>
-		<button id="ptcon" class="astext menu">&#x2666; PT Console &#x2666;</button>
-		<button id="tutorials" class="astext menu">&#x2666; Help &#x2666;</button>
-		<button id="metricMenu" class="astext menu">&#x2666; Metrics &#x2666;</button>
+	<div class="dropdown">
+		<button id="LOCK1" class="dropdown-btn">&#x2666; Settings &#x2666</button>
+		<ul class="dropdown-menu">
+			<li id="appearance">&#x2666; Appearance &#x2666;</li>
+			<li id="BtnBuilder">&#x2666; Toggle On/Off &#x2666;</li>
+			<li id="ptcon">&#x2666; PT Console &#x2666;</li>
+			<li id="tutorials">&#x2666; Help &#x2666;</li>
+			<li id="metricMenu">&#x2666; Metrics &#x2666;</li>
+			<li id="layoutMenu">&#x2666; Profiles &#x2666;</li>
+		</ul>
 	</div>
 
 	<!-- SOP Menu -->
 
 	<div id="sopnav2" class="sop_nav">
-		<button class="sop_btn neu navHeader">Claim Basics</button>
+		<button class="sop_btn neu navHeader" disabled >Claim Basics</button>
 		<button class="sop_btn neu" id="pdf0001">Start a Claim</button>
 		<button class="sop_btn neu" id="pdf0002">Search For Claims</button>
 		<button class="sop_btn neu" id="pdf0003">CH Verification</button>
@@ -156,10 +187,10 @@
 		<button class="sop_btn neu navEnder" id="pdf0012">Claim Documentation</button>
 		<button class="sop_btn neu navHeader">Claim Issues</button>
 		<button class="sop_btn neu" id="pdf0013">Handling Escalations</button>
-		<button class="sop_btn neu" id="pdf0014">Parts Resolution</button>
-		<button class="sop_btn neu" id="pdf0015">Part Returns/Freight</button>
+		<button class="sop_btn neu" id="pdf0014">Part Returns</button>
+		<button class="sop_btn neu" id="pdf0015">Freight on Part Returns</button>
 		<button class="sop_btn neu" id="pdf0016">Close Or Set Inactive</button>
-		<button class="sop_btn neu" id="pdf0017">Warranties Recalls TSBs</button>
+		<button class="sop_btn neu" id="pdf0017">Warranties-Recalls-TSBs</button>
 		<button class="sop_btn neu" id="pdf0018">Altered Records</button>
 		<button class="sop_btn neu" id="pdf0019">Escalating Misrep</button>
 		<button class="sop_btn neu" id="pdf0020">RF Management Case</button>
@@ -182,18 +213,17 @@
 		<button class="sop_btn neu" id="pdf0033">Key Roadside Reimb</button>
 		<button class="sop_btn neu" id="pdf0034">Request Tracking</button>
 		<button class="sop_btn neu" id="pdf0035">Make A 3 Way Call</button>
-		<button class="sop_btn neu" id="pdf0047">Check Available PTO</button>
 		<button class="sop_btn neu navEnder" id="pdf0036">RO To Data Management</button>
 		<button class="sop_btn neu navHeader">Info</button>
 		<button class="sop_btn neu" id="pdf0037">Terms And Abbreviations</button>
 		<button class="sop_btn neu" id="pdf0038">Enhanced Deductible</button>
 		<button class="sop_btn neu" id="pdf0039">Fluid Pricing Sheet</button>
-		<button class="sop_btn neu" id="pdf0040">PT Or General Claim</button>
+		<button class="sop_btn neu" id="pdf0040">Employee_Handbook</button>
 		<button class="sop_btn neu" id="pdf0041">Repair Facility Types</button>
 		<button class="sop_btn neu" id="pdf0042">PRF Location</button>
-		<button class="sop_btn neu" id="pdf0043">CMS Emails</button>
+		<button class="sop_btn neu" id="pdf0043">Emails</button>
 		<button class="sop_btn neu" id="pdf0044">Text Notifications</button>
-		<button class="sop_btn neu" id="pdf0045">PT First Contact</button>
+		<button class="sop_btn neu" id="pdf0045">First Contact</button>
 		<button class="sop_btn neu" id="pdf0046">State Tax</button>
 	</div>
 	<div id="PDFdepot" class="PDF_depot">
@@ -867,7 +897,7 @@ TIME:&nbsp;&nbsp;</textarea>
 	<!-- Bulk Prices -->
 
 	<div id="div6" class="dbacking div6">
-		REG OIL: 7.13<br>
+		<b>REG OIL: 7.13<br>
 		SYN OIL: 11.89<br><br>
 		DEX III: 11.68<br>
 		ATF+4: 11.99<br>
@@ -888,19 +918,25 @@ TIME:&nbsp;&nbsp;</textarea>
 		AC UV DYE: 11.71/OZ<br>
 		FLUSH SOLVANT: 7.66/OZ<br><br>
 		ENG/TRANS DYE: 12.49/OZ<br>
-		SEALANT/RTV: 13.37 PER 3.5OZ<br>
+		SEALANT/RTV: 13.37 PER 3.5OZ</b>
 	</div>
 
 	<!-- Numbers -->
 
 	<div id="NUMBERS2" class="noShow">
 		<div id="NUMBERS" class="div4 noShow">
-			<b>Payments Fax<br>303-456-1039<br><br>
-			Records Fax<br>303-420-4722<br><br>
-			CarShield<br>800-430-1705<br><br>
-			Roadside Assistance<br>866-222-7869<br><br>
-			Rental<br>636-626-2189<br><br>
-			Main<br>800-531-1925</b>
+			<b>Payments Fax<br>
+			303-456-1039<br><br>
+			Records Fax<br>
+			303-420-4722<br><br>
+			CarShield<br>
+			800-430-1705<br><br>
+			Roadside Assistance<br>
+			866-222-7869<br><br>
+			Rental<br>
+			636-626-2189<br><br>
+			Main<br>
+			800-531-1925</b>
 		</div>
 	</div>
 	<div id="glowDiv" class="neon noShow P R" oncontextmenu="customMenu(this.id, event)"></div>
@@ -917,7 +953,7 @@ TIME:&nbsp;&nbsp;</textarea>
 		</div>
 		<div id="policyDiv" class="tab hide">
 			<button id="MBIClaimsBtn" class="tablinks">MBI</button>
-			<button id="xfer2790Btn" class="tablinks">2790</button>
+			<button id="xfer2790Btn" class="tablinks"></button>
 			<button id="TeslaBtn" class="tablinks">Tesla</button>
 			<button id="DoNotUseBtn" class="tablinks edgeButton">Do Not Use</button>
 			<button id="IsItPTBtn" class="tablinks">Is It PT</button>
@@ -942,11 +978,7 @@ TIME:&nbsp;&nbsp;</textarea>
 					&blacklozenge; Only some of the authorized repairs are going to be completed.<br>
 					How do I make the estimate match the invoice?
 				</div>
-				<div class="questions noShow" id="questa4">
-					&blacklozenge; I have a CH on the phone and they don't want to pay OOPC.<br>
-					They want to get the work done at another repair facility.<br>
-					Where do I send them?
-				</div>
+				<div class="questions noShow" id="questa4"></div>
 				<div class="questions noShow" id="questa5">
 					&blacklozenge; The Repair Facility is saying they didn't get paid.<br>
 					It shows they were paid in our system.<br>
@@ -1088,7 +1120,7 @@ TIME:&nbsp;&nbsp;</textarea>
 					<li>Must be prior to date of sale</li>
 				</ul>
 				<p class="bodyTab">
-					Perform a mileage calculation using the AAS SOP available in the Knowledge Base.
+					Perform a mileage calculation using the SOP available in the Knowledge Base.
 				</p>
 			</div>
 			<div id="buttons" class="noShow">
@@ -1127,7 +1159,7 @@ TIME:&nbsp;&nbsp;</textarea>
 			</div>
 			<div id="authGuideAM" class="authGuide noShow noDisp">
 				<p><b>PA Sourcing</b></p>
-				<p class="bodyTab">Enter the CH VIN into PA<br>
+				<p class="bodyTab" id="priceSOP3">Enter the CH VIN into PA<br>
 					If the RF is using OEM, search using the OEM part number<br>
 					If the RF is using AM, seach using the part name<br><br>
 					Filter results to show only <b>BETTER</b> or above Quality Rating.<br>
@@ -1208,7 +1240,7 @@ TIME:&nbsp;&nbsp;</textarea>
 		<!-- PA No Order -->
 
 		<div id="PANoOrder" class="tabcontent">
-			<h3 class="headerTab">Do Not Order These Parts From PA</h3>
+			<h3 class="headerTab">Do Not Order These Parts Aftermarket</h3>
 			<div class="innerLeft">
 				<p><b>Engine and Internals</b></p>
 				<p class="bodyTab">Rocker Arm<br>
@@ -1299,7 +1331,7 @@ TIME:&nbsp;&nbsp;</textarea>
 					failure.<br><br>
 					Anything that is part of the R/R procedure cannot be counted
 					towards diag as it is considered overlap.<br><br>
-					Always check ProDemand FIRST.
+					Always check the labor guide FIRST.
 				</p>
 			</div>
 		</div>
@@ -1429,7 +1461,7 @@ TIME:&nbsp;&nbsp;</textarea>
 				<li>The part was not installed and is no longer required</li>
 			</ul><br><br>
 			<p class="textMargin"><b>How is a Parts Resolution Done?</b></p>
-			<ul>
+			<ul id="partsRes">
 				<li>Note the RF contact name, mileage, labor rate, and labor time for the part.</li>
 				<li>Select the 'Parts' tab in CMS and click 'Parts Ordered'.</li>
 				<li>Click the checkbox next to the part. Select 'Parts Resolution'.</li>
@@ -1460,9 +1492,7 @@ TIME:&nbsp;&nbsp;</textarea>
 				<li>Repair Facility Contact Name</li>
 				<li>Failed Component(s)</li>
 			</ul>
-			<p class="bodyTab">E-mail this information to Jude.Deangelis@americanautoshield.com<br>
-				Advise the Repair Facility that the team that handles Tesla claims will reach out with-in 24 hours.
-			</p>
+			<p class="bodyTab" id="teslaEmail"></p>
 		</div>
 
 		<!-- Do Not Use -->
@@ -1487,11 +1517,9 @@ TIME:&nbsp;&nbsp;</textarea>
 		<!-- 2790 Xfer -->
 
 		<div id="xfer2790" class="tabcontent noteBins arise">
-			<h3 class="headerTab">2790</h3>
+			<h3 class="headerTab" id="2790Header"></h3>
 			<p><b>Don't let the big red banner scare you off.</b></p>
-			<p class="bodyTab">A transfer to 2790 is only required in order to start a new claim.<br>
-				If they already have a claim, read the notes.
-			</p>
+			<p class="bodyTab" id="body12790"></p>
 			<p class="bodyTab">The notes will indicate if any adjuster can continue the claim or if<br>
 				you should task the assigned ADJ with updates or actions needed.
 			</p>
@@ -1527,28 +1555,19 @@ TIME:&nbsp;&nbsp;</textarea>
 		<!-- MBI Claims -->
 
 		<div id="MBIClaims" class="tabcontent noteBins arise">
-			<h3 class="headerTab">MBI Claims</h3>
+			<h3 class="headerTab" id="mbiHeader"></h3>
 			<p><b>Important</b></p>
 			<p>
 				Do <b>NOT</b> request any disassembly or teardown unless notated to do so in the claim.<br>
 				Do <b>NOT</b> disclose any information about coverage.
 			</p>
-			<p class="bodyTab">
-				If a Repair Facility calls in and the contract is an MBI variant,<br>
-				do not disclose any information about coverage whatsoever.<br>
-				Do not bother pulling the contract to check or verify.
-			</p>
+			<p class="bodyTab" id="mbiBody1"></p>
 			<p class="bodyTab">
 				Open a claim following standard SOP and your normal process.<br>
 				The difference is that you will key in and verify parts and labor<br>
 				on all items regardless of coverage.
 			</p>
-			<p class="bodyTab">
-				Once all items are keyed in and verified, click the Assign to MBI<br>
-				button in the actions tab of CMS. Once it has reassigned to an MBI<br>
-				adjuster, task that adjuster. Tell the Repair Facility that the claim is under<br>
-				review and that an adjuster will reach out to them within 24 hours.
-			</p>
+			<p class="bodyTab" id="mbiBody2"></p>
 		</div>
 		<button id="exitRec" class="wefwefwef">Exit</button>
 	</div>
@@ -2459,6 +2478,7 @@ TIME:&nbsp;&nbsp;</textarea>
 			</div>
 		</div>
 	</div>
+	<!--<button id="fakeRecord">record</button>-->
 	
 	<!-- Tutorial -->
 	
@@ -2681,30 +2701,32 @@ TIME:&nbsp;&nbsp;</textarea>
 		<button id="helpNext" class="helpBtn">Next</button>
 		<button id="helpPrev" class="helpBtn" disabled>Previous</button>
 	</div>
-	<script src="JavaScript/splash.js?v=20241119004704"></script>
-	<script src="JavaScript/snipDiv.js?v=20241119004704"></script>
-	<script src="JavaScript/keyEvents.js?v=20241119004704"></script>
-	<script src="JavaScript/originalAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/authorizationAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/transAuthAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/CHStatement.js?v=20241119004704"></script>
-	<script src="JavaScript/PTXfer.js?v=20241119004704"></script>
-	<script src="JavaScript/statusNote.js?v=20241119004704"></script>
-	<script src="JavaScript/ChangeAppearance.js?v=20241119004704"></script>
-	<script src="JavaScript/diagCenter.js?v=20241119004704"></script>
-	<script src="JavaScript/jsonParse.js?v=20241119004704"></script>
-	<script src="JavaScript/ContextMenu.js?v=20241119004704"></script>
-	<script src="JavaScript/trackerScript.js?v=20241119004704"></script>
-	<script src="JavaScript/powertrainAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/NewButton.js?v=20241119004704"></script>
-	<script src="JavaScript/authGuideAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/navAndSopMenuAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/qAndAAS.js?v=20241119004704"></script>
-	<script src="JavaScript/toggle.js?v=20241119004704"></script>
-	<script src="Arrow/eventListeners.js?v=20241119004704"></script>
-	<script src="Arrow/metrics.js?v=20241119004704"></script>
-	<script src="Arrow/buttonTracker.js?v=20241119004704"></script>
-	<script src="Arrow/dataDownload.js?v=20241119004704"></script>
-    <script src="Arrow/layoutProfiles.js?v=20241119004704"></script>
+	<script src="JavaScript/splash.js?v=675635254376344"></script>
+	<script src="JavaScript/snipDiv.js?v=675635254376344"></script>
+	<script src="JavaScript/keyEvents.js?v=675635254376344"></script>
+	<script src="JavaScript/main.js?v=675635254376344"></script>
+	<script src="JavaScript/authorization.js?v=675635254376344"></script>
+	<script src="JavaScript/transAuth.js?v=675635254376344"></script>
+	<script src="JavaScript/CHStatement.js?v=675635254376344"></script>
+	<script src="JavaScript/PTXfer.js?v=675635254376344"></script>
+	<script src="JavaScript/statusNote.js?v=675635254376344"></script>
+	<script src="JavaScript/ChangeAppearance.js?v=675635254376344"></script>
+	<script src="JavaScript/diagCenter.js?v=675635254376344"></script>
+	<script src="JavaScript/jsonParse.js?v=675635254376344"></script>
+	<script src="JavaScript/ContextMenu.js?v=675635254376344"></script>
+	<script src="JavaScript/trackerScript.js?v=675635254376344"></script>
+	<script src="JavaScript/powertrain.js?v=675635254376344"></script>
+	<script src="JavaScript/NewButton.js?v=675635254376344"></script>
+	<script src="JavaScript/authGuide.js?v=675635254376344"></script>
+	<script src="JavaScript/navAndSopMenu.js?v=675635254376344"></script>
+	<script src="JavaScript/qAndA.js?v=675635254376344"></script>
+	<script src="JavaScript/toggle.js?v=675635254376344"></script>
+	<script src="Arrow/eventListeners.js?v=675635254376344"></script>
+	<script src="Arrow/versionInject.js?v=675635254376344"></script>
+	<script src="Arrow/metrics.js?v=675635254376344"></script>
+	<script src="Arrow/buttonTracker.js?v=675635254376344"></script>
+	<script src="Arrow/dataDownload.js?v=675635254376344"></script>
+    <script src="Arrow/layoutProfiles.js?v=675635254376344"></script>
+	<script src="Arrow/metricSend.js?v=675635254376344"></script>
 </body>
 </html>
