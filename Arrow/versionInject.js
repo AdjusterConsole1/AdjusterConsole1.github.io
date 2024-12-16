@@ -352,4 +352,4 @@ document.addEventListener("DOMContentLoaded", function() {
 				
 	const MileDiscrep = document.getElementById('MileDiscrep');
 	if (!isAC() && MileDiscrep) MileDiscrep.innerHTML = MileDiscrepOther;
-}
+});
