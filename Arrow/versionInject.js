@@ -3,6 +3,10 @@ function updateElementById(id, content) {
     if (element) element.innerText = content;
 }
 
+function isAC() {
+    return window.location.href.includes('adjusterconsole1');
+}
+
 const versionMBI = isAC() ? "MBI" : "GL6";
 
 const mbiBody1Text = `
