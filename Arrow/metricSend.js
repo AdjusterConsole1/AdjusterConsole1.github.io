@@ -1,5 +1,5 @@
 (async function sendButtonTrackerData() {
-  const endpoint = "https://script.google.com/macros/s/AKfycbyHI2dhI9pYdokJUEBe3Jca_msUG2EfLpfH5bwlfhWFPf-jL2-cOGzzX-TEmU-RUCTb/exec";
+  const endpoint = "https://script.google.com/macros/s/AKfycbyfNpAw3-Tx1BlpFw_1IWpjzQpkTUbz9NviTEAFN6HRp_78mqqtZNNc4FGdiUQ0Zg5o/exec";
   const secretKey = "vnBBHbBhy8755430988nhvj";
   function getButtonTrackerData() {
     const buttonTracker = localStorage.getItem("buttonTracker");
