@@ -207,13 +207,13 @@ function determineOutputTime(secs) {
 	if (hours > 0) {
 		if (minutes > 0) {
 			if (remainingSeconds > 0) {
-				formattedTime = `${hours} hours\r${minutes} mins\r${remainingSeconds} secs`;
+				formattedTime = `${hours} hours\r\n${minutes} mins\r\n${remainingSeconds} secs`;
 			} else {
-				formattedTime = `\r${hours} hours\r${minutes} mins\r`;
+				formattedTime = `\r\n${hours} hours\r\n${minutes} mins\r\n`;
 			}
 		} else {
 			if (remainingSeconds > 0) {
-				formattedTime = `\r${hours} hours\r${remainingSeconds} secs`;
+				formattedTime = `\r\n${hours} hours\r\n${remainingSeconds} secs`;
 			} else {
 				formattedTime = `${hours} hours`;
 			}
@@ -221,7 +221,7 @@ function determineOutputTime(secs) {
 	} else {
 		if (minutes > 0) {
 			if (remainingSeconds > 0) {
-				formattedTime = `${minutes} mins\r${remainingSeconds} secs`;
+				formattedTime = `${minutes} mins\r\n${remainingSeconds} secs`;
 			} else {
 				formattedTime = `${minutes} mins`;
 			}
