@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	function isAC() {
 		const currentUrl = window.location.href;
-		if (currentUrl.includes('adjusterconsole1')) {
+		if (currentUrl.toLowerCase().includes('adjusterconsole1')) {
 			return true;
 		}
 		console.log(`Current URL: ${currentUrl}`);
