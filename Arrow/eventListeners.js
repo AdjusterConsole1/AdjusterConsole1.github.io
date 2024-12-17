@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('result1')?.addEventListener('click', function() { result('1'); });
     document.getElementById('result2')?.addEventListener('click', function() { result('2'); });
     document.getElementById('otherFPS')?.addEventListener('click', FLUIDLEAK);
-    document.getElementById('authEmail')?.addEventListener('click', function() { outputText(this.id, 'clip'); });
     document.getElementById('SENDPART')?.addEventListener('click', FormToTA);
     document.getElementById('SENDLABOR')?.addEventListener('click', SENDLABOR1);
     document.getElementById('SENDDIAG')?.addEventListener('click', SENDDIAG1);

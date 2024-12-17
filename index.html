@@ -3,23 +3,23 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<link rel="stylesheet" href="CSS/main.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/Common.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/Stable.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/auth_module.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/Buttons.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/CustomButtons.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/AppearOpts.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/Resource.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/contextMenu.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/PTSpecific.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/Instructions.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/transAuth.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/linebacker.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/navAndSopMenus.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/accessDiv.css?v=20241216144138">
-		<link rel="stylesheet" href="CSS/dashboard.css?v=20241216144138">
-        <link rel="stylesheet" href="CSS/layoutProfiles.css?v=20241216144138">
+		<link rel="stylesheet" href="CSS/main.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/Common.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/Stable.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/auth_module.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/Buttons.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/CustomButtons.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/AppearOpts.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/Resource.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/contextMenu.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/PTSpecific.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/Instructions.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/transAuth.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/linebacker.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/navAndSopMenus.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/accessDiv.css?v=20241216220541">
+		<link rel="stylesheet" href="CSS/dashboard.css?v=20241216220541">
+        <link rel="stylesheet" href="CSS/layoutProfiles.css?v=20241216220541">
 		<title>Adjuster Console</title>
 		<link rel="manifest" href="manifest.webmanifest">
 	</head>
@@ -61,14 +61,17 @@
 	
 	<div class="profileDropdown">
 		<button class="profileDropdownButton">Select Profile</button>
-		<ul class="profileDropdownUL noShow">
+		<ul class="profileDropdownUL">
 		</ul>
 	</div>
 
-	<!-- Layout Training 
-	<div id="helpLayoutModal">
-		<a href="javascript:void(0)" class="closeHelp">&times;</a>
-	</div>-->
+
+    <canvas id="canvas"></canvas>
+	<div id="imageInputDiv">
+		<input type="file" id="imageInput" accept="image/*">
+    </div>
+	<img id="retrievedImage" alt="Your image will appear here" width="350" />
+
 	<!-- Splash Screen -->
 
 	<div id="splashContainer">
@@ -498,6 +501,10 @@
 			<button class="D R P C" id="result2">No Ans<br>Left VM</button>
 			<button id="otherFPS" class="P astext">$</button>
 			<button class="D R P C" id="authEmail">Auth Email</button>
+			<div id="authEmailDiv">
+				<input type="text" id="claimNumInput" placeholder="Claim number" />
+				<input type="text" id="authNumInput" placeholder="Authorization number" />
+			</div>
 			<div id="denialBtnDiv" class="denialBtns hideit">
 				<button class="D R P C" id="conopdeny">Continued Operation</button>
 				<button class="D R P C" id="sludgedeny">Carbon/Sludge<br>Lack of Lube</button>
@@ -887,11 +894,11 @@ TIME:&nbsp;&nbsp;</textarea>
 		<button id="CopyZipBTN" class="astext">ZIPCODE: </button>
 		<button id="CopyMileBTN" class="astext">MILEAGE: </button>
 	</div>
-	<textarea autocomplete="off" title="Hidden" id="textarea2" class="textspace" name="name"></textarea>
-	<textarea autocomplete="off" title="Hidden" id="textarea3" class="hideME noShow" name="name"></textarea>
-	<textarea autocomplete="off" title="Hidden" id="textarea4" class="hideME noShow" name="name"></textarea>
-	<textarea autocomplete="off" title="Hidden" id="textarea5" class="hideME noShow" name="name"></textarea>
-	<textarea autocomplete="off" title="Hidden" id="textareadata" class="hideME noShow" name="name"></textarea>
+	<textarea autocomplete="off" id="textarea2" class="textspace" name="name"></textarea>
+	<textarea autocomplete="off" id="textarea3" class="hideME noShow" name="name"></textarea>
+	<textarea autocomplete="off" id="textarea4" class="hideME noShow" name="name"></textarea>
+	<textarea autocomplete="off" id="textarea5" class="hideME noShow" name="name"></textarea>
+	<textarea autocomplete="off" id="textareadata" class="hideME noShow" name="name"></textarea>
 	<textarea id="EDITarea"></textarea>
 
 	<!-- Bulk Prices -->
@@ -2705,31 +2712,32 @@ TIME:&nbsp;&nbsp;</textarea>
 		<button id="helpNext" class="helpBtn">Next</button>
 		<button id="helpPrev" class="helpBtn" disabled>Previous</button>
 	</div>
-	<script src="JavaScript/splash.js?v=20241216144138"></script>
-	<script src="JavaScript/snipDiv.js?v=20241216144138"></script>
-	<script src="JavaScript/keyEvents.js?v=20241216144138"></script>
-	<script src="JavaScript/main.js?v=20241216144138"></script>
-	<script src="JavaScript/authorization.js?v=20241216144138"></script>
-	<script src="JavaScript/transAuth.js?v=20241216144138"></script>
-	<script src="JavaScript/CHStatement.js?v=20241216144138"></script>
-	<script src="JavaScript/PTXfer.js?v=20241216144138"></script>
-	<script src="JavaScript/statusNote.js?v=20241216144138"></script>
-	<script src="JavaScript/ChangeAppearance.js?v=20241216144138"></script>
-	<script src="JavaScript/diagCenter.js?v=20241216144138"></script>
-	<script src="JavaScript/jsonParse.js?v=20241216144138"></script>
-	<script src="JavaScript/ContextMenu.js?v=20241216144138"></script>
-	<script src="JavaScript/trackerScript.js?v=20241216144138"></script>
-	<script src="JavaScript/powertrain.js?v=20241216144138"></script>
-	<script src="JavaScript/NewButton.js?v=20241216144138"></script>
-	<script src="JavaScript/authGuide.js?v=20241216144138"></script>
-	<script src="JavaScript/navAndSopMenu.js?v=20241216144138"></script>
-	<script src="JavaScript/qAndA.js?v=20241216144138"></script>
-	<script src="JavaScript/toggle.js?v=20241216144138"></script>
-	<script src="Arrow/eventListeners.js?v=20241216144138"></script>
-	<script src="Arrow/versionInject.js?v=20241216144138"></script>
-	<script src="Arrow/metrics.js?v=20241216144138"></script>
-	<script src="Arrow/buttonTracker.js?v=20241216144138"></script>
-	<script src="Arrow/dataDownload.js?v=20241216144138"></script>
-    <script src="Arrow/layoutProfiles.js?v=20241216144138"></script>
+	<script src="JavaScript/splash.js?v=20241216220541"></script>
+	<script src="JavaScript/snipDiv.js?v=20241216220541"></script>
+	<script src="JavaScript/keyEvents.js?v=20241216220541"></script>
+	<script src="JavaScript/main.js?v=20241216220541"></script>
+	<script src="JavaScript/authorization.js?v=20241216220541"></script>
+	<script src="JavaScript/transAuth.js?v=20241216220541"></script>
+	<script src="JavaScript/CHStatement.js?v=20241216220541"></script>
+	<script src="JavaScript/PTXfer.js?v=20241216220541"></script>
+	<script src="JavaScript/statusNote.js?v=20241216220541"></script>
+	<script src="JavaScript/ChangeAppearance.js?v=20241216220541"></script>
+	<script src="JavaScript/diagCenter.js?v=20241216220541"></script>
+	<script src="JavaScript/jsonParse.js?v=20241216220541"></script>
+	<script src="JavaScript/ContextMenu.js?v=20241216220541"></script>
+	<script src="JavaScript/trackerScript.js?v=20241216220541"></script>
+	<script src="JavaScript/powertrain.js?v=20241216220541"></script>
+	<script src="JavaScript/NewButton.js?v=20241216220541"></script>
+	<script src="JavaScript/authGuide.js?v=20241216220541"></script>
+	<script src="JavaScript/navAndSopMenu.js?v=20241216220541"></script>
+	<script src="JavaScript/qAndA.js?v=20241216220541"></script>
+	<script src="JavaScript/toggle.js?v=20241216220541"></script>
+	<script src="Arrow/eventListeners.js?v=20241216220541"></script>
+	<script src="Arrow/versionInject.js?v=20241216220541"></script>
+	<script src="Arrow/metrics.js?v=20241216220541"></script>
+	<script src="Arrow/buttonTracker.js?v=20241216220541"></script>
+	<script src="Arrow/dataDownload.js?v=20241216220541"></script>
+    <script src="Arrow/layoutProfiles.js?v=20241216220541"></script>
+	<script src="Arrow/ericsPicture.js?v=20241216220541"></script>
 </body>
 </html>
