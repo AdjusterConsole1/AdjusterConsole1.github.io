@@ -21,7 +21,7 @@ const openDB = () => {
     });
 };
 
-const compressImage = (file, maxWidth = 350, quality = 1) => {
+const compressImage = (file, maxWidth = 300, quality = 1) => {
     return new Promise((resolve) => {
         const img = new Image();
         const reader = new FileReader();
