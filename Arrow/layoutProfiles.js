@@ -25,9 +25,10 @@ class ProfileManager {
 
     generateProfileData() {
         const sessionData = {};
+		const combinedIDs = getCombinedIDs();
         Object.keys(sessionStorage).forEach((key) => {
-            const includesAllowedID = allowedIDs.some((id) => key.includes(id));
-            if (includesAllowedID) {
+            const includesCombinedIDs = combinedIDs.some((id) => key.includes(id));
+            if (includesCombinedIDs) {
                 sessionData[key] = sessionStorage.getItem(key);
             }
         });
@@ -137,10 +138,11 @@ class ProfileManager {
 		}
 		const profileSettings = this.profiles[profileName];
 		const keysToRemove = [];
+		const combinedIDs = getCombinedIDs();
 		keysToRemove.push('colorSet1', 'colorSet2', 'doubleBubble', 'mode');
 		Object.keys(sessionStorage).forEach((key) => {
-			const includesAllowedID = allowedIDs.some((id) => key.includes(id));
-			if (includesAllowedID) {
+			const includesCombinedIDs = combinedIDs.some((id) => key.includes(id));
+			if (includesCombinedIDs) {
 				keysToRemove.push(key);
 			}
 		});
