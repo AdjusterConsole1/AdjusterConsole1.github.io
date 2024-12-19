@@ -36,7 +36,6 @@ class ProfileManager {
         sessionData.colorSet2 = JSON.parse(sessionStorage.getItem('colorSet2')) || {};
         sessionData.customIDs = JSON.parse(sessionStorage.getItem('customIDs')) || [];
         sessionData.doubleBubble = sessionStorage.getItem('doubleBubble');
-        sessionData.mode = sessionStorage.getItem('mode');
         return sessionData;
     }
 
@@ -63,6 +62,9 @@ class ProfileManager {
         if (oldName === "defaultAC") {
             showModalMessage('Default profile cannot be renamed.');
         }
+		if (oldName === "defaultPT") {
+            showModalMessage('Default PT profile cannot be renamed.');
+        }
         if (!this.profiles[oldName]) {
             showModalMessage('Profile does not exist.');
         }
@@ -81,6 +83,9 @@ class ProfileManager {
         if (profileName === "defaultAC") {
             showModalMessage(`Cannot delete the protected profile: ${profileName}.`);
         }
+		if (profileName === "defaultPT") {
+            showModalMessage(`Cannot delete the protected profile: ${profileName}.`);
+        }
         if (!this.profiles[profileName]) {
             showModalMessage('Profile does not exist.');
         }
@@ -97,10 +102,18 @@ class ProfileManager {
         if (!this.profiles[profileName]) {
             showModalMessage('Profile does not exist.');
         }
-        this.profiles[profileName] = defaultProfileInit();
-		this.setSessionUsingProfile(profileName);
-        this.saveToLocalStorage();
-		refreshElements();
+		if (profileName === "defaultAC") {
+			this.profiles[profileName] = defaultProfileInit();
+			this.setSessionUsingProfile(profileName);
+			this.saveToLocalStorage();
+			refreshElements();
+		}
+		if (profileName === "defaultPT") {
+			this.profiles[profileName] = defaultPTInit();
+			this.setSessionUsingProfile(profileName);
+			this.saveToLocalStorage();
+			refreshElements();
+		}
     }
 
     changeProfile(profileName) {
@@ -139,7 +152,7 @@ class ProfileManager {
 		const profileSettings = this.profiles[profileName];
 		const keysToRemove = [];
 		const combinedIDs = getCombinedIDs();
-		keysToRemove.push('colorSet1', 'colorSet2', 'doubleBubble', 'mode');
+		keysToRemove.push('colorSet1', 'colorSet2', 'doubleBubble');
 		Object.keys(sessionStorage).forEach((key) => {
 			const includesCombinedIDs = combinedIDs.some((id) => key.includes(id));
 			if (includesCombinedIDs) {
@@ -354,6 +367,7 @@ function loadProfileManager() {
     const currentProfile = localStorage.getItem('currentProfile');
     if (Object.keys(storedProfiles).length === 0) {
         profileManager.profiles["defaultAC"] = defaultProfileInit();
+		profileManager.profiles["defaultPT"] = defaultPTInit();
 		profileManager.profiles["User1"] = profileManager.generateProfileData();
         profileManager.currentProfile = "User1";
         profileManager.saveToLocalStorage();
@@ -361,16 +375,59 @@ function loadProfileManager() {
         profileManager.profiles = storedProfiles;
         profileManager.currentProfile = currentProfile || Object.keys(storedProfiles)[0];
         profileManager.setSessionUsingProfile(profileManager.currentProfile);
+		removeMode();
     }
+}
+
+function removeMode() {
+	const mode = sessionStorage.getItem('mode');
+	if (mode && (mode === '1' || mode === '2')) {
+		profileManager.profiles["defaultPT"] = defaultPTInit();
+		profileManager.saveToLocalStorage();
+	}
+	localStorage.removeItem('mode');
+	sessionStorage.removeItem('mode');
+	Object.keys(profileManager.profiles).forEach((profileName) => {
+		const profile = profileManager.profiles[profileName];
+        if (profile.hasOwnProperty('mode')) {
+            delete profile.mode;
+        }
+    });
 }
 
 function defaultProfileInit() {
 	return {
 		colorSet1: new colorObject(),
 		colorSet2: new colorObject(),
-		mode: '2',
 		customIDs: [],
 		doubleBubble: 'true',
+	}
+}
+
+function defaultPTInit() {
+	return {
+		colorSet1: new colorObject(),
+		colorSet2: new colorObject(),
+		customIDs: [],
+		doubleBubble: 'true',
+		ITSBRITTNEYXSHOW: "none",
+		PTModeDivXSHOW: "inline-block",
+		newAuthstarterXtop: "305px",
+		newAuthstarterXleft: "20px",
+		statusNoteXSHOW: "none",
+		snipboxXleft: "-135px",
+		snipboxXtop: "325px",
+		R15Xleft: "25px",
+		R15Xtop: "285px",
+		R15XWidth: "120px",
+		SOPsXSHOW: "none",
+		toolsXSHOW: "none",
+		T0XSHOW: "none",
+		otherFPSXSHOW: "inline-block",
+		subPL2XSHOW: "none",
+		subPL1XSHOW: "none",
+		R2XSHOW: "none",
+		RequestXSHOW: "none"
 	}
 }
 

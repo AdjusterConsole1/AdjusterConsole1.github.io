@@ -156,7 +156,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('LOCK1')?.addEventListener('click', MENU);
     document.getElementById('appearance')?.addEventListener('click', personalize);
     document.getElementById('BtnBuilder')?.addEventListener('click', BuilderShow);
-    document.getElementById('ptcon')?.addEventListener('click', () => modePTmenu('demo'));
     document.getElementById('tutorials')?.addEventListener('click', showInstructions);
     document.addEventListener('contextmenu', function(event) { customMenu(event.target, event); });
 });

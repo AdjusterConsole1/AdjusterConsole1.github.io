@@ -15,12 +15,12 @@
   let buttonTrackerData = getButtonTrackerData();
   buttonTrackerData = ensureLastDaySent(buttonTrackerData);
   if (Object.keys(buttonTrackerData).length === 0) {
-    console.warn("No buttonTracker data found in localStorage.");
+    showModalMessage("No buttonTracker data found in localStorage.");
     return;
   }
   let dataToSend = {};
   if (buttonTrackerData.lastDaySent === null) {
-    console.log("lastDaySent is not defined. Sending all buttonTracker data.");
+    showModalMessage("lastDaySent is not defined. Sending all buttonTracker data.");
     Object.keys(buttonTrackerData).forEach(key => {
       if (key !== "lastDaySent") {
         dataToSend[key] = {
@@ -31,7 +31,7 @@
       }
     });
   } else if (buttonTrackerData.lastDaySent === today) {
-    console.log("Data already sent today. Skipping.");
+    showModalMessage("Data already sent today. Skipping.");
     return;
   } else {
     Object.keys(buttonTrackerData).forEach(key => {
@@ -47,7 +47,7 @@
     });
   }
   if (Object.keys(dataToSend).length === 0) {
-    console.log("No relevant data to send.");
+    showModalMessage("No relevant data to send.");
     return;
   }
   try {
@@ -62,11 +62,11 @@
     if (result.status === "success") {
       buttonTrackerData.lastDaySent = today;
       localStorage.setItem('buttonTracker', JSON.stringify(buttonTrackerData));
-      console.log("Button tracker data successfully sent.");
+      showModalMessage("Button tracker data successfully sent.");
     } else {
-      console.error("Error from server:", result.error);
+      showModalMessage("Error from server:", result.error);
     }
   } catch (error) {
-    console.error("Error sending data:", error);
+    showModalMessage("Error sending data:", error);
   }
 })();

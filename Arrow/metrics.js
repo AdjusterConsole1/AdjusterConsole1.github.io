@@ -166,7 +166,12 @@ document.getElementById('closeDash')?.addEventListener('click', function () {
 });
 
 function resetMetricDisplay() {
-	document.getElementById("detailsContent").innerHTML = '';
+	document.getElementById("metricsDivRowx").innerHTML = '';
+	document.getElementById("metricsDivRow0").innerHTML = '';
+	document.getElementById("metricsDivRow1").innerHTML = '';
+	document.getElementById("metricsDivRow2").innerHTML = '';
+	document.getElementById("metricsDivRow3").innerHTML = '';
+	document.getElementById("metricsDivRow4").innerHTML = '';
 	document.getElementById("detailContainer").classList.add("hidden");
 	document.getElementById("mainDash").classList.remove("share");
 }
@@ -584,26 +589,28 @@ function handleRowClick(event) {
         currentFriday.setDate(currentFriday.getDate() - 7);
     }
 	const metricsDivRow0 = document.getElementById("metricsDivRow0");
-	metricsDivRow0.innerHTML = `
-		<div class="metricsDivblock">
-			<p>Week Starting</p>
-		</div>
-	`;
-	dateRanges.forEach(range => {
-    const mondayDate = new Date(range.start);
-    const formattedDate = `${(mondayDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}/${mondayDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")}/${mondayDate.getFullYear()}`;
-		const div = document.createElement("div");
-		div.classList.add("metricsDivBlock");
-		const p = document.createElement("p");
-		p.textContent = formattedDate;
-		div.appendChild(p);
-		metricsDivRow0.appendChild(div);
-	});
+	if (metricsDivRow0) {
+		metricsDivRow0.innerHTML = `
+			<div class="metricsDivblock">
+				<p>Week Starting</p>
+			</div>
+		`;
+		dateRanges.forEach(range => {
+		const mondayDate = new Date(range.start);
+		const formattedDate = `${(mondayDate.getMonth() + 1)
+			.toString()
+			.padStart(2, "0")}/${mondayDate
+			.getDate()
+			.toString()
+			.padStart(2, "0")}/${mondayDate.getFullYear()}`;
+			const div = document.createElement("div");
+			div.classList.add("metricsDivBlock");
+			const p = document.createElement("p");
+			p.textContent = formattedDate;
+			div.appendChild(p);
+			metricsDivRow0.appendChild(div);
+		});
+	}
     const metricsByWeek = dateRanges.map(range => {
         const startEpoch = Math.floor(new Date(range.start).getTime() / (24 * 60 * 60 * 1000));
         const endEpoch = Math.floor(new Date(range.end).getTime() / (24 * 60 * 60 * 1000));
